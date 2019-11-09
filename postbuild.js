@@ -15,7 +15,7 @@ function fromDir(startPath, filter, callback) {
 }
 
 fromDir('./dist', /\.ts$/, function (filename) {
-  fs.unlink(filename);
+  //fs.unlink(filename);
 });
 
 fromDir('./dist', /\.js$/, function (filename) {
