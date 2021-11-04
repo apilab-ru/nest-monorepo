@@ -3,6 +3,7 @@ import { URLSearchParams } from 'url';
 import { map, take } from 'rxjs/operators';
 import { Film, FilmsItem, SearchRequestResult, Genre, GenresResult, TvItem } from '../api';
 import { forkJoin, Observable, Subject } from 'rxjs';
+import { EFilmsSortBy, EOrderType, FilmsChips } from './interface';
 const fs = require('fs');
 
 @Injectable()
@@ -21,8 +22,19 @@ export class FilmsService {
     private readonly httpService: HttpService,
   ){}
 
-  searchMovie(query: string): Observable<SearchRequestResult<Film>> {
-    return this.requestToApi<SearchRequestResult<FilmsItem>>('search/movie',{query, ...this.baseFilterFilms})
+  searchMovie(
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc
+  ): Observable<SearchRequestResult<Film>> {
+    const params = {
+      ...this.baseFilterFilms,
+      query,
+      ...chips
+    };
+    if (orderField) {
+      params['sort_by'] = orderField + '.' + orderType;
+    }
+    const url = query ? 'search/movie' : 'discover/movie';
+    return this.requestToApi<SearchRequestResult<FilmsItem>>(url, params)
       .pipe(
         map(result => {
           return {
@@ -40,8 +52,19 @@ export class FilmsService {
       );
   }
 
-  searchTv(query: string): Observable<SearchRequestResult<Film>> {
-    return this.requestToApi<SearchRequestResult<TvItem>>('search/tv', { query, ...this.baseFilterFilms })
+  searchTv(
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc
+  ): Observable<SearchRequestResult<Film>> {
+    const params = {
+      ...this.baseFilterFilms,
+      query,
+      ...chips
+    };
+    if (orderField) {
+      params['sort_by'] = orderField + '.' + orderType;
+    }
+    const url = query ? 'search/tv' : 'discover/tv';
+    return this.requestToApi<SearchRequestResult<TvItem>>(url, params)
       .pipe(
         map(result => {
           return {
@@ -85,7 +108,7 @@ export class FilmsService {
         if (err) {
           reject(err);
         } else {
-          resolve();
+          resolve(true);
         }
       });
     });
@@ -152,9 +175,10 @@ export class FilmsService {
       genre_ids: item.genre_ids,
       original_title: item.original_title,
       date: item.release_date,
+      year: this.getYear(item.release_date),
       popularity: item.popularity,
       description: item.overview,
-      image: this.imageHost + item.poster_path,
+      image: item.poster_path ? this.imageHost + item.poster_path : null,
       id: item.id
     };
   }
@@ -165,11 +189,19 @@ export class FilmsService {
       genre_ids: item.genre_ids,
       original_title: item.original_name,
       date: item.first_air_date,
+      year: this.getYear(item.first_air_date),
       popularity: item.popularity,
       description: item.overview,
-      image: this.imageHost + item.poster_path,
+      image: item.poster_path ? this.imageHost + item.poster_path : null,
       id: item.id
     };
+  }
+
+  private getYear(date: string): number {
+    if (!date) {
+      return null;
+    }
+    return +date.split('-')[0];
   }
 
   // TODO research what the fuck not working

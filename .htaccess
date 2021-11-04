@@ -1,0 +1,6 @@
+PassengerStartupFile main.js
+PassengerResolveSymlinksInDocumentRoot on
+Require all granted
+PassengerAppType node
+PassengerAppRoot /home/a0180390/domains/enotolyb.ru/public_html/filecabinet
+Options -MultiViews

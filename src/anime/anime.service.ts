@@ -10,23 +10,32 @@ import {
   Genre,
   SearchRequestResult,
 } from '../api';
+import { AnimeSearchChips } from './interface';
 
 const fs = require('fs');
 
 @Injectable()
 export class AnimeService {
 
-  private readonly endpoint = 'http://smotret-anime.ru/api/series/';
+  private readonly endpoint = 'https://smotret-anime.online/api/series/';
 
   constructor(
     private readonly httpService: HttpService,
   ){}
 
-  search(name: string): Observable<SearchRequestResult<Anime>> {
+  search(name: string, chips?: AnimeSearchChips): Observable<SearchRequestResult<Anime>> {
     const params = new URLSearchParams();
-    params.append('query', name);
-    //params.append('fields', 'titles,id,genres,posterUrl,descriptions');
-    const url = this.endpoint + '?' + params.toString();
+    if (name) {
+      params.append('query', name);
+    }
+    let stChips = '';
+    if (chips && JSON.stringify(chips) !== '{}') {
+      stChips = 'chips=';
+      for (const key in chips) {
+        stChips += key + '=' + chips[key] + ';';
+      }
+    }
+    const url = this.endpoint + '?' + params.toString() + stChips;
 
     return this.httpService.get<AnimeRequestResponse>(url)
       .pipe(
@@ -38,6 +47,18 @@ export class AnimeService {
           total_results: list.length,
           total_pages: 1
         }))
+      );
+  }
+
+  byId(id: string): Observable<Anime> {
+    const params = new URLSearchParams();
+    params.append('id', id);
+    const url = this.endpoint + '?' + params.toString();
+
+    return this.httpService.get<{data: AnimeResponseItem}>(url)
+      .pipe(
+        map(response => response.data.data),
+        map(item => this.convertFromAnimeItem(item))
       );
   }
 
@@ -87,7 +108,7 @@ export class AnimeService {
         if (err) {
           reject(err);
         } else {
-          resolve();
+          resolve(true);
         }
       });
     });
@@ -106,6 +127,9 @@ export class AnimeService {
   }
 
   private convertFromAnimeItem(item: AnimeResponseItem): Anime {
+    if (!item) {
+      throw Error('null item');
+    }
     return {
       title: item.titles.ru,
       image: item.posterUrl,
@@ -115,7 +139,8 @@ export class AnimeService {
       year: item.year,
       type: item.type,
       popularity: item.worldArtScore,
-      id: item.id
+      id: item.id,
+      episodes: item.episodes && item.episodes.length
     };
   }
 

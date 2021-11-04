@@ -1,11 +1,7 @@
 import { Item } from './base';
 
 export interface Anime extends Item {
-  genre_ids: number[];
-  original_title: string;
   type: AnimeType;
-  year: number;
-  popularity: number;
 }
 
 export interface AnimeRequestResponse {
@@ -27,6 +23,18 @@ export interface AnimeResponseItem {
   worldArtScore: number;
   type: AnimeType;
   year: number;
+  episodes: {
+    countViews: number;
+    episodeFull: string;
+    episodeInt: string;
+    episodeTitle: string;
+    episodeType: string;
+    firstUploadedDateTime: string; //"2015-02-10 23:33:03"
+    id: number;
+    isActive: number;
+    isFirstUploaded: number;
+    seriesId: number;
+  }[];
 }
 
 export interface AnimeDescription {
