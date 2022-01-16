@@ -1,8 +1,9 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AnimeService } from './anime.service';
-import { Anime, Genre, SearchRequestResult } from '../api';
+import { Anime, GenreOld, SearchRequestResult } from '../models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { AnimeSearchQuery } from './interface';
+import { firstValueFrom } from 'rxjs';
 
 @ApiTags('anime')
 @Controller('anime')
@@ -17,31 +18,43 @@ export class AnimeController {
   @ApiQuery({
     name: 'name',
     type: 'string',
+    required: false,
   })
   @ApiQuery({
     name: 'type',
     type: 'string',
     description: 'types separated by ","',
+    required: false,
   })
   @ApiQuery({
     name: 'genre',
     type: 'string',
     description: 'genres separated by ","',
+    required: false,
   })
   @ApiQuery({
-    name: 'yearseason',
+    name: 'year',
     type: 'string',
-    description: 'years: from{-to}, 2019 or 2018-2019',
+    description: 'years separated by ","',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'limit',
+    type: 'number',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'page',
+    type: 'number',
+    required: false,
   })
   async findAnime(@Query() query: AnimeSearchQuery): Promise<SearchRequestResult<Anime>> {
-    let chips = { ...query };
-    delete chips.name;
-    return await this.animeService.search(query.name, chips).toPromise();
+    return await firstValueFrom(this.animeService.search(query));
   }
 
   @Get('genres')
-  async getGenres(): Promise<Genre[]> {
-    return await this.animeService.getGenres().toPromise();
+  async getGenres(): Promise<GenreOld[]> {
+    return await firstValueFrom(this.animeService.getGenres());
   }
 
   @Get(':id')
@@ -50,6 +63,6 @@ export class AnimeController {
     type: 'number',
   })
   async findById(@Param('id') id: string): Promise<Anime> {
-    return await this.animeService.byId(id).toPromise();
+    return await firstValueFrom(this.animeService.byId(+id));
   }
 }

@@ -1,4 +1,4 @@
-import { Genre, Item } from './base';
+import { GenreOld, Item } from './base';
 
 export enum Lang {
   en = 'en',
@@ -10,7 +10,7 @@ export enum Country {
 }
 
 export interface GenresResult {
-  genres: Genre[];
+  genres: GenreOld[];
 }
 
 export interface Film extends Item {

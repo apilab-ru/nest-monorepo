@@ -1,12 +1,13 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FilmsService } from './films.service';
-import { Film, GenreOld, SearchRequestResult } from '../models';
+import { MediaItem, SearchRequest, SearchRequestResult, SearchRequestResultV2 } from '../models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { EFilmsSortBy, EOrderType } from './interface';
+import { firstValueFrom } from 'rxjs';
 
-@ApiTags('films')
-@Controller('films')
-export class FilmsController {
+@ApiTags('films/v2')
+@Controller('films/v2')
+export class FilmsV2Controller {
 
   constructor(
     private filmsService: FilmsService,
@@ -19,7 +20,7 @@ export class FilmsController {
     type: 'string',
     required: false,
   })
-  @ApiQuery({
+  /*@ApiQuery({
     name: 'orderField',
     type: 'enum',
     enum: Object.values(EFilmsSortBy),
@@ -30,34 +31,33 @@ export class FilmsController {
     type: 'enum',
     enum: Object.values(EOrderType),
     required: false,
-  })
+  })*/
   @ApiQuery({
-    name: 'primary_release_year',
-    type: 'string',
+    name: 'limit',
+    type: 'number',
     required: false,
   })
   @ApiQuery({
-    name: 'with_genres',
-    type: 'string',
+    name: 'page',
+    type: 'number',
     required: false,
   })
   @ApiQuery({
-    name: 'with_people',
+    name: 'year',
     type: 'string',
+    description: 'years separated by ",", for negative add!',
+    required: false,
+  })
+  @ApiQuery({
+    name: 'genre',
+    type: 'string',
+    description: 'genres separated by ",", for negative add!',
     required: false,
   })
   async findFilm(
-    @Query() query,
-  ): Promise<SearchRequestResult<Film>> {
-    const chips = { ...query };
-    const orderField = chips.orderField;
-    const orderType = chips.orderType;
-    delete chips.name;
-    delete chips.orderField;
-    delete chips.orderType;
-    return await this.filmsService.searchMovie(
-      query.name, chips, orderField, orderType,
-    ).toPromise();
+    @Query() query: SearchRequest,
+  ): Promise<SearchRequestResult<MediaItem>> {
+    return await firstValueFrom(this.filmsService.searchMovieV2(query.name));
   }
 
   @Get('tv')
@@ -95,21 +95,17 @@ export class FilmsController {
   })
   async findTv(
     @Query() query,
-  ): Promise<SearchRequestResult<Film>> {
+  ): Promise<SearchRequestResultV2<MediaItem>> {
     const chips = { ...query };
     const orderField = chips.orderField;
     const orderType = chips.orderType;
     delete chips.name;
     delete chips.orderField;
     delete chips.orderType;
-    return await this.filmsService.searchTv(
-      query.name, chips, orderField, orderType,
-    ).toPromise();
-  }
 
-  @Get('genres')
-  async loadGenres(): Promise<GenreOld[]> {
-    return await this.filmsService.getGenres().toPromise();
+    return await firstValueFrom(this.filmsService.searchTvV2(
+      query.name, chips, orderField, orderType,
+    ));
   }
 
 }

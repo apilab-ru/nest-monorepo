@@ -15,13 +15,13 @@ function fromDir(startPath, filter, callback) {
   }
 }
 
-fromDir('./dist', /\.ts$/, function (filename) {
+/*fromDir('./dist', /\.ts$/, function (filename) {
   fs.unlink(filename, () => {});
 });
 
 fromDir('./dist', /\.map$/, function (filename) {
   fs.unlink(filename, () => {});
-});
+});*/
 
 const replaceList = [
   /("@nestjs\/.*)"/g,

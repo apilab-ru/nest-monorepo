@@ -1,9 +1,26 @@
 import { HttpService, Injectable } from '@nestjs/common';
 import { URLSearchParams } from 'url';
-import { map, take } from 'rxjs/operators';
-import { Film, FilmsItem, SearchRequestResult, Genre, GenresResult, TvItem } from '../api';
-import { forkJoin, Observable, Subject } from 'rxjs';
+import { map, switchMap, withLatestFrom } from 'rxjs/operators';
+import {
+  Film,
+  FilmsItem,
+  GenreOld,
+  GenresResult,
+  LibraryItemType,
+  MediaItem,
+  SearchRequestResult,
+  SearchRequestResultV2,
+  TvItem,
+} from '../models';
+import { catchError, forkJoin, from, Observable } from 'rxjs';
 import { EFilmsSortBy, EOrderType, FilmsChips } from './interface';
+import { GenreService } from '../genres/genres.service';
+import { GenreKind } from '../genres/const';
+import { GenreBase } from '../genres/interface';
+import { Genre } from '../models/genre';
+import { LibraryService } from '../library/library.service';
+import { LibraryItemEntity } from '../library/entites/library-item.entity';
+
 const fs = require('fs');
 
 @Injectable()
@@ -15,20 +32,49 @@ export class FilmsService {
   private readonly imageHost = 'https://image.tmdb.org/t/p/w500';
   private readonly baseFilterFilms = {
     include_adult: false,
-    page: 1
+    page: 1,
   };
 
   constructor(
-    private readonly httpService: HttpService,
-  ){}
+    private httpService: HttpService,
+    private genreService: GenreService,
+    private libraryService: LibraryService,
+  ) {
+  }
+
+  foundItem(item: LibraryItemEntity): Observable<MediaItem | null> {
+    return this.byId(item.imdbId, item.type).pipe(
+      catchError(() => {
+        return (item.type === LibraryItemType.movie
+          ? this.searchMovieV2(item.title)
+          : this.searchTvV2(item.title)).pipe(
+          map(result => result.results.length ? result.results[0] : null),
+        );
+      }),
+    );
+  }
+
+  byId(id: number, type: LibraryItemType): Observable<MediaItem> {
+    let url = type === LibraryItemType.movie ? 'movie/' : 'tv/';
+    url += id;
+
+    return this.requestToApi<FilmsItem | TvItem>(url).pipe(
+      withLatestFrom(this.genreService.list$),
+      map(([item, genres]) => {
+        const filmsGenres = this.mapFilmGenres(genres);
+        item.genre_ids = item['genres'].map(it => it.id);
+        return this.convertMediaItem(item, filmsGenres);
+      }),
+    );
+  }
 
   searchMovie(
-    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc,
   ): Observable<SearchRequestResult<Film>> {
     const params = {
       ...this.baseFilterFilms,
       query,
-      ...chips
+      ...chips,
     };
     if (orderField) {
       params['sort_by'] = orderField + '.' + orderType;
@@ -39,26 +85,74 @@ export class FilmsService {
         map(result => {
           return {
             ...result,
-            results: result.results.map(item => this.convertFilm(item))
+            results: result.results.map(item => this.convertFilm(item)),
           };
         }),
         map(result => {
           if (result.total_results > 1) {
-            //result.results.sort(this.sortByPopularity);
-            result.results.sort(this.sortFilmByRelation(query))
+            result.results.sort(this.sortFilmByRelation(query));
           }
           return result;
-        })
+        }),
+      );
+  }
+
+  private mapFilmGenres(genres: Genre[]): Record<number, number> {
+    return genres.reduce((ob, item) => {
+      if (item.imdbId) {
+        ob[item.imdbId] = item.id;
+      }
+
+      return ob;
+    }, {});
+  }
+
+  searchMovieV2(
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
+    const params = {
+      ...this.baseFilterFilms,
+      query,
+      ...chips,
+    };
+    if (orderField) {
+      params['sort_by'] = orderField + '.' + orderType;
+    }
+    const url = query ? 'search/movie' : 'discover/movie';
+    return this.requestToApi<SearchRequestResult<FilmsItem>>(url, params)
+      .pipe(
+        withLatestFrom(this.genreService.list$),
+        map(([result, genres]) => {
+          const filmsGenres = this.mapFilmGenres(genres);
+
+          return {
+            page: result.page,
+            hasMore: result.total_pages > result.page,
+            total: result.total_results,
+            results: result.results.map(item => this.convertMediaItem(item, filmsGenres)),
+          };
+        }),
+        switchMap(searchResult => {
+          return from(this.libraryService.saveToRepository(searchResult.results, 'imdbId')).pipe(
+            map(results => ({ ...searchResult, results })),
+          );
+        }),
+        map(result => {
+          if (result.results.length > 1) {
+            result.results.sort(this.sortFilmByRelation(query));
+          }
+          return result;
+        }),
       );
   }
 
   searchTv(
-    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc,
   ): Observable<SearchRequestResult<Film>> {
     const params = {
       ...this.baseFilterFilms,
       query,
-      ...chips
+      ...chips,
     };
     if (orderField) {
       params['sort_by'] = orderField + '.' + orderType;
@@ -69,42 +163,94 @@ export class FilmsService {
         map(result => {
           return {
             ...result,
-            results: result.results.map(item => this.convertTv(item))
+            results: result.results.map(item => this.convertTv(item)),
           };
         }),
         map(result => {
           if (result.total_results > 1) {
-            //result.results.sort(this.sortByPopularity);
             result.results.sort(this.sortFilmByRelation(query));
           }
           return result;
-        })
+        }),
       );
   }
 
-  loadGenres(): Observable<Genre[]> {
+  searchTvV2(
+    query: string, chips?: FilmsChips, orderField?: EFilmsSortBy, orderType: EOrderType = EOrderType.desc,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
+    const params = {
+      ...this.baseFilterFilms,
+      query,
+      ...chips,
+    };
+    if (orderField) {
+      params['sort_by'] = orderField + '.' + orderType;
+    }
+    const url = query ? 'search/tv' : 'discover/tv';
+    return this.requestToApi<SearchRequestResult<TvItem>>(url, params)
+      .pipe(
+        withLatestFrom(this.genreService.list$),
+        map(([result, genres]) => {
+          const filmsGenres = this.mapFilmGenres(genres);
+
+          return {
+            page: result.page,
+            hasMore: result.total_pages > result.page,
+            total: result.total_results,
+            results: result.results.map(item => this.convertMediaItem(item, filmsGenres, LibraryItemType.tv)),
+          };
+        }),
+        switchMap(searchResult => {
+          return from(this.libraryService.saveToRepository(searchResult.results, 'imdbId')).pipe(
+            map(results => ({ ...searchResult, results })),
+          );
+        }),
+        map(result => {
+          if (result.results.length > 1) {
+            result.results.sort(this.sortFilmByRelation(query));
+          }
+          return result;
+        }),
+      );
+  }
+
+  loadGenres(): Observable<GenreOld[]> {
     return forkJoin(
       this.requestToApi<GenresResult>('genre/movie/list'),
-      this.requestToApi<GenresResult>('genre/tv/list')
+      this.requestToApi<GenresResult>('genre/tv/list'),
     ).pipe(
       map(([movie, tv]) => {
         return [
           ...movie.genres,
-          ...tv.genres
+          ...tv.genres,
         ]
-        .map(item => ({
-          id: item.id,
-          name: this.upperName(item.name)
-        }))
-        .filter((value, index, list) => list.findIndex(it => it.id === value.id) === index)
-        .sort((a, b) => a.name.localeCompare(b.name));
+          .map(item => ({
+            id: item.id,
+            name: this.upperName(item.name),
+          }))
+          .filter((value, index, list) => list.findIndex(it => it.id === value.id) === index)
+          .sort((a, b) => a.name.localeCompare(b.name));
       }),
-    )
+    );
   }
 
-  saveGenres(list: Genre[]): Promise<boolean> {
+  loadBaseGenres(): Observable<GenreBase[]> {
+    return forkJoin(
+      this.requestToApi<GenresResult>('genre/movie/list'),
+      this.requestToApi<GenresResult>('genre/tv/list'),
+    ).pipe(
+      map(([movie, tv]) => {
+        return [
+          ...tv.genres.map(item => ({ ...item, kind: GenreKind.tv, imdbId: item.id })),
+          ...movie.genres.map(item => ({ ...item, kind: GenreKind.films, imdbId: item.id })),
+        ];
+      }),
+    );
+  }
+
+  saveGenres(list: GenreOld[]): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      fs.writeFile("cache/genres-film.json", JSON.stringify(list), err => {
+      fs.writeFile('cache/genres-films.json', JSON.stringify(list), err => {
         if (err) {
           reject(err);
         } else {
@@ -114,15 +260,16 @@ export class FilmsService {
     });
   }
 
-  getGenres(): Observable<Genre[]> {
-    const list$ = new Subject<Genre[]>();
+  getGenres(): Observable<GenreOld[]> {
+    /*const list$ = new Subject<Genre[]>();
     this.getGenresFromCache()
       .then(list => list$.next(list))
       .catch(() => this.loadGenres().subscribe(list => {
         list$.next(list);
         this.saveGenres(list);
       }));
-    return list$.asObservable().pipe(take(1));
+    return list$.asObservable().pipe(take(1));*/
+    return this.loadGenres();
   }
 
   requestToApi<T>(path: string, args = {}): Observable<T> {
@@ -135,15 +282,20 @@ export class FilmsService {
     }
     const url = this.endpoint + path + '?' + params.toString();
 
+    console.log('xxx url', url);
+
     return this.httpService.get<T>(url)
       .pipe(
         map(response => response.data),
       );
   }
 
-  private getGenresFromCache(): Promise<Genre[]> {
+  /**
+   * @deprecated
+   */
+  private getGenresFromCache(): Promise<GenreOld[]> {
     return new Promise((resolve, reject) => {
-      fs.readFile("cache/genres-film.json", null, (err, data) => {
+      fs.readFile('cache/genres-films.json', null, (err, data) => {
         if (err) {
           reject(err);
         } else {
@@ -158,7 +310,7 @@ export class FilmsService {
   }
 
   private sortFilmByRelation(query: string) {
-    return (a: Film, b: Film): number => {
+    return (a: { title: string }, b: { title: string }): number => {
       if (a.title === query) {
         return 1;
       }
@@ -166,7 +318,7 @@ export class FilmsService {
         return 1;
       }
       return 0;
-    }
+    };
   }
 
   private convertFilm(item: FilmsItem): Film {
@@ -179,7 +331,27 @@ export class FilmsService {
       popularity: item.popularity,
       description: item.overview,
       image: item.poster_path ? this.imageHost + item.poster_path : null,
-      id: item.id
+      id: item.id,
+      type: LibraryItemType.movie,
+    };
+  }
+
+  private convertMediaItem(
+    item: FilmsItem | TvItem,
+    genres: Record<number, number>,
+    type: LibraryItemType = LibraryItemType.movie,
+  ): MediaItem {
+    return {
+      imdbId: item.id,
+      title: (item as FilmsItem).title || (item as TvItem).name,
+      genreIds: item.genre_ids.map(id => genres[id]),
+      originalTitle: (item as FilmsItem).original_title || (item as TvItem).original_name,
+      year: this.getYear((item as FilmsItem).release_date || (item as TvItem).first_air_date),
+      popularity: item.vote_average,
+      description: item.overview,
+      image: item.poster_path ? this.imageHost + item.poster_path : null,
+      type,
+      url: null,
     };
   }
 
@@ -193,7 +365,8 @@ export class FilmsService {
       popularity: item.popularity,
       description: item.overview,
       image: item.poster_path ? this.imageHost + item.poster_path : null,
-      id: item.id
+      id: item.id,
+      type: LibraryItemType.tv,
     };
   }
 
@@ -203,11 +376,4 @@ export class FilmsService {
     }
     return +date.split('-')[0];
   }
-
-  // TODO research what the fuck not working
-  private sortByPopularity(a: Film, b: Film): number {
-    return a.popularity === b.popularity ? 0
-      : (a.popularity > b.popularity ? -1 : 1);
-  }
-
 }

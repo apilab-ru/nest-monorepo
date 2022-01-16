@@ -1,14 +1,13 @@
 import { Item } from './base';
 
 export interface Anime extends Item {
-  type: AnimeType;
 }
 
 export interface AnimeRequestResponse {
-  data: AnimeResponseItem[];
+  data: SmotretAnimeResponseItem[];
 }
 
-export interface AnimeResponseItem {
+export interface SmotretAnimeResponseItem {
   id: number;
   titles: {
     ru: string;
@@ -21,7 +20,11 @@ export interface AnimeResponseItem {
   descriptions: AnimeDescription[];
   genres: AnimeGenre[];
   worldArtScore: number;
-  type: AnimeType;
+  myAnimeListScore: number;
+  myAnimeListId: number;
+  aniDbId: number;
+  url: string;
+  type: LibraryItemType;
   year: number;
   episodes: {
     countViews: number;
@@ -50,11 +53,12 @@ export enum AnimeDescriptionSource {
   word_of_anime = 'Word of anime'
 }
 
-export enum AnimeType {
+export enum LibraryItemType {
   tv = 'tv',
   movie = 'movie',
   special = 'special',
-  ova = 'ova'
+  ova = 'ova',
+  ona = 'ona',
 }
 
 export interface AnimeGenre {
