@@ -15,6 +15,10 @@ export class GenreEntity implements Genre {
   name: string;
 
   @ApiProperty()
+  @Column()
+  key: string;
+
+  @ApiProperty()
   @Column({
     type: 'set',
     enum: GenreKind,
