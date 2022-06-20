@@ -1,10 +1,4 @@
-export enum Difficulty {
-    expertPlus = 'ExpertPlus',
-    expert = 'Expert',
-    hard = 'Hard',
-    normal = 'Normal',
-    easy = 'Easy',
-}
+import { Difficulty } from "@bsab/api/map/difficulty";
 
 export enum OrderField {
     createdAt = 'maps.createdAt',

@@ -10,7 +10,8 @@ import camelCase from "lodash/camelCase";
 import flatMap from "lodash/flatMap";
 import uniq from "lodash/uniq";
 import { ErrorsService } from "../../settings/services/errors-service";
-import { Difficulty, DifficultyDetail } from "../../maps/interfaces/map";
+import { DifficultyDetail } from "../../maps/interfaces/map";
+import { Difficulty } from "@bsab/api/map/difficulty";
 
 const path = require('path');
 

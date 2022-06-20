@@ -1,4 +1,5 @@
-import { Difficulty, MapStat } from "../../maps/interfaces/map";
+import { MapStat } from "../../maps/interfaces/map";
+import { Difficulty } from "@bsab/api/map/difficulty";
 
 export enum UploaderType {
     DISCORD = 'DISCORD',
