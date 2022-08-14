@@ -1,5 +1,6 @@
 import { GenreKind } from '../genres/const';
 
+export { GenreKind };
 export interface Genre {
   id: number;
   name: string;

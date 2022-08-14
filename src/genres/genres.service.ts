@@ -99,6 +99,7 @@ export class GenreService {
             newItems.push({
               name,
               kind: [GenreKind.anime],
+              key: '',
             });
           }
 
