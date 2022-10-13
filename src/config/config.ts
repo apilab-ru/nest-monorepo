@@ -3,7 +3,7 @@ import * as firebaseConfig from './fb-config.json';
 export const config = {
   domain: 'http://file-cab.local:3000',
   sentry: {
-    dns: 'https://6f8da66c1cc9498caf54e4bf4f21b9cb@o1087993.ingest.sentry.io/6102391',
+    dns: '',
   },
   db: {
     host: 'localhost',
@@ -14,12 +14,12 @@ export const config = {
   email: {
     service: 'Yandex',
     auth: {
-      user: 'watchlist@apilab.ru',
-      pass: 'DqAtwYE6',
+      user: '',
+      pass: '',
     },
   },
   firebase: {
-    url: `https://filecab-5454b-default-rtdb.firebaseio.com`,
+    url: ``,
     config: {
       type: firebaseConfig.type,
       projectId: firebaseConfig.project_id,

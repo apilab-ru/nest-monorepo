@@ -26,8 +26,8 @@ const fs = require('fs');
 @Injectable()
 export class FilmsService {
 
-  private readonly endpoint = 'https://api.themoviedb.org/3/';
-  private readonly key = '22158161569e7320363684f9683f4953';
+  private readonly endpoint = '';
+  private readonly key = '';
 
   private readonly imageHost = 'https://image.tmdb.org/t/p/w500';
   private readonly baseFilterFilms = {
