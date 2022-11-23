@@ -1,16 +1,19 @@
 {
+  "name": "maps-api",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/maps-api/src",
   "projectType": "application",
   "targets": {
     "build": {
-      "executor": "@nrwl/node:webpack",
+      "executor": "@nrwl/webpack:webpack",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/apps/maps-api",
         "main": "apps/maps-api/src/main.ts",
         "tsConfig": "apps/maps-api/tsconfig.app.json",
-        "assets": ["apps/maps-api/src/assets"]
+        "assets": ["apps/maps-api/src/assets"],
+        "target": "node",
+        "compiler": "tsc"
       },
       "configurations": {
         "production": {
@@ -41,7 +44,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/maps-api"],
+      "outputs": ["{workspaceRoot}/coverage/apps/maps-api"],
       "options": {
         "jestConfig": "apps/maps-api/jest.config.ts",
         "passWithNoTests": true
