@@ -1,4 +1,5 @@
-import { HttpService, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
+import { HttpService } from '@nestjs/axios';
 import { catchError, combineLatest, map, Observable, of, switchMap, take } from "rxjs";
 import { BeatSaverItem, MapVersion } from "../interfaces/beatsaver";
 import * as fs from 'fs';
