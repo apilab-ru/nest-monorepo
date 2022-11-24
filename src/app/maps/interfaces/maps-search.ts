@@ -17,4 +17,5 @@ export interface MapsSearch extends BaseSearch {
     npsFrom?: string;
     npsTo?: string;
     dateFrom?: string;
+    showed: boolean;
 }

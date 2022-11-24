@@ -92,6 +92,12 @@ export class MapsService {
             });
         }
 
+        if (query.showed !== undefined) {
+          queryRunner.andWhere('showed = :showed', {
+            showed: query.showed,
+          });
+        }
+
         const orderFiled = OrderField[query.orderField] || OrderField.createdAt;
         const orderDirection = OrderDirection[query.orderDirection] || OrderDirection.desc;
 
@@ -104,8 +110,6 @@ export class MapsService {
     }
 
     markAsShowed(id: string): Promise<void> {
-      console.log('xxx id', id);
-
       return this.repository
         .findOne({ where: { id } } )
         .then(entity => {
