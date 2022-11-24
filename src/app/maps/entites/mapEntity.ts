@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm/index';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { DifficultyDetail, MapStat } from "../interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";

@@ -13,12 +13,13 @@ import uniq from "lodash/uniq";
 import { ErrorsService } from "../../settings/services/errors-service";
 import { DifficultyDetail } from "../../maps/interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";
+import { environment } from '../../../environments/environment';
 
 const path = require('path');
 
 @Injectable()
 export class ParserBeatSaverService {
-  private fileDir = 'F:/beat-saber-files/';
+  private fileDir = environment.fileDir;
   private api = 'https://beatsaver.com/api/';
 
   constructor(

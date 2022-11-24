@@ -1,4 +1,6 @@
 import { Difficulty } from "@bsab/api/map/difficulty";
+import { MapEntity } from '../entites/mapEntity';
+import { IMap } from '@bsab/api/map/map';
 
 export enum OrderField {
     createdAt = 'maps.createdAt',
@@ -27,7 +29,16 @@ export interface MapStat {
     score: number;
 }
 
-export interface Map {
+type PublicFields<T> = {
+  [P in keyof T]: T[P];
+};
+
+// extends IMap
+export interface Map extends PublicFields<MapEntity> {
+  sourceUrl: string;
+}
+
+/*export interface Map {
     id: string;
     name: string;
     description: string;
@@ -52,4 +63,4 @@ export interface Map {
     downloadURL: string;
     coverURL: string;
     soundURL: string;
-}
+}*/

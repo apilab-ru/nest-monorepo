@@ -1,10 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { catchError, combineLatest, from, mapTo, Observable, of } from "rxjs";
-import { Connection, Repository } from "typeorm/index";
+import { Connection, Repository } from "typeorm";
 import { MapEntity } from "../entites/mapEntity";
 import { ErrorsService } from "../../settings/services/errors-service";
 import { MapsSearch, OrderDirection } from "../interfaces/maps-search";
-import { OrderField } from "../interfaces/map";
+import { Map, OrderField } from '../interfaces/map';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class MapsService {
@@ -35,7 +36,7 @@ export class MapsService {
         );
     }
 
-    loadList(query: MapsSearch, maxLimit = 100): Promise<MapEntity[]> {
+    loadList(query: MapsSearch, maxLimit = 100): Promise<Map[]> {
         const queryRunner = this.repository.createQueryBuilder('maps');
         const limit = Math.min(query.limit, maxLimit);
         queryRunner.limit(limit);
@@ -96,6 +97,25 @@ export class MapsService {
 
         queryRunner.orderBy(orderFiled, orderDirection);
 
-        return queryRunner.getMany();
+        return queryRunner.getMany().then(list => list.map(item => ({
+          ...item,
+          sourceUrl: environment.host + 'parser/proxy-file?file=' + item.downloadURL,
+        })));
+    }
+
+    markAsShowed(id: string): Promise<void> {
+      console.log('xxx id', id);
+
+      return this.repository
+        .findOne({ where: { id } } )
+        .then(entity => {
+          if (!entity) {
+            throw new Error('notFound');
+          }
+
+          entity.showed = true;
+
+          return this.repository.save(entity)
+        }).then(() => {});
     }
 }

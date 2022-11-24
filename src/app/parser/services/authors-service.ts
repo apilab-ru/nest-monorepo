@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Subject } from "rxjs";
-import { Connection, Repository } from "typeorm/index";
+import { Connection, Repository } from "typeorm";
 import { AuthorEntity } from "../entites/author.entity";
 import { Author } from "../interfaces/beatsaver";
 import { ErrorsService } from "../../settings/services/errors-service";
@@ -17,7 +17,7 @@ export class AuthorsService {
     }
 
     pushAuthor(author: Author): Promise<void> {
-        return this.repository.find({
+        return this.repository.findOneBy({
             id: author.id
         }).then(res => {
             if (!res) {

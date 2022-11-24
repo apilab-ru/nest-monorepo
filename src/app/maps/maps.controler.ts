@@ -1,10 +1,11 @@
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Query } from '@nestjs/common';
+import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common';
 import { MapsService } from "./services/maps-service";
 import { TagsService } from "./services/tags-service";
 import { TagEntity } from "./entites/tag.entity";
 import { MapsSearch } from "./interfaces/maps-search";
 import { MapEntity } from "./entites/mapEntity";
+import { BASE_RESPONSE, BaseRequest } from '@bsab/api/request/interface';
 
 @ApiTags('maps')
 @Controller('maps')
@@ -15,6 +16,7 @@ export class MapsController {
     ) {
     }
 
+    @Get('list')
     @ApiQuery({
         name: 'limit',
         type: 'number',
@@ -50,7 +52,6 @@ export class MapsController {
         type: 'string',
         required: false,
     })
-    @Get('list')
     list(@Query() query: MapsSearch): Promise<MapEntity[]> {
         return this.mapsService.loadList(query);
     }
@@ -58,5 +59,17 @@ export class MapsController {
     @Get('tags')
     tags(): Promise<TagEntity[]> {
         return this.tagsService.loadTags();
+    }
+
+    @Post('showed')
+    @ApiBody({
+      schema: {
+        properties: {
+          id: { type: 'string' },
+        },
+      },
+    })
+    markShowed(@Body('id') id: string ): Promise<BaseRequest> {
+      return this.mapsService.markAsShowed(id).then(() => BASE_RESPONSE);
     }
 }
