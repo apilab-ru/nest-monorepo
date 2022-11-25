@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { catchError, combineLatest, from, mapTo, Observable, of } from "rxjs";
-import { Connection, Repository } from "typeorm";
+import { Connection, In, Repository } from 'typeorm';
 import { MapEntity } from "../entites/mapEntity";
 import { ErrorsService } from "../../settings/services/errors-service";
 import { MapsSearch, OrderDirection } from "../interfaces/maps-search";
@@ -120,6 +120,18 @@ export class MapsService {
           entity.showed = true;
 
           return this.repository.save(entity)
-        }).then(() => {});
+        })
+        .then(() => {});
+    }
+
+    markAsShowedList(list: string[]): Promise<void> {
+      return this.repository
+        .findBy({ id: In(list) })
+        .then(res => {
+          res.map(item => item.showed = true);
+
+          return this.repository.save(res);
+        })
+        .then(() => {});
     }
 }
