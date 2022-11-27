@@ -1,21 +1,23 @@
 export enum OrderDirection {
-    asc = 'ASC',
-    desc = 'DESC',
+   asc = 'ASC',
+   desc = 'DESC',
 }
 
 export interface BaseSearch {
-    limit: number;
-    offset: number;
-    orderField?: string;
-    orderDirection?: OrderDirection;
+   limit: number;
+   offset: number;
+   orderField?: string;
+   orderDirection?: OrderDirection;
 }
 
 export interface MapsSearch extends BaseSearch {
-    tagsPositive?: string;
-    tagsNegative?: string;
-    search?: string;
-    npsFrom?: string;
-    npsTo?: string;
-    dateFrom?: string;
-    showed: boolean;
+   tagsPositive?: string;
+   tagsNegative?: string;
+   search?: string;
+   npsFrom?: string;
+   npsTo?: string;
+   dateFrom?: string;
+   showed?: boolean;
+   bpmFrom?: string;
+   bpmTo?: string;
 }

@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { DifficultyDetail, MapStat } from "../interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";
+import { DifficultyDetail, MapStat } from '@bsab/api/map/map-detail';
 
 @Entity({
     name: 'maps',
