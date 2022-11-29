@@ -37,7 +37,11 @@ export class MapsService {
       );
    }
 
-   loadList(query: MapsSearch, maxLimit = 100): Promise<MapDetail[]> {
+   loadListDetails(query: MapsSearch, maxLimit = 100): Promise<MapDetail[]> {
+      return this.loadList(query, maxLimit).then(list => list.map(item => this.mapConvert(item)));
+   }
+
+   loadList(query: MapsSearch, maxLimit = 100): Promise<MapEntity[]> {
       const queryRunner = this.repository.createQueryBuilder('maps');
       const limit = Math.min(query.limit, maxLimit);
       queryRunner.limit(limit);
@@ -95,7 +99,7 @@ export class MapsService {
 
       if (query.showed !== undefined) {
          queryRunner.andWhere('showed = :showed', {
-            showed: query.showed
+            showed: query.showed === 'true' ? 1 : 0,
          });
       }
 
@@ -116,7 +120,7 @@ export class MapsService {
 
       queryRunner.orderBy(orderFiled, orderDirection);
 
-      return queryRunner.getMany().then(list => list.map(item => this.mapConvert(item)));
+      return queryRunner.getMany();
    }
 
    private mapConvert(item: MapEntity): MapDetail {

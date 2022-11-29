@@ -6,6 +6,7 @@ import { TagEntity } from './entites/tag.entity';
 import { MapsSearch } from './interfaces/maps-search';
 import { MapEntity } from './entites/mapEntity';
 import { BASE_RESPONSE, BaseRequest } from '@bsab/api/request/interface';
+import { MapDetail } from '@bsab/api/map/map-detail';
 
 @ApiTags('maps')
 @Controller('maps')
@@ -52,8 +53,8 @@ export class MapsController {
     type: 'string',
     required: false
   })
-  list(@Query() query: MapsSearch): Promise<MapEntity[]> {
-    return this.mapsService.loadList(query);
+  list(@Query() query: MapsSearch): Promise<MapDetail[]> {
+    return this.mapsService.loadListDetails(query);
   }
 
   @Get('tags')
