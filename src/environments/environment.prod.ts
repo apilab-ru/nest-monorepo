@@ -1,4 +1,5 @@
 export const environment = {
-  production: true,
-  fileDir: '',
+   production: true,
+   fileDir: '',
+   autoAuthUser: '',
 };

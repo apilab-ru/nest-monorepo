@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { filter, from, map, mapTo, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from "rxjs";
-import { Connection, Repository } from "typeorm/index";
+import { Connection, Repository } from "typeorm";
 import { TagEntity } from "../entites/tag.entity";
-import camelCase from "lodash/camelCase";
+const camelCase = require("lodash/camelCase");
 
 @Injectable()
 export class TagsService {

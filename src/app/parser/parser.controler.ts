@@ -18,7 +18,7 @@ export class ParserController {
 
     @Get('parser-beat')
     parserBeat(): string {
-        const page = 2232;
+        const page = 433;
         this.parserPage(page);
         return 'success';
     }
@@ -55,14 +55,17 @@ export class ParserController {
 
     private parserPage(page: number) {
         const start = new Date().getTime();
-        console.log('xxx start', page);
+        console.log('xxx start', page, new Date().toTimeString());
         this.parserService.loadPage(page).subscribe(list => {
             const time = new Date().getTime() - start;
             this.settingsService.updateSettings('parserProcess', {
                 time,
                 page,
             });
-            console.log('xxx process', page, time);
+
+            const lastItem = list?.length ? list[list.length - 1] : null;
+            console.log('xxx process', page, time, lastItem?.createdAt);
+
             if (list.length) {
                 this.parserPage(page + 1);
             } else {

@@ -7,9 +7,9 @@ import { TagsService } from "../../maps/services/tags-service";
 import { MapEntity } from "../../maps/entites/mapEntity";
 import { AuthorsService } from "./authors-service";
 import { MapsService } from "../../maps/services/maps-service";
-import camelCase from "lodash/camelCase";
-import flatMap from "lodash/flatMap";
-import uniq from "lodash/uniq";
+const camelCase = require("lodash/camelCase");
+const flatMap = require("lodash/flatMap");
+const uniq = require("lodash/uniq");
 import { ErrorsService } from "../../settings/services/errors-service";
 import { DifficultyDetail } from "../../maps/interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";
@@ -31,7 +31,7 @@ export class ParserBeatSaverService {
   ) {
   }
 
-  loadPage(page = 0) {
+  loadPage(page = 0): Observable<MapEntity[]> {
     return this.httpService.get<{ docs: BeatSaverItem[] }>(this.api + `search/text/${ page }?sortOrder=Relevance`).pipe(
       map(res => res.data.docs),
       switchMap(list => {
@@ -44,7 +44,8 @@ export class ParserBeatSaverService {
           return of([]);
         }
 
-        const tags = uniq(flatMap(list, (it) => it.tags));
+        const tags = uniq(flatMap(list, (it) => it.tags)).filter(tag => !!tag);
+
         return this.tagsService.findTags(tags).pipe(
           switchMap(tagsMap => combineLatest(
             list.map(item => this.convertItem(item, tagsMap))
