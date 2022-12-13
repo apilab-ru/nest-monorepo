@@ -1,5 +1,5 @@
-import { ApiBearerAuth, ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Body, Controller, Get, Post, Query, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
 import { MapsService } from './services/maps-service';
 import { TagsService } from './services/tags-service';
 import { TagEntity } from './entites/tag.entity';
@@ -60,8 +60,18 @@ export class MapsController {
       @Query() query: MapsSearch,
       @RequestUser() user: User,
    ): Promise<MapDetail[]> {
-      console.log('xxx user', user);
       return this.mapsService.loadListDetails(query);
+   }
+
+   @Get(':id')
+   @ApiParam({
+      name: 'id',
+      type: 'string',
+   })
+   getById(
+      @Param('id') id: string,
+   ): Promise<MapDetail> {
+      return this.mapsService.loadById(id);
    }
 
    @Get('tags')
@@ -90,7 +100,6 @@ export class MapsController {
       }
    })
    markShowedList(@Body('ids') ids: string[]): Promise<BaseRequest> {
-      console.log('xxx ids', ids);
       return this.mapsService.markAsShowedList(ids).then(() => BASE_RESPONSE);
    }
 }

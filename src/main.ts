@@ -1,10 +1,11 @@
 import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 import { AppModule } from './app/app.module';
 import { urlencoded, json } from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { environment } from './environments/environment';
 import { NestApplicationOptions } from '@nestjs/common/interfaces/nest-application-options.interface';
+import { AllExceptionsFilter } from "@bsab/server-utils";
 import * as fs from 'fs';
 
 declare global {
@@ -50,6 +51,8 @@ async function bootstrap() {
    const globalPrefix = '';
    app.setGlobalPrefix(globalPrefix);
    const port = process.env.PORT || 3000;
+   const { httpAdapter } = app.get(HttpAdapterHost);
+   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter))
    await app.listen(port);
 
    const method = environment.ssl ? 'https' : 'http';

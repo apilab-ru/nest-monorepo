@@ -41,6 +41,18 @@ export class MapsService {
       return this.loadList(query, maxLimit).then(list => list.map(item => this.mapConvert(item)));
    }
 
+   loadById(id: string): Promise<MapDetail> {
+      return this.repository.findOneBy({
+         id
+      }).then(res => {
+         if (!res) {
+            throw new Error('notFound');
+         }
+
+         return this.mapConvert(res);
+      })
+   }
+
    loadList(query: MapsSearch, maxLimit = 100): Promise<MapEntity[]> {
       const queryRunner = this.repository.createQueryBuilder('maps');
       const limit = Math.min(query.limit, maxLimit);
