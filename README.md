@@ -1,5 +1,6 @@
 ## Description
 Swagger http://localhost:3000/swagger/
+Debugger chrome://inspect
 
 ### FilmsApi 
 https://developers.themoviedb.org/3/getting-started/introduction

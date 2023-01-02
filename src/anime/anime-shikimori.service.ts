@@ -1,4 +1,5 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { AnimeSearchV2Query, ShikimoriDetailItem, ShikimoriGenre, ShikimoriItem } from './interface';
 import { catchError, map, switchMap, take, tap, toArray } from 'rxjs/operators';
 import { concat, from, Observable, of } from 'rxjs';
@@ -6,7 +7,7 @@ import { SentryService } from '../sentry/sentry.service';
 import { URLSearchParams } from 'url';
 import { GenreBase } from '../genres/interface';
 import { MediaItem, SearchRequestResultV2 } from '../models';
-import { Connection, Repository } from 'typeorm/index';
+import { Connection, Repository } from 'typeorm';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { GenreService } from '../genres/genres.service';
 import { Genre } from '../models/genre';
@@ -63,7 +64,7 @@ export class AnimeShikimoriService {
   }
 
   getItemDetail(id: number): Observable<MediaItem> {
-    return from(this.repository.findOne({ id })).pipe(
+    return from(this.repository.findOneBy({ id })).pipe(
       switchMap(item => item ? of(item) : this.loadDetail(id)),
     );
   }

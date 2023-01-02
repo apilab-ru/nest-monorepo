@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { AuthParams, UserResponse } from '../interface';
-import { Connection, Repository } from 'typeorm/index';
+import { Connection, Repository } from 'typeorm';
 import { UserDto, UserEntity } from '../entites/user.entity';
 import { UserTokenEntity } from '../entites/user-token.entity';
 import { MailService } from './mail.service';
@@ -8,7 +8,7 @@ import { config } from '../../config/config';
 import * as fs from 'fs';
 import { format } from 'date-fns';
 
-const cryptors = require('cryptors');
+const crypto = require('crypto');
 const path = require('path');
 
 @Injectable()
@@ -29,7 +29,7 @@ export class UserService {
       throw new Error('notFillData');
     }
 
-    return this.userRepository.findOne({
+    return this.userRepository.findOneBy({
       email,
       password: this.passwordHash(password),
     }).then(user => {
@@ -166,7 +166,9 @@ export class UserService {
   }
 
   private passwordHash(password: string): string {
-    return cryptors.sha1(password);
+    const shasum = crypto.createHash('sha1');
+    shasum.user(password);
+    return shasum.digest('hex');
   }
 
   private generateToken(): string {

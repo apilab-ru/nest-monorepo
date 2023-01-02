@@ -1,8 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm';
+import { Repository, Connection } from 'typeorm';
 import { GenreEntity } from './entites/genre.entity';
 import { GenreBase } from './interface';
-import { Connection } from 'typeorm/index';
 import { Genre } from '../models/genre';
 import { from, map, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';

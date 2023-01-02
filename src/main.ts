@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './sentry/all-exceptions-filter';
 import { urlencoded, json } from 'express';
+import { Logger } from '@nestjs/common';
 
 declare global {
   namespace NodeJS {
@@ -21,7 +22,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('FileCabinet')
     .addBearerAuth()
-    .setVersion('1.1.1')
+    .setVersion('1.2.0')
     .setDescription('')
     .build();
   const document = SwaggerModule.createDocument(app, config);
@@ -30,10 +31,15 @@ async function bootstrap() {
 
   app.use(json({ limit: '50mb' }));
   app.use(urlencoded({ extended: true, limit: '50mb' }));
-
   app.enableCors({});
+
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
-  await app.listen(3000);
+  const port = 3000;
+  await app.listen(port);
+
+  Logger.log(
+    `Application is running on: http://localhost:${port}/swagger`,
+  );
 }
 bootstrap();

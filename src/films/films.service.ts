@@ -1,4 +1,5 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { URLSearchParams } from 'url';
 import { map, switchMap, withLatestFrom } from 'rxjs/operators';
 import {
@@ -20,14 +21,15 @@ import { GenreBase } from '../genres/interface';
 import { Genre } from '../models/genre';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
+import { config } from '../config/config';
 
 const fs = require('fs');
 
 @Injectable()
 export class FilmsService {
 
-  private readonly endpoint = '';
-  private readonly key = '';
+  private readonly endpoint = 'https://api.themoviedb.org/3/';
+  private readonly key = config.films.key;
 
   private readonly imageHost = 'https://image.tmdb.org/t/p/w500';
   private readonly baseFilterFilms = {
@@ -281,8 +283,6 @@ export class FilmsService {
       params.append(key, args[key]);
     }
     const url = this.endpoint + path + '?' + params.toString();
-
-    console.log('xxx url', url);
 
     return this.httpService.get<T>(url)
       .pipe(

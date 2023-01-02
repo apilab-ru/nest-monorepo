@@ -1,4 +1,4 @@
-import { HttpModule, Module } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { FilmsController } from './films/films.controller';
 import { AnimeController } from './anime/anime.controller';
 import { FilmsService } from './films/films.service';
@@ -24,13 +24,14 @@ import { FilmsV2Controller } from './films/films.v2.controller';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ClassTransformInterceptor } from './sentry/class-transform.interceptor';
 import { LibraryController } from './library/library-controller';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
-    HttpModule,
     TypeOrmModule.forRoot(DB_CONFIG),
     PassportModule.register({ defaultStrategy: 'bearer' }),
     ScheduleModule.forRoot(),
+    HttpModule,
   ],
   controllers: [
     FilmsController,

@@ -1,6 +1,7 @@
-import * as firebaseConfig from './fb-config.json';
+const merge = require('deepmerge');
+import { configCustom } from './config-custom';
 
-export const config = {
+const baseConfig = {
   domain: 'http://file-cab.local:3000',
   sentry: {
     dns: '',
@@ -18,19 +19,27 @@ export const config = {
       pass: '',
     },
   },
+  films: {
+    key: '',
+  },
   firebase: {
     url: ``,
     config: {
-      type: firebaseConfig.type,
-      projectId: firebaseConfig.project_id,
-      privateKeyId: firebaseConfig.private_key_id,
-      privateKey: firebaseConfig.private_key,
-      clientEmail: firebaseConfig.client_email,
-      clientId: firebaseConfig.client_id,
-      authUri: firebaseConfig.auth_uri,
-      tokenUri: firebaseConfig.token_uri,
-      authProviderX509CertUrl: firebaseConfig.auth_provider_x509_cert_url,
-      clientX509CertUrl: firebaseConfig.client_x509_cert_url,
+      type: '',
+      projectId: '',
+      privateKeyId: '',
+      privateKey: '',
+      clientEmail: '',
+      clientId: '',
+      authUri: '',
+      tokenUri: '',
+      authProviderX509CertUrl: '',
+      clientX509CertUrl: '',
     },
   },
 };
+
+export const config = merge(
+  baseConfig,
+  configCustom,
+);

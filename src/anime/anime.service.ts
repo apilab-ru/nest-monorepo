@@ -1,4 +1,5 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
+import { HttpService } from '@nestjs/axios';
 import { URLSearchParams } from 'url';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
 import { combineLatest, from, Observable, of, Subject } from 'rxjs';
@@ -29,7 +30,7 @@ const CHIPS = {
 
 @Injectable()
 export class AnimeService {
-  private endpoint = 'https://smotret-anime.online/api/series/';
+  private endpoint = 'http://smotret-anime.online/api/series/';
   private fields = '&id,titles,posterUrl,url,descriptions,genres,year,type,myAnimeListScore,worldArtScore,episodes,myAnimeListId,aniDbId';
 
   constructor(

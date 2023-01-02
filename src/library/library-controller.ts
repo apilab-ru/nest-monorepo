@@ -1,8 +1,7 @@
 import { LibraryService } from './library.service';
 import { AnimeService } from '../anime/anime.service';
 import { FilmsService } from '../films/films.service';
-import { catchError, from, map, NEVER, of, switchMap, take } from 'rxjs';
-import { Cron } from '@nestjs/schedule';
+import { from, map, NEVER, of, switchMap, take } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger';
 import { Controller } from '@nestjs/common';
 import { UserLibraryService } from '../user-library/user-library.service';
