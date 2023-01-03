@@ -1,25 +1,12 @@
-import { LibraryService } from './library.service';
-import { AnimeService } from '../anime/anime.service';
-import { FilmsService } from '../films/films.service';
-import { from, map, NEVER, of, switchMap, take } from 'rxjs';
 import { ApiTags } from '@nestjs/swagger';
 import { Controller } from '@nestjs/common';
-import { UserLibraryService } from '../user-library/user-library.service';
 
 @ApiTags('library')
 @Controller('library')
 export class LibraryController {
-  constructor(
-    private libraryService: LibraryService,
-    private animeService: AnimeService,
-    private filmsService: FilmsService,
-    private userLibraryService: UserLibraryService,
-  ) {
-  }
-
   // TODO research infinity update with last item (846)
   //@Cron('*/10 * * * * *')
-  async loadLibraryItems(): Promise<void> {
+  /*async loadLibraryItems(): Promise<void> {
     from(this.libraryService.loadNeedUpdateItem()).pipe(
       switchMap(entity => !entity ? of(null) : (
           entity.smotretId
@@ -37,6 +24,6 @@ export class LibraryController {
       this.userLibraryService.isNotified = false;
       this.libraryService.updateItem(res.entity, res.response || {});
     });
-  }
+  }*/
 }
 

@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { Connection, In, Repository } from 'typeorm/index';
+import { Connection, In, Repository } from 'typeorm';
 import { LibraryItemEntity, MediaItemDTO } from './entites/library-item.entity';
 import { SentryService } from '../sentry/sentry.service';
 import { MediaItem } from './interface';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class LibraryService {
@@ -29,8 +28,6 @@ export class LibraryService {
         .forEach(key => {
           exItem[key] = item[key];
         });
-
-      exItem.processed = item.processed || false;
     });
 
     return existed;
@@ -70,24 +67,4 @@ export class LibraryService {
       return list.map(it => new MediaItemDTO(it));
     });
   }
-
-  loadNeedUpdateItem(): Promise<LibraryItemEntity | null> {
-    return this.repository.findOne({
-      where: {
-        processed: true,
-      },
-    });
-  }
-
-  updateItem(entity: LibraryItemEntity, item: Partial<MediaItem>): Promise<LibraryItemEntity> {
-    Object.entries(item).forEach(([key, value]) => {
-      entity[key] = value;
-    });
-    entity.processed = false;
-
-    console.log('xxx entity', entity);
-
-    return this.repository.save(entity);
-  }
-
 }

@@ -13,10 +13,6 @@ export class LibraryItemEntity implements MediaItem {
 
   @ApiProperty()
   @Column()
-  processed: boolean;
-
-  @ApiProperty()
-  @Column()
   title: string;
 
   @ApiProperty()
