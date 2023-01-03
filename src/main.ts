@@ -35,7 +35,7 @@ async function bootstrap() {
 
   const { httpAdapter } = app.get(HttpAdapterHost);
   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter));
-  const port = 3000;
+  const port = 3030;
   await app.listen(port);
 
   Logger.log(
