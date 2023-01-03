@@ -8,4 +8,5 @@ export interface Genre {
   kind: GenreKind[];
   imdbId?: number | null;
   smotretId?: number | null;
+  kinopoiskId?: number | null;
 }

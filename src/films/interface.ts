@@ -1,3 +1,5 @@
+import { SearchRequest } from '../models';
+
 export enum EFilmsSortBy {
   voteAverage = 'vote_average',
   popularity = 'popularity'
@@ -16,4 +18,9 @@ export interface FilmsChips {
 
 export interface FilmsSearchQuery {
   name: string;
+}
+
+export interface FilmSearchParams extends SearchRequest {
+  kinopoiskId?: number;
+  imdbId?: number;
 }

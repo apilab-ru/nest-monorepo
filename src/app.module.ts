@@ -25,6 +25,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ClassTransformInterceptor } from './sentry/class-transform.interceptor';
 import { LibraryController } from './library/library-controller';
 import { HttpModule } from '@nestjs/axios';
+import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { HttpModule } from '@nestjs/axios';
   ],
   providers: [
     FilmsService,
+    FilmsKinopoiskService,
     AnimeService,
     AnimeShikimoriService,
     SentryService,

@@ -32,4 +32,8 @@ export class GenreEntity implements Genre {
   @ApiProperty()
   @Column()
   smotretId?: number | null;
+
+  @ApiProperty()
+  @Column()
+  kinopoiskId?: number | null;
 }

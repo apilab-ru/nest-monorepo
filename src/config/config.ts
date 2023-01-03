@@ -21,6 +21,7 @@ const baseConfig = {
   },
   films: {
     key: '',
+    kinopoiskKey: '',
   },
   firebase: {
     url: ``,

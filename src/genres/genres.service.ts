@@ -86,6 +86,24 @@ export class GenreService {
     }).filter(it => !!it);
   }
 
+  prepareGenres(originalList: number[], fullList: Genre[], key: keyof Genre): number[] {
+    const response: number[] = [];
+    originalList.forEach(item => {
+      const id = fullList.find(genre => genre[key] === item)?.id;
+      if (id) {
+        response.push(id);
+      } else if (item) {
+        this.sentryService.captureException({
+          message: 'Genre math error',
+          key,
+          item,
+        });
+      }
+    });
+
+    return response;
+  }
+
   findGenresAsync(itemList: string[]): Observable<number[]> {
     return this.list$.pipe(
       take(1),

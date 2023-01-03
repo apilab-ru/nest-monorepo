@@ -39,7 +39,7 @@ export class LibraryItemEntity implements MediaItem {
 
   @ApiProperty()
   @Column()
-  episodes: number;
+  episodes: number | null;
 
   @ApiProperty()
   @Column()
@@ -64,25 +64,31 @@ export class LibraryItemEntity implements MediaItem {
   @Column({
     nullable: true,
   })
-  shikimoriId: number | null;
+  shikimoriId?: number | null;
 
   @ApiProperty()
   @Column({
     nullable: true,
   })
-  aniDbId: number | null;
+  aniDbId?: number | null;
 
   @ApiProperty()
   @Column({
     nullable: true,
   })
-  imdbId: number | null;
+  imdbId?: number | null;
 
   @ApiProperty()
   @Column({
     nullable: true,
   })
   smotretId?: number | null;
+
+  @ApiProperty()
+  @Column({
+    nullable: true,
+  })
+  kinopoiskId?: number | null;
 }
 
 export class MediaItemDTO implements MediaItem {
@@ -102,6 +108,7 @@ export class MediaItemDTO implements MediaItem {
   aniDbId: number | null;
   imdbId: number | null;
   smotretId?: number | null;
+  kinopoiskId?: number | null;
 
   constructor(entity: LibraryItemEntity) {
     Object.keys(entity).forEach(key => {

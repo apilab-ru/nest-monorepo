@@ -28,6 +28,7 @@ export interface MediaItem {
   aniDbId?: number;
   imdbId?: number;
   smotretId?: number;
+  kinopoiskId?: number;
   genreIds: number[];
   originalTitle: string;
   type: LibraryItemType;
