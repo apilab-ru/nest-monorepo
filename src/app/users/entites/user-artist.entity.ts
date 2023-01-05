@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity({
-   name: 'user-artists',
+   name: 'user_artists',
 })
 export class UserArtistEntity {
 
@@ -11,9 +11,9 @@ export class UserArtistEntity {
 
    @ApiProperty()
    @Column()
-   user_id: string;
+   user_id: number;
 
    @ApiProperty()
    @Column()
-   artist_id: number;
+   artist: string;
 }

@@ -127,6 +127,26 @@ export class MapsService {
          });
       }
 
+      if (query.recommended) {
+         queryRunner.distinctOn(['maps.id'])
+
+         queryRunner.leftJoin(
+            'user_songs',
+            'us',
+            '(us.song = maps.songName or us.song = maps.songSubName) and us.user_id = :userId',
+            { userId: 1 }
+         );
+
+         queryRunner.leftJoin(
+            'user_artists',
+            'ua',
+            'ua.artist = maps.songAuthorName and ua.user_id = :userId',
+            { userId: 1 }
+         );
+
+         queryRunner.andWhere('((us.id is not NULL) or (ua.id is not NULL))')
+      }
+
       const orderFiled = OrderField[query.orderField] || OrderField.createdAt;
       const orderDirection = OrderDirection[query.orderDirection] || OrderDirection.desc;
 
