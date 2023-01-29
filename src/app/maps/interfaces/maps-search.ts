@@ -21,4 +21,7 @@ export interface MapsSearch extends BaseSearch {
    recommended?: string;
    bpmFrom?: string;
    bpmTo?: string;
+   durationFrom?: string;
+   durationTo?: string;
+   scoreFrom?: string;
 }

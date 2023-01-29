@@ -147,6 +147,24 @@ export class MapsService {
          queryRunner.andWhere('((us.id is not NULL) or (ua.id is not NULL))')
       }
 
+      if (query.durationFrom) {
+         queryRunner.andWhere('duration >= :durationFrom', {
+            durationFrom: query.durationFrom
+         });
+      }
+
+      if (query.durationTo) {
+         queryRunner.andWhere('duration <= :durationTo', {
+            durationTo: query.durationTo
+         });
+      }
+
+      if (query.scoreFrom) {
+         queryRunner.andWhere('JSON_EXTRACT(maps.stats, "$.score") >= :score', {
+            score: +query.scoreFrom / 100
+         })
+      }
+
       const orderFiled = OrderField[query.orderField] || OrderField.createdAt;
       const orderDirection = OrderDirection[query.orderDirection] || OrderDirection.desc;
 
