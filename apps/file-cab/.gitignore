@@ -1,0 +1,4 @@
+.env
+dist
+/src/config/config-custom.ts
+/src/config/fb-config.json

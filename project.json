@@ -14,7 +14,9 @@
         "main": "apps/file-cab/src/main.ts",
         "tsConfig": "apps/file-cab/tsconfig.app.json",
         "assets": ["apps/file-cab/src/assets"],
-        "webpackConfig": "apps/file-cab/webpack.config.js"
+        "webpackConfig": "apps/file-cab/webpack.config.js",
+        "sourceMap": true,
+        "debug": true
       },
       "configurations": {
         "production": {
