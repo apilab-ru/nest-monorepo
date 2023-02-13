@@ -1,0 +1,3 @@
+[submodule "libs/bsab-interfaces"]
+	path = libs/bsab-interfaces
+	url = https://github.com/apilab-ru/bsab-api-interfaces.git

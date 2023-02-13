@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@utils/*": ["libs/utils/*"],
+      "@utils/*": ["libs/utils/src/*"],
+      "@bsab/api/*": ["libs/bsab-interfaces/src/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]
