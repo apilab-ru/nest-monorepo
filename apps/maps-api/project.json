@@ -13,7 +13,9 @@
         "tsConfig": "apps/maps-api/tsconfig.app.json",
         "assets": ["apps/maps-api/src/assets"],
         "target": "node",
-        "compiler": "tsc"
+        "compiler": "tsc",
+        "sourceMap": true,
+        "debug": true
       },
       "configurations": {
         "production": {

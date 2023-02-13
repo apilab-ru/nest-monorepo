@@ -5,7 +5,7 @@ import { urlencoded, json } from 'express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { environment } from './environments/environment';
 import { NestApplicationOptions } from '@nestjs/common/interfaces/nest-application-options.interface';
-import { AllExceptionsFilter } from "@bsab/server-utils";
+import { AllExceptionsFilter } from "@utils/src/exceptions";
 import * as fs from 'fs';
 
 declare global {
