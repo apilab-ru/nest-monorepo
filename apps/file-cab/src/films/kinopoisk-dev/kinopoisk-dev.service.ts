@@ -1,7 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { MediaItemsProvider } from "../../library/media-items.provider";
 import { config } from '../../config/config';
-import { concat, map, Observable, switchMap } from "rxjs";
+import { concat, from, map, Observable, switchMap } from "rxjs";
 import { MediaItem, SearchRequestResultV2 } from "@filecab/models";
 import { HttpService } from "@nestjs/axios";
 import { GenreService } from "../../genres/genres.service";
@@ -18,9 +17,10 @@ import { FilmsKinopoiskService } from "../kinopoisk/films-kinopoisk.service";
 import { toArray, withLatestFrom } from "rxjs/operators";
 import { Genre } from "@filecab/models/genre";
 import { KINOPOISK_GENRES_MAP } from "../kinopoisk/const";
+import { Types } from "@filecab/models/types";
 
 @Injectable()
-export class KinopoiskDevService implements MediaItemsProvider {
+export class KinopoiskDevService {
   private endpoint = 'https://test-api.kinopoisk.dev/';
   private token = config.films.kinopoiskDev;
 
@@ -71,9 +71,11 @@ export class KinopoiskDevService implements MediaItemsProvider {
       })
     })
 
+    const type = params.type === Types.films ? KinopoiskDevTypes.movie : undefined;
+
     fields.push({
       field: 'type',
-      search: KinopoiskDevTypes.movie,
+      search: type,
     })
 
     return this.requestSearch<KinopoiskDevResponse>(fields, pageParams).pipe(
@@ -82,20 +84,21 @@ export class KinopoiskDevService implements MediaItemsProvider {
   }
 
   private mapDevResponse(response: KinopoiskDevResponse): Observable<SearchRequestResultV2<MediaItem>> {
-    const withGenres$ = response.docs.map(item => this.filmsKinopoiskService.getByKinopoiskId(item.id));
+    const ids =  response.docs.map(item => item.id);
 
-    return concat<MediaItem[]>(
-      ...withGenres$
-    ).pipe(
-      toArray(),
-      map((withGenres) => {
+    return from(this.libraryService.loadByIds(ids, 'kinopoiskId')).pipe(
+      switchMap(exsisted => {
+        const existedIds = exsisted.map(item => item.kinopoiskId);
+        const newItems = ids.filter(id => !existedIds.includes(id));
 
-        return withGenres.map((item, index) => ({
-          ...item,
-          imdbId: this.parseImdb(response.docs[index].externalId.imdb),
-        }))
+        return concat<MediaItem[]>(
+          ...newItems.map(id => this.loadById(id)),
+        ).pipe(
+          toArray(),
+          switchMap(list => this.libraryService.saveToRepository(list, 'imdbId')),
+          map(newItems => [...exsisted, ...newItems])
+        )
       }),
-      switchMap(list => this.libraryService.saveToRepository(list, 'imdbId')),
       map(list => ({
         results: list,
         total: response.total,

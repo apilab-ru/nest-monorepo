@@ -5,6 +5,7 @@ import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { EFilmsSortBy, EOrderType, FilmSearchParams } from './interface';
 import { firstValueFrom } from 'rxjs';
 import { KinopoiskDevService } from "./kinopoisk-dev/kinopoisk-dev.service";
+import { Types } from "@filecab/models/types";
 
 @ApiTags('films/v2')
 @Controller('films/v2')
@@ -69,7 +70,10 @@ export class FilmsV2Controller {
   async findFilm(
     @Query() query: FilmSearchParams,
   ): Promise<SearchRequestResult<MediaItem>> {
-    return await firstValueFrom(this.kinopoiskService.search(query));
+    return await firstValueFrom(this.kinopoiskService.search({
+      ...query,
+      type: Types.films,
+    }));
   }
 
   @Get('tv')
@@ -108,16 +112,10 @@ export class FilmsV2Controller {
   async findTv(
     @Query() query,
   ): Promise<SearchRequestResultV2<MediaItem>> {
-    const chips = { ...query };
-    const orderField = chips.orderField;
-    const orderType = chips.orderType;
-    delete chips.name;
-    delete chips.orderField;
-    delete chips.orderType;
-
-    return await firstValueFrom(this.filmsService.searchTvV2(
-      query.name, chips, orderField, orderType,
-    ));
+    return await firstValueFrom(this.kinopoiskService.search({
+      ...query,
+      type: Types.tv,
+    }));
   }
 
 }

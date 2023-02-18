@@ -22,6 +22,8 @@ export interface AnimeSearchQuery extends AnimeSearchChips {
   limit?: number;
   page?: number;
   id?: number;
+  shikimoriId?: number;
+  smotretId?: number;
 }
 
 export interface AnimeSearchV2Query {

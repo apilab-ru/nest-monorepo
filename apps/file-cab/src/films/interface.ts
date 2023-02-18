@@ -1,4 +1,5 @@
 import { SearchRequest } from '@filecab/models';
+import { Types } from "@filecab/models/types";
 
 export enum EFilmsSortBy {
   voteAverage = 'vote_average',
@@ -23,4 +24,5 @@ export interface FilmsSearchQuery {
 export interface FilmSearchParams extends SearchRequest {
   kinopoiskId?: number;
   imdbId?: number;
+  type?: Types;
 }
