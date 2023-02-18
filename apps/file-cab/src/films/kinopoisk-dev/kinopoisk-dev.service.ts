@@ -21,7 +21,7 @@ import { KINOPOISK_GENRES_MAP } from "../kinopoisk/const";
 
 @Injectable()
 export class KinopoiskDevService implements MediaItemsProvider {
-  private endpoint = 'https://api.kinopoisk.dev/';
+  private endpoint = 'https://test-api.kinopoisk.dev/';
   private token = config.films.kinopoiskDev;
 
   constructor(
@@ -144,8 +144,7 @@ export class KinopoiskDevService implements MediaItemsProvider {
     });
 
     fields.forEach(item => {
-      searchParams.append('field', item.field);
-      searchParams.append('search', '' + item.search);
+      searchParams.append(item.field, '' + item.search);
     })
 
     return this.get<T>('movie', searchParams.toString())
