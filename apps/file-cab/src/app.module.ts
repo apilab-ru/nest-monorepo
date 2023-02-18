@@ -26,6 +26,8 @@ import { ClassTransformInterceptor } from './sentry/class-transform.interceptor'
 import { LibraryController } from './library/library-controller';
 import { HttpModule } from '@nestjs/axios';
 import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service';
+import { MigrationService } from "./library/migration.service";
+import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service";
 
 @Module({
   imports: [
@@ -47,6 +49,7 @@ import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service
   providers: [
     FilmsService,
     FilmsKinopoiskService,
+    KinopoiskDevService,
     AnimeService,
     AnimeShikimoriService,
     SentryService,
@@ -56,6 +59,7 @@ import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service
     UserLibraryService,
     HttpStrategy,
     LibraryService,
+    MigrationService,
     FireBaseService,
     {
       provide: APP_INTERCEPTOR,

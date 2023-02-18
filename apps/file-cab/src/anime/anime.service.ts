@@ -21,6 +21,7 @@ import { GenreEntity } from '../genres/entites/genre.entity';
 import { MediaItem } from '@filecab/models';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
+import { MediaItemsProvider } from "../library/media-items.provider";
 
 const fs = require('fs');
 const DEFAULT_LIMIT = 50;
@@ -29,7 +30,7 @@ const CHIPS = {
 };
 
 @Injectable()
-export class AnimeService {
+export class AnimeService implements MediaItemsProvider {
   private endpoint = 'http://smotret-anime.online/api/series/';
   private fields = '&id,titles,posterUrl,url,descriptions,genres,year,type,myAnimeListScore,worldArtScore,episodes,myAnimeListId,aniDbId';
 
@@ -105,6 +106,10 @@ export class AnimeService {
           this.libraryService.saveToRepository([item], 'smotretId');
         }),
       );
+  }
+
+  getByFieldId(id: number, field: string): Observable<MediaItem> {
+    return of();
   }
 
   getGenres(): Observable<GenreOld[]> {

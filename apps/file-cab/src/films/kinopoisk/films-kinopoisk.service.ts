@@ -17,9 +17,10 @@ import { KINOPOISK_FILM_TYPE_MAP, KINOPOISK_GENRES_MAP } from './const';
 import { Genre } from '@filecab/models/genre';
 import { SearchRequestResultV2 } from '@filecab/models';
 import { FilmSearchParams } from '../interface';
+import { MediaItemsProvider } from "../../library/media-items.provider";
 
 @Injectable()
-export class FilmsKinopoiskService {
+export class FilmsKinopoiskService implements MediaItemsProvider {
   private endpoint = 'https://kinopoiskapiunofficial.tech/api/';
 
   constructor(
@@ -29,13 +30,19 @@ export class FilmsKinopoiskService {
   ) {
   }
 
-  getByKinopoiskId(id: number): Observable<MediaItem> {
+  getByFieldId(id: number, field: string): Observable<MediaItem> {
+    return this.getByKinopoiskId(id).pipe(
+      switchMap(item => this.libraryService.saveToRepository([item], 'kinopoiskId')
+        .then(list => list[0])
+      )
+    );
+  }
+
+  getByKinopoiskId(id: number): Observable<Omit<MediaItem, 'id'>> {
     return this.get<KinopoiskDetailItem>('v2.2/films/' + id).pipe(
       withLatestFrom(this.genreService.list$),
-      switchMap(([data, genres]) => {
-        const item = this.mapDetails(data, genres);
-        return this.libraryService.saveToRepository([item], 'kinopoiskId')
-          .then(list => list[0]);
+      map(([data, genres]) => {
+        return this.mapDetails(data, genres);
       }),
     );
   }
@@ -43,6 +50,9 @@ export class FilmsKinopoiskService {
   search(params: FilmSearchParams): Observable<SearchRequestResultV2<MediaItem>> {
     if (params.kinopoiskId) {
       return this.getByKinopoiskId(params.kinopoiskId).pipe(
+        switchMap(item => this.libraryService.saveToRepository([item], 'kinopoiskId')
+          .then(list => list[0])
+        ),
         map(item => ({
           page: 1,
           results: [item],

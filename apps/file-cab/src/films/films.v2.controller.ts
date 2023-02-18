@@ -4,7 +4,7 @@ import { MediaItem, SearchRequestResult, SearchRequestResultV2 } from '@filecab/
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { EFilmsSortBy, EOrderType, FilmSearchParams } from './interface';
 import { firstValueFrom } from 'rxjs';
-import { FilmsKinopoiskService } from './kinopoisk/films-kinopoisk.service';
+import { KinopoiskDevService } from "./kinopoisk-dev/kinopoisk-dev.service";
 
 @ApiTags('films/v2')
 @Controller('films/v2')
@@ -12,7 +12,7 @@ export class FilmsV2Controller {
 
   constructor(
     private filmsService: FilmsService,
-    private kinopoiskService: FilmsKinopoiskService,
+    private kinopoiskService: KinopoiskDevService,
   ) {
   }
 

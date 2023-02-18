@@ -1,13 +1,13 @@
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Post } from '@nestjs/common';
-import { LibraryService } from "./library.service";
 import { PreparedItem } from "@filecab/models/library";
+import { MigrationService } from "./migration.service";
 
 @ApiTags('library')
 @Controller('library')
 export class LibraryController {
   constructor(
-    private libraryService: LibraryService,
+    private migrationService: MigrationService,
   ) {
   }
 
@@ -21,9 +21,10 @@ export class LibraryController {
       },
     },
   })
-  migrateV3(@Body() params: any): void {
+  migrateV3(@Body() params: { list: PreparedItem[] }) {
     const list: PreparedItem[] = params.list;
-    console.log('xxx params', list);
+
+    return this.migrationService.migrateItems(list).toPromise();
   }
 
   // TODO research infinity update with last item (846)
