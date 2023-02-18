@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
-import { Connection, Repository } from 'typeorm/index';
+import { Connection, Repository } from 'typeorm';
 import { UserLibraryEntity } from './entites/user-library';
-import { Library, LibraryFlatData, LibraryItem, Tag } from '../library/interface';
+import { Library, LibraryFlatData, LibraryItem } from '@filecab/models/library';
 import { LibraryService } from '../library/library.service';
 import { GenreService } from '../genres/genres.service';
 import { FireBaseService } from '../user/services/fire-base.service';
-import { FIREBASE_EVENT_TABLE } from '../models';
+import { FIREBASE_EVENT_TABLE } from '@filecab/models/const';
 
 @Injectable()
 export class UserLibraryService {

@@ -2,7 +2,7 @@ import { ApiBearerAuth, ApiBody, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { UserLibraryService } from './user-library.service';
-import { Library } from '../library/interface';
+import { Library } from '@filecab/models/library';
 import { BaseResponse } from '../base/base-response';
 
 @ApiTags('user-library')

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Connection, In, Repository } from 'typeorm';
 import { LibraryItemEntity, MediaItemDTO } from './entites/library-item.entity';
 import { SentryService } from '../sentry/sentry.service';
-import { MediaItem } from './interface';
+import { MediaItem } from '@filecab/models';
 
 @Injectable()
 export class LibraryService {

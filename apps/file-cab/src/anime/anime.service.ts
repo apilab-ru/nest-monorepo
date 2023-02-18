@@ -11,14 +11,14 @@ import {
   SearchRequestResult,
   SearchRequestResultV2,
   SmotretAnimeResponseItem,
-} from '../models';
+} from '@filecab/models';
 import { AnimeSearchQuery } from './interface';
 import { GenreBase } from '../genres/interface';
-import { GenreKind } from '../genres/const';
+import { GenreKind } from '@filecab/models/genre';
 import { GenreService } from '../genres/genres.service';
 import { SentryService } from '../sentry/sentry.service';
 import { GenreEntity } from '../genres/entites/genre.entity';
-import { MediaItem } from '../library/interface';
+import { MediaItem } from '@filecab/models';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 

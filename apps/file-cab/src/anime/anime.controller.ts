@@ -1,6 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common';
 import { AnimeService } from './anime.service';
-import { Anime, GenreOld, SearchRequestResult } from '../models';
+import { Anime, GenreOld, SearchRequestResult } from '@filecab/models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { AnimeSearchQuery } from './interface';
 import { firstValueFrom } from 'rxjs';

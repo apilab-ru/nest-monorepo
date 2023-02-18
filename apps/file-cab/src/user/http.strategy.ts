@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-http-bearer';
 import { UserService } from './services/user.service';
-import { UserResponse } from './interface';
+import { UserResponse } from '@filecab/models/user';
 
 @Injectable()
 export class HttpStrategy extends PassportStrategy(Strategy) {

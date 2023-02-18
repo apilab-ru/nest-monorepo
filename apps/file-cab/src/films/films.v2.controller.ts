@@ -1,6 +1,6 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FilmsService } from './films.service';
-import { MediaItem, SearchRequest, SearchRequestResult, SearchRequestResultV2 } from '../models';
+import { MediaItem, SearchRequestResult, SearchRequestResultV2 } from '@filecab/models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { EFilmsSortBy, EOrderType, FilmSearchParams } from './interface';
 import { firstValueFrom } from 'rxjs';

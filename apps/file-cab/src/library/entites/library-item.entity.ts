@@ -1,7 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { MediaItem } from '../interface';
-import { LibraryItemType } from '../../models';
+import { MediaItem, LibraryItemType } from '@filecab/models';
 
 @Entity({
   name: 'library',

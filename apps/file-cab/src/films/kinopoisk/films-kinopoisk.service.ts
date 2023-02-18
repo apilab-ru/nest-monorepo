@@ -4,7 +4,7 @@ import { HttpService } from '@nestjs/axios';
 import { GenreService } from '../../genres/genres.service';
 import { LibraryService } from '../../library/library.service';
 import { config } from '../../config/config';
-import { MediaItem } from '../../library/interface';
+import { MediaItem } from '@filecab/models';
 import {
   KinopoiskDetailItem,
   KinopoiskSearchItemResponse,
@@ -14,8 +14,8 @@ import {
 import { withLatestFrom } from 'rxjs/operators';
 import { LibraryItemEntity } from '../../library/entites/library-item.entity';
 import { KINOPOISK_FILM_TYPE_MAP, KINOPOISK_GENRES_MAP } from './const';
-import { Genre } from '../../models/genre';
-import { SearchRequestResultV2 } from '../../models';
+import { Genre } from '@filecab/models/genre';
+import { SearchRequestResultV2 } from '@filecab/models';
 import { FilmSearchParams } from '../interface';
 
 @Injectable()

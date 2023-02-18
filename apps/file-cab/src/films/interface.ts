@@ -1,4 +1,4 @@
-import { SearchRequest } from '../models';
+import { SearchRequest } from '@filecab/models';
 
 export enum EFilmsSortBy {
   voteAverage = 'vote_average',

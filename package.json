@@ -2,7 +2,9 @@
   "name": "nest-monorepo",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "filecab": "nx serve file-cab"
+  },
   "private": true,
   "dependencies": {
     "@nestjs/axios": "1.0.1",

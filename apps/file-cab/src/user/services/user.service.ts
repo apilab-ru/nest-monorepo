@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { AuthParams, UserResponse } from '../interface';
+import { AuthParams, UserResponse } from '@filecab/models';
 import { Connection, Repository } from 'typeorm';
 import { UserDto, UserEntity } from '../entites/user.entity';
 import { UserTokenEntity } from '../entites/user-token.entity';

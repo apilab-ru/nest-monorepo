@@ -1,4 +1,4 @@
-import { GenreKind } from './const';
+import { GenreKind } from '@filecab/models/genre';
 
 export interface GenreBase {
   name: string;

@@ -2,10 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { Repository, Connection } from 'typeorm';
 import { GenreEntity } from './entites/genre.entity';
 import { GenreBase } from './interface';
-import { Genre } from '../models/genre';
+import { Genre, GenreKind } from '@filecab/models/genre';
 import { from, map, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
-import { GenreKind } from './const';
 
 @Injectable()
 export class GenreService {

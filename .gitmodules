@@ -1,3 +1,6 @@
 [submodule "libs/bsab-interfaces"]
 	path = libs/bsab-interfaces
 	url = https://github.com/apilab-ru/bsab-api-interfaces.git
+[submodule "libs/filecab-models"]
+	path = libs/filecab-models
+	url = https://github.com/apilab-ru/filecab-models.git

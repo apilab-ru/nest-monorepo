@@ -1,7 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { GenreKind } from '../const';
-import { Genre } from '../../models/genre';
+import { GenreKind, Genre } from '@filecab/models/genre';
 
 @Entity({
   name: 'genres',

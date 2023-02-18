@@ -1,10 +1,8 @@
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { AnimeSearchQuery } from './interface';
-import { SearchRequest, SearchRequestResultV2 } from '../models';
+import { SearchRequest, SearchRequestResultV2, MediaItem } from '@filecab/models';
 import { firstValueFrom } from 'rxjs';
 import { AnimeService } from './anime.service';
-import { MediaItem } from '../library/interface';
 
 @ApiTags('anime/v2')
 @Controller('anime/v2')

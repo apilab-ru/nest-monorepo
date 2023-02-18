@@ -1,4 +1,4 @@
-import { LibraryItemType } from '../../models';
+import { LibraryItemType } from '@filecab/models';
 
 export enum KinopoiskFilmType {
   film = 'FILM',

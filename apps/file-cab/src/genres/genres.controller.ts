@@ -5,7 +5,7 @@ import { AnimeShikimoriService } from '../anime/anime-shikimori.service';
 import { GenreService } from './genres.service';
 import { combineLatest } from 'rxjs';
 import { AnimeService } from '../anime/anime.service';
-import { Genre } from '../models/genre';
+import { Genre } from '@filecab/models/genre';
 
 @ApiTags('genres')
 @Controller('genres')

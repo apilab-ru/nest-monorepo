@@ -1,5 +1,5 @@
-import { GenreKind } from '../genres/const';
-import { LibraryItemType } from '../models';
+import { GenreKind } from '@filecab/models/genre';
+import { LibraryItemType } from '@filecab/models';
 
 export enum EAnimeSearchTypes {
   tv = 'tv',

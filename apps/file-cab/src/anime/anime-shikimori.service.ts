@@ -6,11 +6,11 @@ import { concat, from, Observable, of } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
 import { URLSearchParams } from 'url';
 import { GenreBase } from '../genres/interface';
-import { MediaItem, SearchRequestResultV2 } from '../models';
+import { MediaItem, SearchRequestResultV2 } from '@filecab/models';
 import { Connection, Repository } from 'typeorm';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { GenreService } from '../genres/genres.service';
-import { Genre } from '../models/genre';
+import { Genre } from '@filecab/models/genre';
 
 const domain = 'https://shikimori.one';
 const api = domain + '/api/';

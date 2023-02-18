@@ -16,7 +16,9 @@
     "baseUrl": ".",
     "paths": {
       "@utils/*": ["libs/utils/src/*"],
-      "@bsab/api/*": ["libs/bsab-interfaces/src/*"]
+      "@bsab/api/*": ["libs/bsab-interfaces/src/*"],
+      "@filecab/models": ["libs/filecab-models/src/index.ts"],
+      "@filecab/models/*": ["libs/filecab-models/src/*"],
     }
   },
   "exclude": ["node_modules", "tmp"]

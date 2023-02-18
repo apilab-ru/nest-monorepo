@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm/index';
 import { ApiProperty } from '@nestjs/swagger';
-import { LibraryFlatData, Tag } from '../../library/interface';
+import { LibraryFlatData, Tag } from '@filecab/models/library';
 
 @Entity({
   name: 'user-library',

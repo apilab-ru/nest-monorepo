@@ -13,7 +13,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { UserService } from './services/user.service';
-import { AuthParams, UserResponse } from './interface';
+import { AuthParams, UserResponse } from '@filecab/models/user';
 import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('user')

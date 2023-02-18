@@ -12,13 +12,12 @@ import {
   SearchRequestResult,
   SearchRequestResultV2,
   TvItem,
-} from '../models';
+} from '@filecab/models';
 import { catchError, forkJoin, from, Observable } from 'rxjs';
 import { EFilmsSortBy, EOrderType, FilmsChips } from './interface';
 import { GenreService } from '../genres/genres.service';
-import { GenreKind } from '../genres/const';
+import { GenreKind, Genre } from '@filecab/models/genre';
 import { GenreBase } from '../genres/interface';
-import { Genre } from '../models/genre';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { config } from '../config/config';

@@ -1,6 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm/index';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { UserResponse } from '../interface';
+import { UserResponse } from '@filecab/models/user';
 
 @Entity({
   name: 'users',
