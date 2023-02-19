@@ -5,6 +5,8 @@ import { SettingsService } from "../settings/services/settings-service";
 import { ProxyService } from "./services/proxy.service";
 import { Response } from 'express';
 import { Readable } from 'stream';
+import { ErrorsService } from "../settings/services/errors-service";
+import { StringableObject } from "../settings/services/stringable-object";
 
 @ApiTags('parser')
 @Controller('parser')
@@ -13,6 +15,7 @@ export class ParserController {
         private parserService: ParserBeatSaverService,
         private settingsService: SettingsService,
         private proxyService: ProxyService,
+        private errorService: ErrorsService,
     ) {
     }
 
@@ -34,6 +37,12 @@ export class ParserController {
         @Res() res: Response,
     ) {
         const buffer = await this.proxyService.proxyFile(query.file);
+
+        if (!buffer) {
+          this.errorService.addError(new StringableObject({error: 'Proxy file'}), query.file);
+          throw new Error('notFound');
+        }
+
         const stream = new Readable();
         const type = this.proxyService.getFileType(query.file);
 

@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { filter, from, map, mapTo, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from "rxjs";
-import { Connection, Repository } from "typeorm/index";
-import { SettingsEntity } from "../entites/settings.entity";
+import { Connection, Repository } from "typeorm";
 import { ErrorEntity } from "../entites/error.entity";
+import { StringableObject } from "./stringable-object";
 
 @Injectable()
 export class ErrorsService {
@@ -14,7 +13,7 @@ export class ErrorsService {
         this.repository = connection.getRepository(ErrorEntity);
     }
 
-    addError(error: Error, data: any): void {
+    addError(error: Error | StringableObject, data: any): void {
         this.repository.save({
             error: error.toString(),
             data: JSON.stringify(data),
