@@ -17,10 +17,6 @@ export interface FilmsChips {
   with_people: string;
 }
 
-export interface FilmsSearchQuery {
-  name: string;
-}
-
 export interface FilmSearchParams extends SearchRequest {
   kinopoiskId?: number;
   imdbId?: number;

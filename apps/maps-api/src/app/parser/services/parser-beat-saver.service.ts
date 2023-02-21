@@ -10,7 +10,7 @@ import { MapsService } from "../../maps/services/maps-service";
 const camelCase = require("lodash/camelCase");
 const flatMap = require("lodash/flatMap");
 const uniq = require("lodash/uniq");
-import { ErrorsService } from "../../settings/services/errors-service";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 import { DifficultyDetail } from "../../maps/interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";
 import { environment } from '../../../environments/environment';

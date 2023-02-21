@@ -110,6 +110,10 @@ export class MediaItemDTO implements MediaItem {
       if (key !== 'processed') {
         this[key] = entity[key];
       }
+
+      if (key === 'genreIds') {
+        this.genreIds = entity.genreIds.map(it => +it)
+      }
     });
   }
 }

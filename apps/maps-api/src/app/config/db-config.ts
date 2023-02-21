@@ -6,7 +6,7 @@ import { MapEntity } from '../maps/entites/mapEntity';
 import { TagEntity } from '../maps/entites/tag.entity';
 import { AuthorEntity } from '../parser/entites/author.entity';
 import { SettingsEntity } from '../settings/entites/settings.entity';
-import { ErrorEntity } from '../settings/entites/error.entity';
+import { ErrorEntity } from '@utils/exceptions/entities/error.entity';
 import { USER_ENTITES } from "../users/entites";
 
 export const DB_CONFIG: ConnectionOptions = {

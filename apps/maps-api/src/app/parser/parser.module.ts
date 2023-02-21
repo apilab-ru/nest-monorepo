@@ -9,7 +9,7 @@ import { ParserBeatSaverService } from './services/parser-beat-saver.service';
 import { TagsService, MapsService } from "../maps";
 import { AuthorsService } from './services/authors-service';
 import { SettingsService } from "../settings/services/settings-service";
-import { ErrorsService } from "../settings/services/errors-service";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 import { ProxyService } from "./services/proxy.service";
 
 @Module({

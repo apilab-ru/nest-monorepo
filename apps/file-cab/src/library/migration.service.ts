@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { LibraryItemV2, MediaItemV2, MigrationResult, PreparedItem } from "@filecab/models/library";
+import { MediaItemV2, MigrationResult, PreparedItem } from "@filecab/models/library";
 import { combineLatest, concat, Observable} from "rxjs";
 import { LibraryService } from "./library.service";
 import { AnimeService } from "../anime/anime.service";
@@ -88,34 +88,36 @@ export class MigrationService {
   }
 
   private migrateAnime(items: PreparedItem[]): Observable<MigrationResult> {
+    const result: MigrationResult = {
+      manyResults: [],
+      migrated: [],
+    };
+
+    const $list = items.map(item => this.animeService.getByFieldId(item.item.shikimoriId, 'shikimoriId').pipe(
+      map(list => {
+        const mediaItem = list.length === 1
+          ? list[0]
+          : list.find(it => it.title === item.item.title);
+
+        if (mediaItem) {
+          result.migrated.push({
+            ...item,
+            item: mediaItem as MediaItemV2,
+          });
+        } else {
+          result.manyResults.push({
+            item,
+            list: list as MediaItemV2[],
+          })
+        }
+      })
+    ))
+
     return concat(
-      ...items.map(item => this.animeService.getByFieldId(item.item.shikimoriId, 'shikimoriId'))
+      ...$list
     ).pipe(
       toArray(),
-      map(results => {
-        return {
-          manyResults: [],
-          migrated: results.map((item, index) => ({
-            ...items[index],
-            item
-          } as LibraryItemV2))
-        }
-      }),
+      map(() => result),
     )
   }
-
-
-  /*private loadItems(ids: number[], field: keyof MediaItem): Observable<MediaItemV2[]> {
-    const provider = typesMap[field] === 'films' ? this.filmsService : this.animeService;
-
-    return from(this.libraryService.loadByIds(ids, field)).pipe(
-      switchMap(list => {
-        if (list.length === ids.length) {
-          return of(list)
-        }
-
-        const newItems = ids.filter(id => !list.find(item => item[field] === id));
-      })
-    )
-  }*/
 }

@@ -8,7 +8,7 @@ export interface KinopoiskDevShortItem {
     _id: string
   },
   logo: { url: null | string },
-  poster: {
+  poster?: {
     url: string,
     previewUrl: string
   },
@@ -36,7 +36,11 @@ export interface KinopoiskDevShortItem {
   names: { _id: string, name: string }[],
   movieLength: number,
   shortDescription: null,
-  releaseYears: []
+  genres: {name: string}[];
+  seasonsInfo: {
+    number: number;
+    episodesCount: number;
+  }[]
 }
 
 export interface KinopoiskDevDetails extends KinopoiskDevShortItem {

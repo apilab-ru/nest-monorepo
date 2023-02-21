@@ -1,12 +1,11 @@
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Header, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ParserBeatSaverService } from './services/parser-beat-saver.service';
 import { SettingsService } from "../settings/services/settings-service";
 import { ProxyService } from "./services/proxy.service";
 import { Response } from 'express';
 import { Readable } from 'stream';
-import { ErrorsService } from "../settings/services/errors-service";
-import { StringableObject } from "../settings/services/stringable-object";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 
 @ApiTags('parser')
 @Controller('parser')
@@ -39,7 +38,7 @@ export class ParserController {
         const buffer = await this.proxyService.proxyFile(query.file);
 
         if (!buffer) {
-          this.errorService.addError(new StringableObject({error: 'Proxy file'}), query.file);
+          this.errorService.addError({error: 'Proxy file'}, query.file);
           throw new Error('notFound');
         }
 

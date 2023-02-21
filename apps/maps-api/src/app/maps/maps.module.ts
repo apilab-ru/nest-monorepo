@@ -6,7 +6,7 @@ import { TagsService } from "./services/tags-service";
 import { MapsService } from "./services/maps-service";
 import { MapEntity } from "./entites/mapEntity";
 import { TagEntity } from "./entites/tag.entity";
-import { ErrorsService } from "../settings/services/errors-service";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 import { AuthModule } from "../auth/auth.module";
 
 @Module({

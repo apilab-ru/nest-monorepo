@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { catchError, combineLatest, from, mapTo, Observable, of } from 'rxjs';
 import { Connection, In, Repository } from 'typeorm';
 import { MapEntity } from '../entites/mapEntity';
-import { ErrorsService } from '../../settings/services/errors-service';
+import { ErrorsService } from '@utils/exceptions/errors-service';
 import { MapsSearch, OrderDirection } from '../interfaces/maps-search';
 import { OrderField } from '../interfaces/map';
 import { environment } from '../../../environments/environment';

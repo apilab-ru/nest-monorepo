@@ -3,7 +3,7 @@ import { Subject } from "rxjs";
 import { Connection, Repository } from "typeorm";
 import { AuthorEntity } from "../entites/author.entity";
 import { Author } from "../interfaces/beatsaver";
-import { ErrorsService } from "../../settings/services/errors-service";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 
 @Injectable()
 export class AuthorsService {

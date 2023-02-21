@@ -17,10 +17,9 @@ import { KINOPOISK_FILM_TYPE_MAP, KINOPOISK_GENRES_MAP } from './const';
 import { Genre } from '@filecab/models/genre';
 import { SearchRequestResultV2 } from '@filecab/models';
 import { FilmSearchParams } from '../interface';
-import { MediaItemsProvider } from "../../library/media-items.provider";
 
 @Injectable()
-export class FilmsKinopoiskService implements MediaItemsProvider {
+export class FilmsKinopoiskService {
   private endpoint = 'https://kinopoiskapiunofficial.tech/api/';
 
   constructor(
@@ -141,6 +140,7 @@ export class FilmsKinopoiskService implements MediaItemsProvider {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
+        detail.genres
       ),
       episodes: null,
       popularity: this.toNumber(detail.ratingKinopoisk),
@@ -162,6 +162,7 @@ export class FilmsKinopoiskService implements MediaItemsProvider {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
+        detail.genres
       ),
       episodes: null,
       popularity: this.toNumber(detail.rating),
@@ -183,6 +184,7 @@ export class FilmsKinopoiskService implements MediaItemsProvider {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
+        detail.genres
       ),
       episodes: null,
       popularity: this.toNumber(detail.ratingKinopoisk),

@@ -114,8 +114,7 @@ export class FilmsV2Controller {
   ): Promise<SearchRequestResultV2<MediaItem>> {
     return await firstValueFrom(this.kinopoiskService.search({
       ...query,
-      type: Types.tv,
-    }));
+    }, true));
   }
 
 }

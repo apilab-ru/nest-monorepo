@@ -5,6 +5,7 @@ import { GenreBase } from './interface';
 import { Genre, GenreKind } from '@filecab/models/genre';
 import { from, map, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
+import { ErrorsService } from "@utils/exceptions/errors-service";
 
 @Injectable()
 export class GenreService {
@@ -16,6 +17,7 @@ export class GenreService {
   constructor(
     connection: Connection,
     private sentryService: SentryService,
+    private errorsService: ErrorsService,
   ) {
     this.repository = connection.getRepository(GenreEntity);
     this.list$ = this.refresh.pipe(
@@ -79,24 +81,37 @@ export class GenreService {
           message: 'Anime genre not found',
           name: name,
         });
+
+        this.errorsService.addError({
+          error: 'Anime genre not found',
+        }, { name })
       }
 
       return item?.id;
     }).filter(it => !!it);
   }
 
-  prepareGenres(originalList: number[], fullList: Genre[], key: keyof Genre): number[] {
+  prepareGenres(originalList: number[], fullList: Genre[], key: keyof Genre, context: any): number[] {
     const response: number[] = [];
     originalList.forEach(item => {
       const id = fullList.find(genre => genre[key] === item)?.id;
       if (id) {
-        response.push(id);
+        response.push(+id);
       } else if (item) {
         this.sentryService.captureException({
           message: 'Genre math error',
           key,
           item,
+          context
         });
+
+        this.errorsService.addError({
+          error: 'Genre math error',
+        }, {
+          key,
+          item,
+          context
+        })
       }
     });
 

@@ -4,6 +4,11 @@ import { LibraryItemEntity, MediaItemDTO } from './entites/library-item.entity';
 import { SentryService } from '../sentry/sentry.service';
 import { MediaItem } from '@filecab/models';
 
+const UPDATE_FIELDS: Partial<keyof MediaItem>[] = [
+  'episodes',
+  'popularity'
+];
+
 @Injectable()
 export class LibraryService {
   private repository: Repository<LibraryItemEntity>;
@@ -20,14 +25,15 @@ export class LibraryService {
     list: Partial<LibraryItemEntity>[],
     filedId: keyof MediaItem = 'id',
   ): LibraryItemEntity[] {
-    existed.forEach(exItem => {
-      const item = list.find(it => it[filedId] === exItem[filedId]);
+    existed.forEach((exItem, index) => {
+      const item = list.find(it => it[filedId] === exItem[filedId])!;
 
-      Object.keys(item)
-        .filter(key => item[key])
-        .forEach(key => {
-          exItem[key] = item[key];
-        });
+      UPDATE_FIELDS.forEach(field => {
+        if (item[field]) {
+          // @ts-ignore
+          existed[index][field] = item[field];
+        }
+      })
     });
 
     return existed;

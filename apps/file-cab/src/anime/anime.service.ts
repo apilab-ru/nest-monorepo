@@ -1,18 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 import { URLSearchParams } from 'url';
-import { catchError, map, switchMap, take, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, take, tap, toArray } from 'rxjs/operators';
 import { combineLatest, from, Observable, of, Subject } from 'rxjs';
 import {
   Anime,
   AnimeDescriptionSource,
   AnimeGenre,
-  AnimeRequestResponse, GenreOld, SearchRequest,
+  AnimeRequestResponse,
+  GenreOld,
   SearchRequestResult,
   SearchRequestResultV2,
   SmotretAnimeResponseItem,
 } from '@filecab/models';
-import { AnimeSearchQuery } from './interface';
+import { AnimeSearchQuery, AnimeSearchV2Query } from './interface';
 import { GenreBase } from '../genres/interface';
 import { GenreKind } from '@filecab/models/genre';
 import { GenreService } from '../genres/genres.service';
@@ -23,10 +24,21 @@ import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 
 const fs = require('fs');
+
 const DEFAULT_LIMIT = 50;
 const CHIPS = {
   year: 'yearseason',
 };
+const CUSTOM = {
+  shikimoriId: 'myAnimeListId',
+  smotretId: 'id',
+};
+
+const SAVE_FIELDS: Partial<keyof MediaItem>[] = [
+  'shikimoriId',
+  'imdbId',
+  'smotretId',
+];
 
 @Injectable()
 export class AnimeService {
@@ -41,7 +53,7 @@ export class AnimeService {
   ) {
   }
 
-  searchV2(query: SearchRequest): Observable<SearchRequestResultV2<MediaItem>> {
+  searchV2(query: AnimeSearchV2Query): Observable<SearchRequestResultV2<MediaItem>> {
     return this.genreService.list$.pipe(
       take(1),
       switchMap(genres => this.requestSearch(query, genres)),
@@ -49,10 +61,30 @@ export class AnimeService {
         return !list.length ? of([]) : combineLatest(list.map(item => this.convertToLibraryItem(item)));
       }),
       switchMap(list => {
-        return from(this.libraryService.saveToRepository(list, 'smotretId'));
+        const byFields: Partial<Record<keyof MediaItem, MediaItem[]>> = {};
+
+        list.forEach(item => {
+          for(const key of SAVE_FIELDS) {
+            if (item[key]) {
+
+              if (!byFields[key]) {
+                byFields[key] = [];
+              }
+
+              byFields[key].push(item);
+              break;
+            }
+          }
+        })
+
+        return combineLatest(
+          ...Object.entries(byFields).map(([field, list]) => from(
+            this.libraryService.saveToRepository(list, field as keyof MediaItem))
+        ))
       }),
+      toArray(),
       map(results => ({
-        results,
+        results: results.flat(2),
         page: query.page,
         hasMore: query.limit === results.length,
       })),
@@ -107,7 +139,7 @@ export class AnimeService {
       );
   }
 
-  getByFieldId(id: number, field: 'shikimoriId' | 'smotretId'): Observable<MediaItem | MediaItem[]> {
+  getByFieldId(id: number, field: 'aniDbId' | 'smotretId' | 'shikimoriId'): Observable<MediaItem[]> {
     return from(this.libraryService.loadByIds([id], field)).pipe(
       switchMap(list => {
         if (list.length) {
@@ -149,10 +181,10 @@ export class AnimeService {
     return [list.slice(0, length)].concat(this.chunk(list.slice(length), length));
   }
 
-  private requestSearch(query: SearchRequest, dbGenres?: GenreEntity[]): Observable<SmotretAnimeResponseItem[]> {
+  private requestSearch(query: AnimeSearchV2Query, dbGenres?: GenreEntity[]): Observable<SmotretAnimeResponseItem[]> {
     query.limit = Math.min(query.limit || DEFAULT_LIMIT, DEFAULT_LIMIT);
     query.page = query.page || 1;
-    const { name, limit, page, ...chips } = query;
+    const { name, limit, page, shikimoriId, smotretId, ...chips } = query;
 
     const params = new URLSearchParams({
       // fields: this.fields,
@@ -165,6 +197,14 @@ export class AnimeService {
 
     if (page > 1) {
       params.append('offset', `${(page - 1) * limit}`);
+    }
+
+    if (shikimoriId) {
+      params.append(CUSTOM.shikimoriId, '' + shikimoriId);
+    }
+
+    if (smotretId) {
+      params.append(CUSTOM.smotretId, '' + smotretId);
     }
 
     let stChips = '';
@@ -255,7 +295,7 @@ export class AnimeService {
           originalTitle: item.titles.en,
           year: item.year,
           type: item.type,
-          popularity: item.myAnimeListScore || item.worldArtScore,
+          popularity: +(item.myAnimeListScore || item.worldArtScore || 0),
           episodes: item.episodes && item.episodes.length,
           shikimoriId: item.myAnimeListId,
           aniDbId: item.aniDbId,
@@ -269,8 +309,16 @@ export class AnimeService {
       return of([]);
     }
 
-    return this.genreService.findGenresAsync(
-      list.map(it => this.genreService.prepareName(it.title)),
+    return this.genreService.list$.pipe(
+      take(1),
+      map(genres => {
+        return this.genreService.prepareGenres(
+          list.map(it => it.id),
+          genres,
+          'smotretId',
+          list
+        )
+      }),
     );
   }
 

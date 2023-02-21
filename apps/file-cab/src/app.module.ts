@@ -28,6 +28,9 @@ import { HttpModule } from '@nestjs/axios';
 import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service';
 import { MigrationService } from "./library/migration.service";
 import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service";
+import { ErrorsService } from "@utils/exceptions/errors-service";
+import { UtilsController } from "./utils/utils.controller";
+import { UtilsService } from "./utils/utils.service";
 
 @Module({
   imports: [
@@ -45,6 +48,7 @@ import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service
     UserController,
     UserLibraryController,
     LibraryController,
+    UtilsController,
   ],
   providers: [
     FilmsService,
@@ -61,6 +65,8 @@ import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service
     LibraryService,
     MigrationService,
     FireBaseService,
+    ErrorsService,
+    UtilsService,
     {
       provide: APP_INTERCEPTOR,
       useClass: ClassTransformInterceptor,

@@ -1,5 +1,5 @@
 import { GenreKind } from '@filecab/models/genre';
-import { LibraryItemType } from '@filecab/models';
+import { LibraryItemType, SearchRequest } from '@filecab/models';
 
 export enum EAnimeSearchTypes {
   tv = 'tv',
@@ -26,10 +26,9 @@ export interface AnimeSearchQuery extends AnimeSearchChips {
   smotretId?: number;
 }
 
-export interface AnimeSearchV2Query {
-  name: string;
-  page?: number;
-  limit?: number;
+export interface AnimeSearchV2Query extends SearchRequest {
+  shikimoriId?: number;
+  smotretId?: number;
 }
 
 export interface ShikimoriItem {
