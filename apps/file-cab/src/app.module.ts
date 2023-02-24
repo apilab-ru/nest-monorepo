@@ -25,7 +25,7 @@ import { APP_INTERCEPTOR } from '@nestjs/core';
 import { ClassTransformInterceptor } from './sentry/class-transform.interceptor';
 import { LibraryController } from './library/library-controller';
 import { HttpModule } from '@nestjs/axios';
-import { FilmsKinopoiskService } from './films/kinopoisk/films-kinopoisk.service';
+import { KinopoiskService } from './films/kinopoisk/kinopoisk.service';
 import { MigrationService } from "./library/migration.service";
 import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service";
 import { ErrorsService } from "@utils/exceptions/errors-service";
@@ -52,7 +52,7 @@ import { UtilsService } from "./utils/utils.service";
   ],
   providers: [
     FilmsService,
-    FilmsKinopoiskService,
+    KinopoiskService,
     KinopoiskDevService,
     AnimeService,
     AnimeShikimoriService,

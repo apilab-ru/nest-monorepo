@@ -1,11 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { MediaItemV2, MigrationResult, PreparedItem } from "@filecab/models/library";
-import { combineLatest, concat, Observable} from "rxjs";
+import { LibraryItemV2, MediaItemId, MediaItemV2, MigrationResult, PreparedItem } from "@filecab/models/library";
+import { combineLatest, concat, from, merge, Observable, of, switchMap } from "rxjs";
 import { LibraryService } from "./library.service";
 import { AnimeService } from "../anime/anime.service";
 import { KinopoiskDevService } from "../films/kinopoisk-dev/kinopoisk-dev.service";
 import { Types } from "@filecab/models/types";
 import { map, toArray } from "rxjs/operators";
+import { KinopoiskService } from "../films/kinopoisk/kinopoisk.service";
+
+const saveFields: (keyof MediaItemId)[] = [
+  'kinopoiskId',
+  'shikimoriId',
+  'smotretId',
+];
 
 @Injectable()
 export class MigrationService {
@@ -13,6 +20,7 @@ export class MigrationService {
   constructor(
     private libraryService: LibraryService,
     private filmsService: KinopoiskDevService,
+    private filmsOldService: KinopoiskService,
     private animeService: AnimeService,
   ) {
   }
@@ -29,9 +37,9 @@ export class MigrationService {
     });
 
     return combineLatest(
-      ...Object.entries(byTypes).map(([type, items]) => type === Types.films
-        ? this.migrateFilms(items)
-        : this.migrateAnime(items)
+      ...Object.entries(byTypes).map(([type, items]) => type === Types.anime
+        ? this.migrateAnime(items)
+        : this.migrateFilms(items)
       )
     ).pipe(
       map(list => {
@@ -50,6 +58,86 @@ export class MigrationService {
     );
   }
 
+  checkItems(items: LibraryItemV2[]): Observable<MigrationResult> {
+    const byTypes: Partial<Record<keyof MediaItemId, LibraryItemV2[]>> = {};
+
+    items.forEach(item => {
+      for (const field of saveFields) {
+        if (item.item[field]) {
+          if (!byTypes[field]) {
+            byTypes[field] = [];
+          }
+
+          byTypes[field].push(item);
+          break;
+        }
+      }
+    })
+
+    return combineLatest(
+      Object.entries(byTypes).map(([field, list]) => this.checkExisted(list, field as keyof MediaItemId))
+    ).pipe(
+      map(results => {
+        const response = {
+          migrated: [],
+          manyResults: []
+        };
+
+        results.forEach(item => {
+          response.migrated.push(...item.migrated);
+          response.manyResults.push(...item.manyResults);
+        })
+
+        return response;
+      })
+    )
+  }
+
+  private checkExisted(list: LibraryItemV2[], field: keyof MediaItemId): Observable<MigrationResult> {
+    return from(this.libraryService.loadByIds(
+      list.map(item => item.item[field]),
+      field,
+    )).pipe(
+      switchMap(mediaList => {
+        const mediaSet = {};
+        mediaList.forEach(item => {
+          mediaSet[item[field]] = item;
+        })
+
+        const notFound = [];
+        const migrated = [];
+
+        list.forEach(item => {
+
+          const id = item.item[field];
+
+          if (mediaSet[id]) {
+            migrated.push({
+              ...item,
+              item: mediaSet[id]
+            })
+          } else {
+            notFound.push(item);
+          }
+        })
+
+        if (!notFound.length) {
+          return of({
+            migrated,
+            manyResults: [],
+          })
+        }
+
+        return this.migrateItems(notFound).pipe(
+          map(res => ({
+            migrated: [...migrated, ...res.migrated],
+            manyResults: res.manyResults,
+          }))
+        )
+      })
+    )
+  }
+
   private migrateFilms(items: PreparedItem[]): Observable<MigrationResult> {
     const result: MigrationResult = {
       manyResults: [],
@@ -59,6 +147,23 @@ export class MigrationService {
     const list$ = items.map(item => this.filmsService.search({
         name: item.item.title,
       }).pipe(
+        /*switchMap(res => {
+          if (!res.results.length || (res.results.find(item => !item.imdbId) && res.results.length !== 1)) {
+
+            return this.filmsService.search({
+              name: item.item.title,
+            })
+          }
+
+          if (res.results.find(item => !item.imdbId) && res.results.length === 1) {
+            const kinopoiskId = res.results[0].kinopoiskId!;
+            return this.filmsService.loadById(kinopoiskId).pipe(
+              map(item => ({ results: [item] }))
+            )
+          }
+
+          return of(res);
+        }),*/
         map(list => {
           const mediaItem = list.results.length === 1
             ? list.results[0]

@@ -6,7 +6,7 @@ import { MediaItem } from '@filecab/models';
 
 const UPDATE_FIELDS: Partial<keyof MediaItem>[] = [
   'episodes',
-  'popularity'
+  'genreIds'
 ];
 
 @Injectable()

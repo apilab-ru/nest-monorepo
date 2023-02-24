@@ -19,7 +19,7 @@ import { SearchRequestResultV2 } from '@filecab/models';
 import { FilmSearchParams } from '../interface';
 
 @Injectable()
-export class FilmsKinopoiskService {
+export class KinopoiskService {
   private endpoint = 'https://kinopoiskapiunofficial.tech/api/';
 
   constructor(

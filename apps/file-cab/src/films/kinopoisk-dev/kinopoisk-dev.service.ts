@@ -13,22 +13,23 @@ import {
   KinopoiskDevRequestSearch,
   KinopoiskDevResponse, KinopoiskDevShortItem
 } from "./interface";
-import { FilmsKinopoiskService } from "../kinopoisk/films-kinopoisk.service";
 import { withLatestFrom } from "rxjs/operators";
 import { Genre } from "@filecab/models/genre";
 import { KINOPOISK_GENRES_MAP } from "../kinopoisk/const";
 import { Types } from "@filecab/models/types";
 import { EMPTY_POSTER } from "../../base/const";
+import { ErrorsService } from "@utils/exceptions/errors-service";
 
 @Injectable()
 export class KinopoiskDevService {
-  private endpoint = 'https://test-api.kinopoisk.dev/';
-  private token = config.films.kinopoiskDev;
+  private endpoint = 'https://api.kinopoisk.dev/v1/';
+  private tokens = config.films.kinopoiskDev;
 
   constructor(
     private httpService: HttpService,
     private genreService: GenreService,
     private libraryService: LibraryService,
+    private errorsService: ErrorsService,
   ) {
   }
 
@@ -58,7 +59,7 @@ export class KinopoiskDevService {
 
   search(params: FilmSearchParams, isTv = false): Observable<SearchRequestResultV2<MediaItem>> {
     const pageParams: Partial<KinopoiskDevPagination> = {
-      limit: params?.limit || 10,
+      limit: params?.limit || 100,
       page: params?.page || 1,
     }
 
@@ -94,7 +95,7 @@ export class KinopoiskDevService {
     ];
 
     if (isTv) {
-      selectFields.push('seasonsInfo')
+      // selectFields.push('seasonsInfo')
     }
 
     return this.requestSearch<KinopoiskDevResponse>(fields, selectFields, pageParams).pipe(
@@ -106,7 +107,7 @@ export class KinopoiskDevService {
     return this.genreService.list$.pipe(
       take(1),
       map(genres => response.docs.map(item => this.mapDetail(item, genres))),
-      switchMap(list => this.libraryService.saveToRepository(list, 'imdbId')),
+      switchMap(list => this.libraryService.saveToRepository(list, 'kinopoiskId')),
       map(list => ({
         results: list,
         total: response.total,
@@ -127,22 +128,34 @@ export class KinopoiskDevService {
   private mapDetail(detail: KinopoiskDevShortItem, genres: Genre[]): Omit<MediaItem, 'id'> {
     const episodes = detail.seasonsInfo?.reduce((calc, it) => calc + it.episodesCount, 0) || 0;
 
-    const url = detail.externalId.kpHD
+    const url = detail.externalId?.kpHD
       ? `https://hd.kinopoisk.ru/?rt=` + detail.externalId.kpHD
-      : (detail.externalId.imdb ? `https://www.imdb.com/title/${detail.externalId.imdb}/` : '');
+      : (detail.externalId?.imdb ? `https://www.imdb.com/title/${detail.externalId.imdb}/` : '');
+
+    const itemGenres = [];
+
+    detail.genres?.forEach(({ name }) => {
+      if (KINOPOISK_GENRES_MAP[name]) {
+        itemGenres.push(KINOPOISK_GENRES_MAP[name]);
+      } else {
+        this.errorsService.addError({
+          error: 'Kinopoisk genre not found'
+        }, { name })
+      }
+    });
 
     return {
       title: detail.name,
       image: detail.poster?.previewUrl || EMPTY_POSTER,
       description: detail.description,
       episodes: episodes,
-      popularity: detail.rating.kp || detail.rating.imdb,
+      popularity: detail.rating?.kp || detail.rating?.imdb || 0,
       year: detail.year,
       url,
-      imdbId: this.parseImdb(detail.externalId.imdb),
+      imdbId: this.parseImdb(detail.externalId?.imdb),
       kinopoiskId: detail.id,
       genreIds: this.genreService.prepareGenres(
-        detail.genres.map(({ name }) => KINOPOISK_GENRES_MAP[name], genres),
+        itemGenres,
         genres,
         'kinopoiskId',
         detail.genres
@@ -173,9 +186,7 @@ export class KinopoiskDevService {
   }
 
   private get<T>(api: string, paramsQuery = ''): Observable<T> {
-    const url = this.endpoint + api + '?token=' + this.token + (paramsQuery ? ('&' + paramsQuery) : '');
-
-    console.log('url', url);
+    const url = this.endpoint + api + '?token=' + this.getToken() + (paramsQuery ? ('&' + paramsQuery) : '');
 
     return this.httpService.get<T>(url, {
       headers: {
@@ -185,5 +196,10 @@ export class KinopoiskDevService {
     }).pipe(
       map(res => res.data),
     );
+  }
+
+  private getToken(): string {
+    const random = Math.floor(Math.random() * this.tokens.length);
+    return this.tokens[random];
   }
 }

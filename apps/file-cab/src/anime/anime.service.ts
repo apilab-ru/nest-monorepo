@@ -22,23 +22,13 @@ import { GenreEntity } from '../genres/entites/genre.entity';
 import { MediaItem } from '@filecab/models';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
+import { CHIPS, CUSTOM_FIELDS, FILTER_GENRES, GENRES_CONVERT, SAVE_FIELDS } from "./const";
 
 const fs = require('fs');
+const uniq = require("lodash/uniq");
 
 const DEFAULT_LIMIT = 50;
-const CHIPS = {
-  year: 'yearseason',
-};
-const CUSTOM = {
-  shikimoriId: 'myAnimeListId',
-  smotretId: 'id',
-};
 
-const SAVE_FIELDS: Partial<keyof MediaItem>[] = [
-  'shikimoriId',
-  'imdbId',
-  'smotretId',
-];
 
 @Injectable()
 export class AnimeService {
@@ -200,11 +190,11 @@ export class AnimeService {
     }
 
     if (shikimoriId) {
-      params.append(CUSTOM.shikimoriId, '' + shikimoriId);
+      params.append(CUSTOM_FIELDS.shikimoriId, '' + shikimoriId);
     }
 
     if (smotretId) {
-      params.append(CUSTOM.smotretId, '' + smotretId);
+      params.append(CUSTOM_FIELDS.smotretId, '' + smotretId);
     }
 
     let stChips = '';
@@ -229,7 +219,6 @@ export class AnimeService {
       map(res => res.data.data),
     );
   }
-
 
   private loadGenres(): Observable<GenreOld[]> {
     const params = new URLSearchParams();
@@ -309,11 +298,21 @@ export class AnimeService {
       return of([]);
     }
 
+    const ids = list.map(it => it.id)
+      .filter(id => !FILTER_GENRES.includes(id))
+      .map(id => {
+        if (GENRES_CONVERT[id]) {
+          return GENRES_CONVERT[id]
+        }
+
+        return id;
+      })
+
     return this.genreService.list$.pipe(
       take(1),
       map(genres => {
         return this.genreService.prepareGenres(
-          list.map(it => it.id),
+          uniq(ids),
           genres,
           'smotretId',
           list

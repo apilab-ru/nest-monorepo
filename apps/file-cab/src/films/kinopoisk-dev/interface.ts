@@ -1,11 +1,10 @@
 import { KinopoiskDevFileds, KinopoiskDevTypes } from "./const";
 
 export interface KinopoiskDevShortItem {
-  externalId: {
+  externalId?: {
     kpHD: string | null,
     imdb: string | null, // tt0942385
     tmdb: number | null,
-    _id: string
   },
   logo: { url: null | string },
   poster?: {

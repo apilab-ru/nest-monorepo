@@ -1,6 +1,6 @@
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Post } from '@nestjs/common';
-import { PreparedItem } from "@filecab/models/library";
+import { LibraryItemV2, PreparedItem } from "@filecab/models/library";
 import { MigrationService } from "./migration.service";
 
 @ApiTags('library')
@@ -16,7 +16,7 @@ export class LibraryController {
     schema: {
       properties: {
         list: {
-          type: undefined,
+          allOf: undefined,
         },
       },
     },
@@ -25,6 +25,22 @@ export class LibraryController {
     const list: PreparedItem[] = params.list;
 
     return this.migrationService.migrateItems(list).toPromise();
+  }
+
+  @Post('check/v3')
+  @ApiBody({
+    schema: {
+      properties: {
+        list: {
+          type: undefined,
+        },
+      },
+    },
+  })
+  checkV3(@Body() params: { list: LibraryItemV2[] }) {
+    const list: LibraryItemV2[] = params.list;
+
+    return this.migrationService.checkItems(list).toPromise();
   }
 
   // TODO research infinity update with last item (846)
