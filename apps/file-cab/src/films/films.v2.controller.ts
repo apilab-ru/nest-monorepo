@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FilmsService } from './films.service';
-import { MediaItem, SearchRequestResult, SearchRequestResultV2 } from '@filecab/models';
+import { FilmSearchParams, MediaItem, SearchRequestResult, SearchRequestResultV2 } from '@filecab/models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { EFilmsSortBy, EOrderType, FilmSearchParams } from './interface';
+import { EFilmsSortBy, EOrderType } from './interface';
 import { firstValueFrom } from 'rxjs';
 import { KinopoiskDevService } from "./kinopoisk-dev/kinopoisk-dev.service";
 import { Types } from "@filecab/models/types";

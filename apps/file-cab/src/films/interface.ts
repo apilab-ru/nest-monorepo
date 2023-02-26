@@ -16,9 +16,3 @@ export interface FilmsChips {
   with_genres: string;
   with_people: string;
 }
-
-export interface FilmSearchParams extends SearchRequest {
-  kinopoiskId?: number;
-  imdbId?: number;
-  type?: Types;
-}

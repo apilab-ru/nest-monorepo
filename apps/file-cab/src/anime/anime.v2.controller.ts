@@ -1,6 +1,6 @@
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { Controller, Get, Param, Query } from '@nestjs/common';
-import { SearchRequest, SearchRequestResultV2, MediaItem } from '@filecab/models';
+import { SearchRequest, SearchRequestResultV2, MediaItem, AnimeSearchV2Query } from '@filecab/models';
 import { firstValueFrom } from 'rxjs';
 import { AnimeService } from './anime.service';
 
@@ -40,7 +40,7 @@ export class AnimeV2Controller {
     description: 'genres separated by ",", for negative add!',
     required: false,
   })
-  async findAnimeV2(@Query() query: SearchRequest): Promise<SearchRequestResultV2<MediaItem>> {
+  async findAnimeV2(@Query() query: AnimeSearchV2Query): Promise<SearchRequestResultV2<MediaItem>> {
     return firstValueFrom(this.animeService.searchV2(query));
   }
 

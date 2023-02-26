@@ -147,23 +147,6 @@ export class MigrationService {
     const list$ = items.map(item => this.filmsService.search({
         name: item.item.title,
       }).pipe(
-        /*switchMap(res => {
-          if (!res.results.length || (res.results.find(item => !item.imdbId) && res.results.length !== 1)) {
-
-            return this.filmsService.search({
-              name: item.item.title,
-            })
-          }
-
-          if (res.results.find(item => !item.imdbId) && res.results.length === 1) {
-            const kinopoiskId = res.results[0].kinopoiskId!;
-            return this.filmsService.loadById(kinopoiskId).pipe(
-              map(item => ({ results: [item] }))
-            )
-          }
-
-          return of(res);
-        }),*/
         map(list => {
           const mediaItem = list.results.length === 1
             ? list.results[0]

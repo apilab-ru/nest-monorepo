@@ -26,11 +26,6 @@ export interface AnimeSearchQuery extends AnimeSearchChips {
   smotretId?: number;
 }
 
-export interface AnimeSearchV2Query extends SearchRequest {
-  shikimoriId?: number;
-  smotretId?: number;
-}
-
 export interface ShikimoriItem {
   id: 693,
   name: string,

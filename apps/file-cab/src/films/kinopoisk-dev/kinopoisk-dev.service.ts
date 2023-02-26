@@ -1,12 +1,11 @@
 import { Injectable } from "@nestjs/common";
 import { config } from '../../config/config';
 import { map, Observable, switchMap, take } from "rxjs";
-import { MediaItem, SearchRequestResultV2 } from "@filecab/models";
+import { FilmSearchParams, MediaItem, SearchRequestResultV2 } from "@filecab/models";
 import { HttpService } from "@nestjs/axios";
 import { GenreService } from "../../genres/genres.service";
 import { LibraryService } from "../../library/library.service";
 import { KINOPOISK_DEV_FILM_TYPE_MAP, KinopoiskDevFileds, KinopoiskDevTypes } from "./const";
-import { FilmSearchParams } from "../interface";
 import {
   KinopoiskDevDetails,
   KinopoiskDevPagination,

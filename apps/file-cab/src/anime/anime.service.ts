@@ -8,12 +8,13 @@ import {
   AnimeDescriptionSource,
   AnimeGenre,
   AnimeRequestResponse,
+  AnimeSearchV2Query,
   GenreOld,
   SearchRequestResult,
   SearchRequestResultV2,
   SmotretAnimeResponseItem,
 } from '@filecab/models';
-import { AnimeSearchQuery, AnimeSearchV2Query } from './interface';
+import { AnimeSearchQuery } from './interface';
 import { GenreBase } from '../genres/interface';
 import { GenreKind } from '@filecab/models/genre';
 import { GenreService } from '../genres/genres.service';
@@ -33,7 +34,6 @@ const DEFAULT_LIMIT = 50;
 @Injectable()
 export class AnimeService {
   private endpoint = 'http://smotret-anime.online/api/series/';
-  private fields = '&id,titles,posterUrl,url,descriptions,genres,year,type,myAnimeListScore,worldArtScore,episodes,myAnimeListId,aniDbId';
 
   constructor(
     private httpService: HttpService,
@@ -177,7 +177,6 @@ export class AnimeService {
     const { name, limit, page, shikimoriId, smotretId, ...chips } = query;
 
     const params = new URLSearchParams({
-      // fields: this.fields,
       limit: `${limit}`,
     });
 
