@@ -15,8 +15,7 @@ import { withLatestFrom } from 'rxjs/operators';
 import { LibraryItemEntity } from '../../library/entites/library-item.entity';
 import { KINOPOISK_FILM_TYPE_MAP, KINOPOISK_GENRES_MAP } from './const';
 import { Genre } from '@filecab/models/genre';
-import { SearchRequestResultV2 } from '@filecab/models';
-import { FilmSearchParams } from '../interface';
+import { SearchRequestResultV2, FilmSearchParams } from '@filecab/models';
 
 @Injectable()
 export class KinopoiskService {
