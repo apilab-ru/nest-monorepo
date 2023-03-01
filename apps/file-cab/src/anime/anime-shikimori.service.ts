@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { AnimeSearchV2Query, ShikimoriDetailItem, ShikimoriGenre, ShikimoriItem } from './interface';
+import { ShikimoriDetailItem, ShikimoriGenre, ShikimoriItem } from './interface';
 import { catchError, map, switchMap, take, tap, toArray } from 'rxjs/operators';
 import { concat, from, Observable, of } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
 import { URLSearchParams } from 'url';
 import { GenreBase } from '../genres/interface';
-import { MediaItem, SearchRequestResultV2 } from '@filecab/models';
+import { AnimeSearchV2Query, MediaItem, SearchRequestResultV2 } from '@filecab/models';
 import { Connection, Repository } from 'typeorm';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { GenreService } from '../genres/genres.service';
