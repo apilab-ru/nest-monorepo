@@ -21,7 +21,7 @@ export class AuthorsService {
             id: author.id
         }).then(res => {
             if (!res) {
-                this.repository.save([author])
+                this.repository.upsert([author], ['id'])
                     .then(() => undefined)
                     .catch(error => {
                         this.errorsService.addError(error, author);

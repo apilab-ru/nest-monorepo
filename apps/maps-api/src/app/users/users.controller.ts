@@ -32,4 +32,9 @@ export class UsersController {
    ): Promise<BaseResponse> {
       return this.userService.updateUserArtists(list).then(() => new BaseResponse());
    }
+
+  @Post('login')
+  @ApiBody({
+    type:
+  })
 }

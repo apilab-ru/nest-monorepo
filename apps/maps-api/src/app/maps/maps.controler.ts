@@ -60,7 +60,8 @@ export class MapsController {
       @Query() query: MapsSearch,
       @RequestUser() user: User,
    ): Promise<MapDetail[]> {
-      return this.mapsService.loadListDetails(query);
+     const userId = 1;
+      return this.mapsService.loadListDetails(query, userId);
    }
 
    @Get(':id')
@@ -88,7 +89,7 @@ export class MapsController {
       }
    })
    markShowed(@Body('id') id: string): Promise<BaseRequest> {
-      return this.mapsService.markAsShowed(id).then(() => BASE_RESPONSE);
+      return this.mapsService.markAsShowed(id, 1).then(() => BASE_RESPONSE);
    }
 
    @Post('showed-list')
@@ -100,6 +101,6 @@ export class MapsController {
       }
    })
    markShowedList(@Body('ids') ids: string[]): Promise<BaseRequest> {
-      return this.mapsService.markAsShowedList(ids).then(() => BASE_RESPONSE);
+      return this.mapsService.markAsShowedList(1, ids).then(() => BASE_RESPONSE);
    }
 }

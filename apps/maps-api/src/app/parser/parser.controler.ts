@@ -10,76 +10,86 @@ import { ErrorsService } from "@utils/exceptions/errors-service";
 @ApiTags('parser')
 @Controller('parser')
 export class ParserController {
-    constructor(
-        private parserService: ParserBeatSaverService,
-        private settingsService: SettingsService,
-        private proxyService: ProxyService,
-        private errorService: ErrorsService,
-    ) {
+  constructor(
+    private parserService: ParserBeatSaverService,
+    private settingsService: SettingsService,
+    private proxyService: ProxyService,
+    private errorService: ErrorsService,
+  ) {
+  }
+
+  @Get('parser-beat')
+  parserBeat(): string {
+    const page = 3010;
+    this.parserPage(page);
+    return 'success';
+  }
+
+  @ApiQuery({
+    name: 'file',
+    type: 'string',
+    required: true,
+  })
+  @Get('proxy-file')
+  async proxyFile(
+    @Query() query: { file: string },
+    @Res() res: Response,
+  ) {
+    const buffer = await this.proxyService.proxyFile(query.file);
+
+    if (!buffer) {
+      this.errorService.addError({ error: 'Proxy file' }, query.file);
+      throw new Error('notFound');
     }
 
-    @Get('parser-beat')
-    parserBeat(): string {
-        const page = 1;
-        this.parserPage(page);
-        return 'success';
-    }
+    const stream = new Readable();
+    const type = this.proxyService.getFileType(query.file);
 
-    @ApiQuery({
-        name: 'file',
-        type: 'string',
-        required: true,
-    })
-    @Get('proxy-file')
-    async proxyFile(
-        @Query() query: { file: string },
-        @Res() res: Response,
-    ) {
-        const buffer = await this.proxyService.proxyFile(query.file);
+    stream.push(buffer);
+    stream.push(null);
 
-        if (!buffer) {
-          this.errorService.addError({error: 'Proxy file'}, query.file);
-          throw new Error('notFound');
-        }
+    res.set({
+      'Content-Type': type,
+      'Content-Length': buffer.length,
+    });
 
-        const stream = new Readable();
-        const type = this.proxyService.getFileType(query.file);
+    stream.pipe(res);
+  }
 
-        stream.push(buffer);
-        stream.push(null);
+  @Get('fix-format')
+  fixFormat() {
+    return this.parserService.fixFormat();
+  }
 
-        res.set({
-            'Content-Type': type,
-            'Content-Length': buffer.length,
-        });
+  @Get('errors')
+  fixErrors() {
+    return this.parserService.fixErrors();
+  }
 
-        stream.pipe(res);
-    }
+  @Get('migrate')
+  migrate() {
+    return this.parserService.migrate();
+  }
 
-    @Get('fix-format')
-    fixFormat() {
-        return this.parserService.fixFormat();
-    }
+  private parserPage(page: number) {
+    const start = new Date().getTime();
+    console.log('xxx start', page, new Date().toTimeString());
+    this.parserService.loadPage(page).subscribe(list => {
+      const time = Math.ceil((new Date().getTime() - start) / 1000);
+      this.settingsService.updateSettings('parserProcess', {
+        time,
+        page,
+      });
 
-    private parserPage(page: number) {
-        const start = new Date().getTime();
-        console.log('xxx start', page, new Date().toTimeString());
-        this.parserService.loadPage(page).subscribe(list => {
-            const time = Math.ceil((new Date().getTime() - start) / 1000);
-            this.settingsService.updateSettings('parserProcess', {
-                time,
-                page,
-            });
+      const lastItem = list?.length ? list[list.length - 1] : null;
+      console.log('xxx process', page, time, lastItem?.createdAt);
 
-            const lastItem = list?.length ? list[list.length - 1] : null;
-            console.log('xxx process', page, time, lastItem?.createdAt);
-
-            if (list.length) {
-                this.parserPage(page + 1);
-            } else {
-                console.log('xxx stop');
-            }
-        });
-    }
+      if (list.length) {
+        this.parserPage(page + 1);
+      } else {
+        console.log('xxx stop');
+      }
+    });
+  }
 
 }

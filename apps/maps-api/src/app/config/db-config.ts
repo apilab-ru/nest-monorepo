@@ -8,24 +8,26 @@ import { AuthorEntity } from '../parser/entites/author.entity';
 import { SettingsEntity } from '../settings/entites/settings.entity';
 import { ErrorEntity } from '@utils/exceptions/entities/error.entity';
 import { USER_ENTITES } from "../users/entites";
+import { UserMapShowEntity } from "../maps/entites/userMapShowEntity";
 
 export const DB_CONFIG: ConnectionOptions = {
-   type: 'mysql',
-   port: 3306,
-   ...config.db,
-   entities: [
-      MapOldEntity,
-      GenreEntity,
-      MapEntity,
-      TagEntity,
-      AuthorEntity,
-      SettingsEntity,
-      ErrorEntity,
-      ...USER_ENTITES,
-   ],
-   migrationsRun: false,
-   synchronize: false,
-   charset: 'utf8mb4',
+  type: 'mysql',
+  port: 3306,
+  ...config.db,
+  entities: [
+    MapOldEntity,
+    GenreEntity,
+    MapEntity,
+    UserMapShowEntity,
+    TagEntity,
+    AuthorEntity,
+    SettingsEntity,
+    ErrorEntity,
+    ...USER_ENTITES,
+  ],
+  migrationsRun: false,
+  synchronize: false,
+  charset: 'utf8mb4',
 
-   //logging: 'all'
+  //logging: 'all'
 };
