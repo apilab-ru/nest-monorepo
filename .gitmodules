@@ -1,3 +1,6 @@
 [submodule "libs/filecab-models"]
 	path = libs/filecab-models
 	url = https://github.com/apilab-ru/filecab-models.git
+[submodule "libs/bsab-models"]
+	path = libs/bsab-models
+	url = https://github.com/apilab-ru/bsab-models.git
