@@ -11,7 +11,7 @@
         "outputPath": "dist/apps/maps-api",
         "main": "apps/maps-api/src/main.ts",
         "tsConfig": "apps/maps-api/tsconfig.app.json",
-        "assets": ["apps/maps-api/src/assets"],
+        "assets": ["apps/maps-api/src/assets", "apps/maps-api/src/.htaccess"],
         "target": "node",
         "compiler": "tsc",
         "sourceMap": true,

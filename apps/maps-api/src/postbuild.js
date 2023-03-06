@@ -2,6 +2,8 @@ const path = require('path');
 const fs = require('fs');
 const nodeModulesPath = '"./../../';
 
+const dir = 'S:\\projects\\nest-monorepo\\dist\\apps\\maps-api'
+
 function fromDir(startPath, filter, callback) {
 
   var files = fs.readdirSync(startPath);
@@ -15,22 +17,15 @@ function fromDir(startPath, filter, callback) {
   }
 }
 
-/*fromDir('./dist', /\.ts$/, function (filename) {
-  fs.unlink(filename, () => {});
-});
-
-fromDir('./dist', /\.map$/, function (filename) {
-  fs.unlink(filename, () => {});
-});*/
-
 const replaceList = [
+  /("@nestjs\/axios")/g,
   /("@nestjs\/.*)"/g,
   /("typeorm)"/g,
   /("moment)"/g,
   /("firebase-admin)"/g,
 ];
 
-fromDir('./dist', /\.js$/, function (filename) {
+fromDir(dir, /\.js$/, function (filename) {
   //
   const depth = filename.split('\\').length - 2;
 

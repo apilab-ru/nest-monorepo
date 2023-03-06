@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "filecab": "nx serve file-cab",
-    "bsab": "nx serve maps-api"
+    "filecab:build": "nx build file-cab",
+    "bsab": "nx serve maps-api",
+    "bsab:build": "nx build maps-api --prod"
   },
   "private": true,
   "dependencies": {

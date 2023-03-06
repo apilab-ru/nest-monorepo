@@ -39,18 +39,21 @@ async function bootstrap() {
       .setVersion('1.0')
       .setDescription('')
       .build();
+
    const document = SwaggerModule.createDocument(app, config);
 
-   SwaggerModule.setup(SWAGGER_PUBLIC_PATH, app, document);
+   SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document);
 
    app.use(json({ limit: '50mb' }));
    app.use(urlencoded({ extended: true, limit: '50mb' }));
 
    app.enableCors({});
 
-   const globalPrefix = '';
-   app.setGlobalPrefix(globalPrefix);
+
+   app.setGlobalPrefix(environment.prefix);
+
    const port = process.env.PORT || 3000;
+
    const { httpAdapter } = app.get(HttpAdapterHost);
    app.useGlobalFilters(new AllExceptionsFilter(httpAdapter))
    await app.listen(port);
@@ -58,7 +61,7 @@ async function bootstrap() {
    const method = environment.ssl ? 'https' : 'http';
 
    Logger.log(
-      `Application is running on: ${ method }://localhost:${ port }/swagger`
+      `Application is running on: ${ method }://localhost:${ port + environment.prefix }/swagger`
    );
 }
 

@@ -1,6 +1,6 @@
 import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { UserEntity } from "./entites/user.entity";
+import { UserEntity } from "@bsab/shared/auth/entities/user.entity";
 import { UsersController } from "./users.controller";
 import { UserArtistEntity } from "./entites/user-artist.entity";
 import { UserSongsEntity } from "./entites/user-songs.entity";

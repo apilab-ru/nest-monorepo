@@ -1,4 +1,4 @@
-import { UserEntity } from "./user.entity";
+import { UserEntity } from "@bsab/shared/auth/entities/user.entity";
 import { UserArtistEntity } from "./user-artist.entity";
 import { UserSongsEntity } from "./user-songs.entity";
 
