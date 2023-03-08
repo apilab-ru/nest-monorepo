@@ -26,7 +26,7 @@ export class ParserController {
   parserBeat(
      @Query() params: { page?: number, reload?: boolean }
   ): string {
-    const page = params?.page || 1;
+    const page = params?.page ? +params.page : 1;
     const reload = params?.reload || false;
 
     this.parserPage(page, reload);

@@ -9,6 +9,7 @@ import { environment } from '../../../../../apps/maps-api/src/environments/envir
 import { MapDetail } from '@bsab/api/map/map-detail';
 import { FindManyOptions } from "typeorm/find-options/FindManyOptions";
 import { UserMapShowEntity } from "../entites/userMapShowEntity";
+import { PageResponse } from "@bsab/api/map/page";
 
 @Injectable()
 export class MapsService {
@@ -57,9 +58,12 @@ export class MapsService {
     );
   }
 
-  loadListDetails(query: MapsSearch, userId?: number): Promise<MapDetail[]> {
+  loadListDetails(query: MapsSearch, userId?: number): Promise<PageResponse<MapDetail>> {
     const maxLimit = 100;
-    return this.loadList(query, maxLimit, userId).then(list => list.map(item => this.mapConvert(item)));
+    return this.loadList(query, maxLimit, userId).then(res => ({
+       ...res,
+       list: res.list.map(item => this.mapConvert(item))
+    }));
   }
 
   loadById(id: string): Promise<MapDetail> {
@@ -78,11 +82,13 @@ export class MapsService {
     return this.repository.find(options);
   }
 
-  loadList(query: MapsSearch, maxLimit = 100, userId?: number): Promise<MapEntity[]> {
+  private async loadList(query: MapsSearch, maxLimit = 100, userId?: number): Promise<PageResponse<MapEntity>> {
     const queryRunner = this.repository.createQueryBuilder('maps');
-    const limit = Math.min(query.limit, maxLimit);
+    const limit = Math.min(query.limit || 10, maxLimit);
+    const offset = query.offset || 0;
+
     queryRunner.limit(limit);
-    queryRunner.offset(query.offset || 0);
+    queryRunner.offset(offset);
     queryRunner.orderBy('id');
 
     if (!userId) {
@@ -206,7 +212,15 @@ export class MapsService {
 
     queryRunner.orderBy(orderFiled, orderDirection);
 
-    return queryRunner.getMany();
+    const list = await queryRunner.getMany();
+    const total = await queryRunner.getCount();
+
+    return {
+       list,
+       total,
+       offset,
+       limit
+    }
   }
 
   private mapConvert(item: MapEntity): MapDetail {

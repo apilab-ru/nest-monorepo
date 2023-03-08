@@ -35,6 +35,7 @@ async function bootstrap() {
    const config = new DocumentBuilder()
       .setTitle('BSaberProxy')
       .addBearerAuth()
+      .setBasePath(environment.prefix)
       .setVersion('1.1.1')
       .setVersion('1.0')
       .setDescription('')

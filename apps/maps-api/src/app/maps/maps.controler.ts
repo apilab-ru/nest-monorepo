@@ -9,6 +9,7 @@ import { MapDetail } from '@bsab/api/map/map-detail';
 import { AuthGuard } from "@nestjs/passport";
 import { OptionalJwtAuthGuard } from "@utils/auth/optional-auth-guard";
 import { User } from "@bsab/api/user/user";
+import { PageResponse } from "@bsab/api/map/page";
 
 
 @ApiTags('maps')
@@ -61,7 +62,7 @@ export class MapsController {
   list(
     @Query() query: MapsSearch,
     @Request() { user }: { user: User },
-  ): Promise<MapDetail[]> {
+  ): Promise<PageResponse<MapDetail>> {
 
     return this.mapsService.loadListDetails(query, user?.id);
   }

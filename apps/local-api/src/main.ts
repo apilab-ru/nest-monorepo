@@ -34,6 +34,7 @@ async function bootstrap() {
       .setDescription('')
       .build();
 
+   // TODO fix prefix for prod
    const document = SwaggerModule.createDocument(app, config);
 
    SwaggerModule.setup(SWAGGER_PUBLIC_PATH, app, document);
