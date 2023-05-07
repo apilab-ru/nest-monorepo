@@ -1,8 +1,3 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger } from '@nestjs/common';
 import { HttpAdapterHost, NestFactory } from '@nestjs/core';
 
@@ -39,8 +34,8 @@ async function bootstrap() {
 
    SwaggerModule.setup(SWAGGER_PUBLIC_PATH, app, document);
 
-   app.use(json({ limit: '50mb' }));
-   app.use(urlencoded({ extended: true, limit: '50mb' }));
+   app.use(json({ limit: '100mb' }));
+   app.use(urlencoded({ extended: true, limit: '100mb' }));
 
    app.enableCors({});
 

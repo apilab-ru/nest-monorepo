@@ -3,6 +3,10 @@ import { Controller, Get, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { Readable } from "stream";
 import { ProxyService } from "./services/proxy.service";
+import { environment } from "../../environments/environment";
+
+import fs from "fs";
+import JSZip from 'jszip';
 
 @ApiTags('proxy')
 @Controller('proxy')
@@ -43,5 +47,48 @@ export class ParserController {
       });
 
       stream.pipe(res);
+   }
+
+   @ApiQuery({
+      name: 'id',
+      type: 'string',
+      required: true,
+   })
+   @Get('source')
+   async proxySource(
+      @Query() query: { id: string },
+      @Res() res: Response,
+   ) {
+      const dir = environment.levelsPath + query.id;
+
+      try {
+         const listFiles = await fs.promises.readdir(dir);
+
+         const allFiles = await Promise.all(
+            listFiles.map(file => fs.promises.readFile(dir + '/' + file).then(data => ({
+               file, data
+            })))
+         );
+
+         const zip = new JSZip();
+         allFiles.forEach(({ file, data }) => {
+            zip.file(file, data);
+         });
+
+         const stream = zip.generateNodeStream({ type: "nodebuffer" });
+
+         res.set({
+            'Content-Type': 'application/zip',
+            // 'Content-Length': buffer.length,
+         });
+
+         stream.pipe(res);
+
+      } catch (e) {
+         res.status(404);
+         console.log('dir', dir);
+         console.error(e);
+         res.send('File not found');
+      }
    }
 }
