@@ -7,6 +7,7 @@ import { environment } from "../../environments/environment";
 
 import fs from "fs";
 import JSZip from 'jszip';
+import { Req } from "@nestjs/common/decorators/http/route-params.decorator";
 
 @ApiTags('proxy')
 @Controller('proxy')
@@ -50,16 +51,17 @@ export class ParserController {
    }
 
    @ApiQuery({
-      name: 'id',
+      name: 'file',
       type: 'string',
       required: true,
    })
    @Get('source')
    async proxySource(
-      @Query() query: { id: string },
+      @Req() req: { originalUrl: string },
       @Res() res: Response,
    ) {
-      const dir = environment.levelsPath + query.id;
+      const [_, file] = req.originalUrl.split('?file=');
+      const dir = environment.levelsPath + decodeURIComponent(file);
 
       try {
          const listFiles = await fs.promises.readdir(dir);

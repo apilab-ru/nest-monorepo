@@ -1,7 +1,7 @@
 import { LocalMap } from '@bsab/api/map/map';
 
 export interface MapCache extends LocalMap {
-  rav: MapRav;
+  // rav: MapRav;
 }
 
 export interface MapRav {
@@ -189,4 +189,9 @@ export interface RavMapDifficultDetailV3 {
   lightColorEventBoxGroups: [];
   lightRotationEventBoxGroups: [];
   useNormalEventsAsCompatibleEvents: boolean;
+}
+
+export interface MapCacheDetail {
+   map: MapCache;
+   version: number;
 }

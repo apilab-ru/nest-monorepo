@@ -27,6 +27,10 @@ export class AllExceptionsFilter implements ExceptionFilter {
       return exception.getStatus();
     }
 
+    if (exception.message.includes('no such file')) {
+       return HttpStatus.NOT_FOUND;
+    }
+
     switch (exception.message) {
       case 'notFound':
         return HttpStatus.NOT_FOUND;

@@ -1,42 +1,45 @@
-import { MapCache, MapDifficultDetail, MapRav, RavMapDifficultDetailV2 } from "../map";
+import { MapCache, MapCacheDetail, MapDifficultDetail, MapRav } from "../models/map";
 import { environment } from "../../../environments/environment";
 import { DIFFICULTY_MAP } from "@bsab/api/map/difficulty";
-import { LocalMap, MAP_MODE_CONVERT, MapDifficultList, MapDiffiDetail } from "@bsab/api/map/map";
+import { LocalMap, MAP_MODE_CONVERT, MapCinema, MapDifficultList, MapDiffiDetail } from "@bsab/api/map/map";
 import * as JSZip from 'jszip';
-import { readMapDifficultDetail } from '../map-parser';
-import { MapsIdsResponse } from "../response";
+import { readMapDifficultDetail } from '../models/map-parser';
 import { Injectable } from "@nestjs/common";
-import { ErrorsService } from "@utils/exceptions/errors-service";
+import { MapsIdsResponse, MapsResponse } from "@bsab/api/map/response";
+import { DEFAULT_MAP_CINEMA } from "../models/cinema";
+import { RequestFile } from "../models/request-file";
 
 const fs = require('fs');
 const crypto = require('crypto')
 
+const CACHE_FILE = 'local-cache.json';
 const INFO_FILE = 'Info.dat';
 const CINEMA_FILE = 'cinema-video.json';
 
 @Injectable()
 export class MapsLocalService {
-   private lastChange: string;
-   private cache: MapCache[];
+   private version = 8;
 
-   async loadMaps(): Promise<LocalMap[]> {
+   async loadMaps(offset = 0, limit = 10000): Promise<MapsResponse> {
       const { mtime } = await fs.promises.stat(environment.levelsPath);
 
-      if (!this.cache || mtime === this.lastChange) {
-         const files = await fs.promises.readdir(environment.levelsPath);
-         // .slice(1, 2)
-         const cache = await Promise.all(
-            files.map(file => this.loadMap(file).catch(error => {
-               console.error(error);
+      const files = await fs.promises.readdir(environment.levelsPath);
 
-               return null;
-            }))
-         );
+      const maps = await Promise.all(
+         files.splice(offset, limit).map(file => this.loadMap(file).catch(error => {
+            console.error(error);
 
-         this.cache = cache.filter(it => !!it);
-      }
+            return null;
+         }))
+      );
 
-      return this.cache.map(({ rav, ...item }) => item);
+      const fullOffset = (+offset || 0) + maps.length;
+
+      return {
+         maps,
+         offset: fullOffset,
+         hasMore: fullOffset < files.length
+      };
    }
 
    getBeatSaverIds(list: LocalMap[]): MapsIdsResponse {
@@ -94,6 +97,30 @@ export class MapsLocalService {
       ).then(() => list.length);
    }
 
+   async uploadCinemaVideo(id: string, file: RequestFile, cinema?: MapCinema): Promise<MapCinema> {
+      const oldData = await this.readMapCinema(id) || DEFAULT_MAP_CINEMA;
+      const cinemaData = cinema || await this.readMapCinema(id);
+
+      const videoFile = oldData.videoFile || file.originalname;
+
+      await fs.promises.unlink(this.getDirById(id) + videoFile).catch(() => {});
+
+      await fs.promises.appendFile(
+         this.getDirById(id) + videoFile,
+         file.buffer
+      );
+
+      const newData: MapCinema = {
+         ...oldData,
+         ...(cinemaData || {}),
+         videoFile
+      };
+
+      await this.saveMapCinema(id, newData);
+
+      return newData;
+   }
+
    private readMapFiles(path: string, fileNames: string[]): Promise<{ name: string, data: string }[]> {
       return Promise.all(
          fileNames.map(name => fs.promises.readFile(path + name) as string)
@@ -105,7 +132,40 @@ export class MapsLocalService {
       });
    }
 
-   private async loadMap(id: string): Promise<MapCache> {
+   private async checkCache(id: string): Promise<MapCache | null> {
+      const { mtime: dirModTime } = await fs.promises.stat(environment.levelsPath + id);
+
+      const { mtime: cacheModTime } = await fs.promises
+         .stat(environment.levelsPath + id + '/' + CACHE_FILE)
+         .catch(() => ({ mtime: 0 }));
+
+      if (!cacheModTime || dirModTime > cacheModTime) {
+         return null;
+      }
+
+      const cacheFile = await fs.promises.readFile(environment.levelsPath + id + '/' + CACHE_FILE);
+      const cache = JSON.parse(cacheFile) as MapCacheDetail;
+
+      if (cache.version !== this.version || this.version === 0) {
+         return null;
+      }
+
+      return cache.map;
+   }
+
+   private saveCache(id: string, map: MapCache): void {
+      fs.promises.writeFile(environment.levelsPath + id + '/' + CACHE_FILE, JSON.stringify({
+         version: this.version,
+         map,
+      }));
+   }
+
+   private async loadMapFiles(id: string): Promise<{
+      createdAt: string,
+      rav: MapRav,
+      file: string,
+      filesMap: { name: string, data: string }[]
+   }> {
       const file = await fs.promises.readFile(environment.levelsPath + id + '/' + INFO_FILE);
       const { ctime } = await fs.promises.stat(environment.levelsPath + id + '/' + INFO_FILE);
       const rav: MapRav = JSON.parse(file);
@@ -119,6 +179,26 @@ export class MapsLocalService {
             console.error('error read', error);
             return [];
          });
+
+      return {
+         createdAt: ctime,
+         rav,
+         file,
+         filesMap
+      }
+   }
+
+   private async loadMap(id: string): Promise<MapCache> {
+      const cache = await this.checkCache(id);
+
+      if (cache) {
+         return cache;
+      }
+
+      const [{ file, rav, filesMap, createdAt }, cinema] = await Promise.all([
+         this.loadMapFiles(id),
+         this.readMapCinema(id)
+      ])
 
       const hash = this.makeHash(file, filesMap.map(({ data }) => data));
 
@@ -166,24 +246,71 @@ export class MapsLocalService {
       const difsDetails = Object.entries(diffDetails)
          .map(([difficulty, nps]) => ({ difficulty, nps } as MapDiffiDetail))
 
-      return {
-         rav,
-         id,
+      const map = {
+         id: this.encodeId(id),
          songName: rav._songName,
          songSubName: rav._songSubName,
          bpm: rav._beatsPerMinute,
          songFilename: this.getFile(id, rav._songFilename),
          coverURL: this.getFile(id, rav._coverImageFilename),
-         sourceUrl: environment.host + `proxy/source/?id=` + id,
+         sourceUrl: environment.host + `proxy/source/?file=` + this.encodeId(id),
          author: rav._levelAuthorName,
          songAuthorName: rav._songAuthorName,
          difficultMap: this.convertDifficultMap(rav._difficultyBeatmapSets),
-         createdAt: ctime,
+         createdAt,
          difsDetails,
          mods,
          duration,
          hash,
+         cinema
+      };
+
+      this.saveCache(id, map);
+
+      return map;
+   }
+
+   decodeId(id: string): string {
+      return decodeURIComponent(id);
+   }
+
+   private encodeId(path: string): string {
+      return encodeURIComponent(path);
+   }
+
+   private getDirById(id: string): string {
+      return environment.levelsPath + id + '/';
+   }
+
+   async saveMapCinema(id: string, cinema: MapCinema): Promise<void> {
+      await fs.promises.writeFile(
+         this.getDirById(id) + CINEMA_FILE,
+         JSON.stringify(cinema)
+      );
+   }
+
+   private async readMapCinema(id: string): Promise<null | MapCinema> {
+      const file = await fs.promises
+         .readFile(this.getDirById(id) + CINEMA_FILE)
+         .catch(() => null);
+
+      if (!file) {
+         return null;
       }
+
+      const data = JSON.parse(file) as MapCinema;
+
+      if (data.videoFile) {
+         const fileExist = await fs.promises.stat(this.getDirById(id) + data.videoFile)
+            .then(() => true)
+            .catch(() => false)
+
+         if (!fileExist) {
+            data.videoFile = undefined;
+         }
+      }
+
+      return data;
    }
 
    private makeHash(file: string, files: string[]): string {
@@ -191,11 +318,6 @@ export class MapsLocalService {
          .update(file + files.join(''), "utf8")
          .digest("hex").toUpperCase()
    }
-
-   /*private getFile(id: string, file: string): string {
-      const DIR = '\\';
-      return environment.host + `proxy/file?=` + DIR + id + DIR + file;
-   }*/
 
    private getFile(id: string, file: string): string {
       return (environment.host + 'map/' + id + '/' + file);
