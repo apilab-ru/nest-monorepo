@@ -6,6 +6,7 @@ import { SettingsService } from "@bsab/shared/settings/services/settings-service
 import { MapsModule } from "./maps/maps.module";
 import { AuthModule } from "@bsab/shared/auth/auth.module";
 import { UsersModule } from "./users/users.module";
+import { ParserModule } from "./parser/parser.module";
 
 @Module({
    imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from "./users/users.module";
       MapsModule,
       AuthModule,
       UsersModule,
+      ParserModule
    ],
    controllers: [],
    providers: [

@@ -3,13 +3,14 @@ import { Body, Controller, Get, Param, Post, Query, Request, UseGuards } from '@
 import { MapsService } from '@bsab/shared/maps/services/maps-service';
 import { TagsService } from '@bsab/shared/maps/services/tags-service';
 import { TagEntity } from '@bsab/shared/maps/entites/tag.entity';
-import { MapsSearch } from '@bsab/shared/maps/interfaces/maps-search';
+import { MapsSearch, OrderDirection } from '@bsab/shared/maps/interfaces/maps-search';
 import { BASE_RESPONSE, BaseRequest } from '@bsab/api/request/interface';
 import { MapDetail } from '@bsab/api/map/map-detail';
 import { AuthGuard } from "@nestjs/passport";
 import { OptionalJwtAuthGuard } from "@utils/auth/optional-auth-guard";
 import { User } from "@bsab/api/user/user";
 import { PageResponse } from "@bsab/api/map/page";
+import { OrderField } from "@bsab/shared/maps/interfaces/map";
 
 
 @ApiTags('maps')
@@ -57,6 +58,18 @@ export class MapsController {
     name: 'npsTo',
     type: 'string',
     required: false
+  })
+  @ApiQuery({
+     name: 'orderField',
+     type: 'string',
+     enum: Object.keys(OrderField),
+     required: false
+  })
+  @ApiQuery({
+     name: 'orderDirection',
+     type: 'string',
+     enum: OrderDirection,
+     required: false
   })
   @ApiBearerAuth()
   list(

@@ -35,21 +35,21 @@ async function bootstrap() {
    const config = new DocumentBuilder()
       .setTitle('BSaberProxy')
       .addBearerAuth()
+      .addServer(environment.prefix)
       .setBasePath(environment.prefix)
       .setVersion('1.1.1')
-      .setVersion('1.0')
+      .setVersion('1.1')
       .setDescription('')
       .build();
 
-   const document = SwaggerModule.createDocument(app, config);
-
-   SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document);
+   const document = SwaggerModule.createDocument(app, config, {
+      ignoreGlobalPrefix: false
+   });
 
    app.use(json({ limit: '50mb' }));
    app.use(urlencoded({ extended: true, limit: '50mb' }));
 
    app.enableCors({});
-
 
    app.setGlobalPrefix(environment.prefix);
 
@@ -57,6 +57,11 @@ async function bootstrap() {
 
    const { httpAdapter } = app.get(HttpAdapterHost);
    app.useGlobalFilters(new AllExceptionsFilter(httpAdapter))
+
+   SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document, {
+
+   });
+
    await app.listen(port);
 
    const method = environment.ssl ? 'https' : 'http';

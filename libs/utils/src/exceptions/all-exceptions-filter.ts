@@ -12,7 +12,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const httpStatus = this.statusMapper(exception);
 
-    console.error(exception);
+    console.error(exception.message);
 
     const responseBody = {
       statusCode: httpStatus,
