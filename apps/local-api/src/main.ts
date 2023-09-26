@@ -13,7 +13,9 @@ import { AllExceptionsFilter } from "@utils/exceptions";
 const SWAGGER_PUBLIC_PATH = 'swagger';
 
 async function bootstrap() {
-   const options: NestApplicationOptions = {};
+   const options: NestApplicationOptions = {
+      cors: true
+   };
 
    options.httpsOptions = {
       key: fs.readFileSync(environment.ssl.key, 'utf8'),

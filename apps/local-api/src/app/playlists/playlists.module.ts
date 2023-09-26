@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { ErrorsService } from "@utils/exceptions/errors-service";
 import { PlaylistsService } from "./services/playlists-service";
 import { PlaylistsController } from "./playlists.controller";
 
@@ -10,7 +9,6 @@ import { PlaylistsController } from "./playlists.controller";
    ],
    providers: [
       PlaylistsService,
-      ErrorsService,
    ],
 })
 export class PlaylistsModule {

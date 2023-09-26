@@ -9,6 +9,7 @@ export const environment = {
    levelsPath: gamePath + 'Beat Saber_Data/CustomLevels/',
    playlistsPath: gamePath + 'Playlists/',
    installPath: 'D:\\YandexDisk\\Загрузки\\map-install',
+   apiEndpoint: 'https://api2.apilab.ru/bsab',
    ssl: {
       key: __dirname + '/assets/cert/localhost-key.pem',
       cert: __dirname + '/assets/cert/localhost.pem'

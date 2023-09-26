@@ -1,6 +1,5 @@
 import { Module } from "@nestjs/common";
 import { HttpModule } from "@nestjs/axios";
-import { ErrorsService } from "@utils/exceptions/errors-service";
 import { ProxyService } from "./services/proxy.service";
 import { ParserController } from "./proxy.controler";
 
@@ -12,7 +11,6 @@ import { ParserController } from "./proxy.controler";
       ParserController
    ],
    providers: [
-      ErrorsService,
       ProxyService,
    ],
 })

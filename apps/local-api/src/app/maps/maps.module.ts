@@ -1,5 +1,4 @@
 import { Module } from "@nestjs/common";
-import { ErrorsService } from "@utils/exceptions/errors-service";
 import { MapsLocalService } from "./services/maps-local-service";
 import { MapsLocalController } from "./maps.controler";
 
@@ -10,7 +9,6 @@ import { MapsLocalController } from "./maps.controler";
    ],
    providers: [
       MapsLocalService,
-      ErrorsService,
    ],
 })
 export class MapsLocalModule {
