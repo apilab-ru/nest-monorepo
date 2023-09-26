@@ -3,7 +3,7 @@ import { Body, Controller, Get, Param, Post, Query, Request, UseGuards } from '@
 import { MapsService } from '@bsab/shared/maps/services/maps-service';
 import { TagsService } from '@bsab/shared/maps/services/tags-service';
 import { TagEntity } from '@bsab/shared/maps/entites/tag.entity';
-import { MapsSearch, OrderDirection } from '@bsab/shared/maps/interfaces/maps-search';
+import { MapsSearch } from '@bsab/shared/maps/interfaces/maps-search';
 import { BASE_RESPONSE, BaseRequest } from '@bsab/api/request/interface';
 import { MapDetail } from '@bsab/api/map/map-detail';
 import { AuthGuard } from "@nestjs/passport";
@@ -11,6 +11,7 @@ import { OptionalJwtAuthGuard } from "@utils/auth/optional-auth-guard";
 import { User } from "@bsab/api/user/user";
 import { PageResponse } from "@bsab/api/map/page";
 import { OrderField } from "@bsab/shared/maps/interfaces/map";
+import { OrderDirection } from "@bsab/api/request/request";
 
 
 @ApiTags('maps')

@@ -37,8 +37,7 @@ async function bootstrap() {
       .addBearerAuth()
       .addServer(environment.prefix)
       .setBasePath(environment.prefix)
-      .setVersion('1.1.1')
-      .setVersion('1.1')
+      .setVersion('1.1.3')
       .setDescription('')
       .build();
 
@@ -56,11 +55,9 @@ async function bootstrap() {
    const port = process.env.PORT || 3000;
 
    const { httpAdapter } = app.get(HttpAdapterHost);
-   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter))
+   app.useGlobalFilters(new AllExceptionsFilter(httpAdapter, !environment.production))
 
-   SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document, {
-
-   });
+   SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document, {});
 
    await app.listen(port);
 

@@ -6,7 +6,7 @@ import {
   Observable,
   of,
   switchMap,
-  take,
+  take, tap,
 } from "rxjs";
 import { BeatSaverItem } from "../interfaces/beatsaver";
 import { TagsService } from "@bsab/shared/maps/services/tags-service";
@@ -17,14 +17,13 @@ import { MapsService } from "@bsab/shared/maps/services/maps-service";
 const camelCase = require("lodash/camelCase");
 const flatMap = require("lodash/flatMap");
 const uniq = require("lodash/uniq");
+
 import { ErrorsService } from "@utils/exceptions/errors-service";
 import { DifficultyDetail } from "@bsab/shared/maps/interfaces/map";
 import { Difficulty } from "@bsab/api/map/difficulty";
 
 import { ErrorEntity } from "@utils/exceptions/entities/error.entity";
 import { MapUrls } from "@bsab/api/map/map-detail";
-
-const path = require('path');
 
 @Injectable()
 export class ParserBeatSaverService {
@@ -40,7 +39,9 @@ export class ParserBeatSaverService {
   }
 
   loadPage(page = 0, reload = false): Observable<MapEntity[]> {
-    const docs$ = this.httpService.get<{ docs: BeatSaverItem[] }>(this.api + `search/text/${page}?sortOrder=Relevance`).pipe(
+    const docs$ = this.httpService.get<{
+      docs: BeatSaverItem[]
+    }>(this.api + `search/text/${ page }?sortOrder=Relevance`).pipe(
       map(res => this.filterIncorrectSourceMaps(res.data.docs)),
       switchMap(list => {
         return this.mapsService.getByIds(list.map(it => it.id)).pipe(
@@ -49,18 +50,19 @@ export class ParserBeatSaverService {
 
             const updateItems = !reload ? [] : list.filter(it => foundedList.find(f => f.id === it.id));
 
-            return { newItems, updateItems: { list: updateItems, founded: foundedList } }
+            return {newItems, updateItems: {list: updateItems, founded: foundedList}}
           })
         )
       }),
     );
 
     return docs$.pipe(
-      switchMap(({ newItems, updateItems }) => combineLatest([
+      switchMap(({newItems, updateItems}) => combineLatest([
         this.addMaps(newItems),
         this.updateMaps(updateItems.list, updateItems.founded)
       ])),
       take(1),
+      tap(([newItem, updateItem]) => console.log('xxx result', newItem.length, updateItem.length)),
       map(list => list.flat()),
     )
   }
@@ -81,6 +83,12 @@ export class ParserBeatSaverService {
   }
 
   private updateMaps(sourceList: BeatSaverItem[], list: MapEntity[]): Observable<MapEntity[]> {
+    if (!sourceList.length) {
+      return of([])
+    }
+
+    const updateList = [];
+
     sourceList.forEach(source => {
       const version = source.versions[source.versions.length - 1]!;
 
@@ -94,12 +102,14 @@ export class ParserBeatSaverService {
 
       entity.stats = source.stats;
 
+      updateList.push(entity);
+
       /*entity.coverURL = this.clearDir(entity.coverURL);
       entity.downloadURL = this.clearDir(entity.downloadURL);
       entity.soundURL = this.clearDir(entity.soundURL);*/
     })
 
-    return this.mapsService.saveList(list);
+    return this.mapsService.saveList(updateList);
   }
 
   private filterIncorrectMaps(list: MapEntity[]): MapEntity[] {
@@ -164,51 +174,52 @@ export class ParserBeatSaverService {
   }
 
   private prepareItemUrls(itemId: string): MapUrls {
-     return {
-        downloadURL: `/${itemId}/zip.zip`,
-        coverURL: `/${itemId}/cover.jpg`,
-        soundURL: `/${itemId}/sound.mp3`
-     }
+    return {
+      downloadURL: `/${ itemId }/zip.zip`,
+      coverURL: `/${ itemId }/cover.jpg`,
+      soundURL: `/${ itemId }/sound.mp3`
+    }
   }
 
   private convertItem(item: BeatSaverItem, tagsMap: Record<string, number>): Observable<MapEntity> {
     const version = item.versions[item.versions.length - 1]!;
     this.authorsService.pushAuthor(item.uploader);
 
-     const diffsDetails = version.diffs.map(it => ({
-        ...it,
-        difficulty: camelCase(it.difficulty) as Difficulty,
-     }));
+    const diffsDetails = version.diffs.map(it => ({
+      ...it,
+      difficulty: camelCase(it.difficulty) as Difficulty,
+    }));
 
-     const { minNps, maxNps } = this.calcNps(diffsDetails);
+    const {minNps, maxNps} = this.calcNps(diffsDetails);
 
     const entity: MapEntity = {
-       id: item.id,
-       name: item.name,
-       description: item.description,
-       author: item.uploader.id,
-       bpm: item.metadata.bpm,
-       duration: item.metadata.duration,
-       songName: item.metadata.songName,
-       songSubName: item.metadata.songSubName,
-       songAuthorName: item.metadata.songAuthorName,
-       difs: version.diffs.map(it => camelCase(it.difficulty) as Difficulty),
-       difsDetails: diffsDetails,
-       tags: this.tagsService.idsByTags(item.tags, tagsMap),
-       stats: item.stats,
-       uploaded: new Date(item.uploaded),
-       automapper: item.automapper,
-       ranked: item.ranked,
-       qualified: item.qualified,
-       createdAt: new Date(item.createdAt),
-       updatedAt: new Date(item.updatedAt),
-       lastPublishedAt: new Date(item.lastPublishedAt),
-       ...this.prepareItemUrls(item.id),
-       originalCoverURL: version.coverURL,
-       originalDownloadURL: version.downloadURL,
-       originalSoundURL: version.previewURL,
-       minNps,
-       maxNps,
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      author: item.uploader.id,
+      bpm: item.metadata.bpm,
+      duration: item.metadata.duration,
+      songId: null,
+      songName: item.metadata.songName,
+      songSubName: item.metadata.songSubName,
+      songAuthorName: item.metadata.songAuthorName,
+      difs: version.diffs.map(it => camelCase(it.difficulty) as Difficulty),
+      difsDetails: diffsDetails,
+      tags: this.tagsService.idsByTags(item.tags, tagsMap),
+      stats: item.stats,
+      uploaded: new Date(item.uploaded),
+      automapper: item.automapper,
+      ranked: item.ranked,
+      qualified: item.qualified,
+      createdAt: new Date(item.createdAt),
+      updatedAt: new Date(item.updatedAt),
+      lastPublishedAt: new Date(item.lastPublishedAt),
+      ...this.prepareItemUrls(item.id),
+      originalCoverURL: version.coverURL,
+      originalDownloadURL: version.downloadURL,
+      originalSoundURL: version.previewURL,
+      minNps,
+      maxNps,
     }
 
     return of(entity);

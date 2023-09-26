@@ -1,7 +1,4 @@
-export enum OrderDirection {
-   asc = 'ASC',
-   desc = 'DESC',
-}
+import { OrderDirection } from "@bsab/api/request/request";
 
 export interface BaseSearch {
    limit: number;
@@ -19,6 +16,7 @@ export interface MapsSearch extends BaseSearch {
    dateFrom?: string;
    showed?: string;
    recommended?: string;
+   ranked?: string;
    bpmFrom?: string;
    bpmTo?: string;
    durationFrom?: string;

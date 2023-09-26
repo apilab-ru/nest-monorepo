@@ -8,6 +8,8 @@ import { AuthorsService } from './services/authors-service';
 import { ErrorsService } from "@utils/exceptions/errors-service";
 import { SettingsService } from "@bsab/shared/settings/services/settings-service";
 import { MapsService, TagsService } from "@bsab/shared/maps";
+import { SongsService } from "./services/songs-service";
+import { SongsMetaApiService } from "./services/songs-meta-api.service";
 
 @Module({
    imports: [
@@ -25,6 +27,8 @@ import { MapsService, TagsService } from "@bsab/shared/maps";
       MapsService,
       SettingsService,
       ErrorsService,
+      SongsService,
+      SongsMetaApiService,
    ],
 })
 export class ParserModule {

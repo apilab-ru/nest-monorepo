@@ -42,6 +42,10 @@ export class MapEntity {
 
    @ApiProperty()
    @Column()
+   songId: number | null;
+
+   @ApiProperty()
+   @Column()
    songSubName: string;
 
    @ApiProperty()

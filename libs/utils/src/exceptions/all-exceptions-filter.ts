@@ -4,7 +4,7 @@ import { AbstractHttpAdapter } from "@nestjs/core/adapters/http-adapter";
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapter: AbstractHttpAdapter) {
+  constructor(private readonly httpAdapter: AbstractHttpAdapter, private readonly isDev?: boolean) {
   }
 
   catch(exception: Error, host: ArgumentsHost): void {
@@ -12,7 +12,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     const httpStatus = this.statusMapper(exception);
 
-    console.error(exception.message);
+    if (this.isDev) {
+       console.error(exception);
+    } else {
+       console.error(exception.message);
+    }
 
     const responseBody = {
       statusCode: httpStatus,

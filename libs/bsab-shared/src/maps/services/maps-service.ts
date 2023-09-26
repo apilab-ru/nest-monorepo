@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { catchError, combineLatest, from, map, mapTo, Observable, of } from 'rxjs';
-import { Connection, In, IsNull, Repository } from 'typeorm';
+import { Connection, Repository } from 'typeorm';
 import { MapEntity } from '../entites/mapEntity';
 import { ErrorsService } from '@utils/exceptions/errors-service';
-import { MapsSearch, OrderDirection } from '../interfaces/maps-search';
+import { MapsSearch } from '../interfaces/maps-search';
 import { OrderField } from '../interfaces/map';
-import { environment } from '../../../../../apps/maps-api/src/environments/environment';
 import { MapDetail } from '@bsab/api/map/map-detail';
 import { FindManyOptions } from "typeorm/find-options/FindManyOptions";
 import { UserMapShowEntity } from "../entites/userMapShowEntity";
 import { PageResponse } from "@bsab/api/map/page";
+import { OrderDirectionDTO } from "@bsab/api/request/request";
 
 @Injectable()
 export class MapsService {
@@ -34,7 +34,13 @@ export class MapsService {
     return from(this.repository.findByIds(ids));
   }
 
-  saveItem(item: MapEntity): Observable<MapEntity> {
+  updateItem(item: MapEntity): Observable<MapEntity> {
+     return from(this.repository.save(item)).pipe(
+        map(result => item)
+     );
+  }
+
+  upsertItem(item: MapEntity): Observable<MapEntity> {
     return from(this.repository.upsert(item, ['id'])).pipe(
       map(result => item)
     );
@@ -46,7 +52,7 @@ export class MapsService {
     }
 
     return combineLatest(
-      list.map(item => this.saveItem(item).pipe(
+      list.map(item => this.upsertItem(item).pipe(
         catchError(error => {
           this.errorsService.addError(error, item);
 
@@ -82,7 +88,7 @@ export class MapsService {
     return this.repository.find(options);
   }
 
-  private async loadList(query: MapsSearch, maxLimit = 100, userId?: number): Promise<PageResponse<MapEntity>> {
+  async loadList(query: MapsSearch, maxLimit = 100, userId?: number): Promise<PageResponse<MapEntity>> {
     const queryRunner = this.repository.createQueryBuilder('maps');
     const limit = Math.min(query.limit || 10, maxLimit);
     const offset = query.offset || 0;
@@ -189,6 +195,12 @@ export class MapsService {
       queryRunner.andWhere('((us.id is not NULL) or (ua.id is not NULL))')
     }
 
+    if (query.ranked) {
+       queryRunner.andWhere('ranked = :ranked', {
+          ranked: query.ranked === 'true' ? 1 : 0
+       });
+    }
+
     if (query.durationFrom) {
       queryRunner.andWhere('duration >= :durationFrom', {
         durationFrom: query.durationFrom
@@ -208,7 +220,7 @@ export class MapsService {
     }
 
     const orderFiled = OrderField[query.orderField] || OrderField.createdAt;
-    const orderDirection = OrderDirection[query.orderDirection] || OrderDirection.desc;
+    const orderDirection = OrderDirectionDTO[query.orderDirection] || OrderDirectionDTO.desc;
 
     queryRunner.orderBy(orderFiled, orderDirection);
 

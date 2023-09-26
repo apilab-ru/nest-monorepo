@@ -4,6 +4,11 @@ import { Connection, Repository } from "typeorm";
 import { TagEntity } from "../entites/tag.entity";
 const camelCase = require("lodash/camelCase");
 
+const TAGS_CAST_MAP = {
+  'hipHop': 'hipHopRock',
+  'drumNBass': 'drumAndBass'
+}
+
 @Injectable()
 export class TagsService {
     list$: Observable<Record<string, number>>;
@@ -22,12 +27,20 @@ export class TagsService {
         );
     }
 
+    getOrAddTags(tags: string[]): Observable<number[]> {
+      return this.findTags(tags).pipe(
+        map(tagsMap => this.idsByTags(tags, tagsMap))
+      );
+    }
+
     idsByTags(tags: string[], tagsMap: Record<string, number>): number[] {
         if (!tags) {
             return [];
         }
 
-        return tags.map(tag => tagsMap[camelCase(tag)]);
+        const preparedTags = tags.map(it => camelCase(it)).map(tag => TAGS_CAST_MAP[tag] ? TAGS_CAST_MAP[tag] : tag);
+
+        return preparedTags.map(tag => tagsMap[camelCase(tag)]);
     }
 
     findTags(tagsInput: string[]): Observable<Record<string, number>> {
@@ -35,7 +48,7 @@ export class TagsService {
             return of({});
         }
 
-        const tags = tagsInput.map(it => camelCase(it));
+        const tags = tagsInput.map(it => camelCase(it)).map(tag => TAGS_CAST_MAP[tag] ? TAGS_CAST_MAP[tag] : tag);
 
         return this.list$.pipe(
             take(1),

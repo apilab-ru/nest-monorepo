@@ -3,10 +3,10 @@ import { config } from './config';
 import { MapEntity } from '@bsab/shared/maps/entites/mapEntity';
 import { TagEntity } from '@bsab/shared/maps/entites/tag.entity';
 import { ErrorEntity } from '@utils/exceptions/entities/error.entity';
-import { USER_ENTITES } from "../users/entites";
+import { USER_ENTITIES } from "../users/entites";
 import { UserMapShowEntity } from "@bsab/shared/maps/entites/userMapShowEntity";
-import { AuthorEntity } from "../parser/entites/author.entity";
 import { SettingsEntity } from "@bsab/shared/settings/entites/settings.entity";
+import { PARSER_ENTITIES } from "../parser/entites";
 
 export const DB_CONFIG: ConnectionOptions = {
    type: 'mysql',
@@ -16,10 +16,10 @@ export const DB_CONFIG: ConnectionOptions = {
       MapEntity,
       UserMapShowEntity,
       TagEntity,
-      AuthorEntity,
       ErrorEntity,
       SettingsEntity,
-      ...USER_ENTITES,
+      ...PARSER_ENTITIES,
+      ...USER_ENTITIES,
    ],
    migrationsRun: false,
    synchronize: false,
