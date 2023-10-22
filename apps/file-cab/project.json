@@ -22,7 +22,13 @@
         "production": {
           "optimization": true,
           "extractLicenses": true,
-          "inspect": false
+          "inspect": false,
+          "fileReplacements": [
+            {
+              "replace": "apps/file-cab/src/environments/environment.ts",
+              "with": "apps/file-cab/src/environments/environment.prod.ts"
+            }
+          ]
         }
       }
     },

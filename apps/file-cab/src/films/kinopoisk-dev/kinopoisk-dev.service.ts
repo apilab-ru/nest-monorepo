@@ -21,7 +21,7 @@ import { ErrorsService } from "@utils/exceptions/errors-service";
 
 @Injectable()
 export class KinopoiskDevService {
-  private endpoint = 'https://api.kinopoisk.dev/v1/';
+  private endpoint = 'https://api.kinopoisk.dev/v1.3/';
   private tokens = config.films.kinopoiskDev;
 
   constructor(
@@ -192,6 +192,7 @@ export class KinopoiskDevService {
         'x-api-key': this.getToken(),
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
         'accept': 'application/json',
+        'Accept-Encoding': 'gzip,deflate,compress'
       },
     }).pipe(
       map(res => res.data),

@@ -2,6 +2,7 @@ const merge = require('deepmerge');
 import { configCustom } from './config-custom';
 
 const baseConfig = {
+  port: 3030,
   domain: 'http://file-cab.local:3000',
   sentry: {
     dns: '',
