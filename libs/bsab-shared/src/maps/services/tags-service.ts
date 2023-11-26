@@ -28,6 +28,10 @@ export class TagsService {
     }
 
     getOrAddTags(tags: string[]): Observable<number[]> {
+      if (!tags.length) {
+        return of([])
+      }
+
       return this.findTags(tags).pipe(
         map(tagsMap => this.idsByTags(tags, tagsMap))
       );

@@ -1,5 +1,5 @@
 import { ApiTags } from "@nestjs/swagger";
-import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Patch, Post } from "@nestjs/common";
 import { PlaylistsService } from "./services/playlists-service";
 import { Playlist } from "@bsab/api/local/playlist";
 
@@ -18,7 +18,12 @@ export class PlaylistsController {
       return { list };
    }
 
-   @Post(':id')
+   @Post('')
+   async createPlaylist(@Body() playlist: Playlist): Promise<Playlist> {
+     return this.playlistsService.createPlaylist(playlist);
+   }
+
+   @Patch(':id')
    async updatePlaylist(@Body() playlist: Playlist, @Param('id') id: string): Promise<void> {
       return this.playlistsService.updatePlaylist(id, playlist);
    }

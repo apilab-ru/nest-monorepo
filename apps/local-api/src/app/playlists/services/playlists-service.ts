@@ -5,7 +5,9 @@ import { Injectable } from "@nestjs/common";
 const fs = require('fs');
 
 const PLAYLIST_EXT = '.bplist';
-const IMAGE_PREFIX = 'data:image/png;';
+const IMAGE_PREFIX_LIST = ['data:image/png;', 'data:image/avif;'];
+const DEFAULT_PREFIX = 'data:image/png;'
+const kebabCase =  require("lodash/kebabCase");
 
 @Injectable()
 export class PlaylistsService {
@@ -28,13 +30,45 @@ export class PlaylistsService {
     return this.cache;
   }
 
+  private prepareImage(image: string): string {
+    IMAGE_PREFIX_LIST.forEach(prefix => {
+      image = image.replace(prefix, '')
+    });
+
+    return image;
+  }
+
   async updatePlaylist(id: string, playlist: Playlist): Promise<void> {
+
     const data = JSON.stringify({
       ...playlist,
-      image: playlist.image.replace(IMAGE_PREFIX, '')
+      image: this.prepareImage(playlist.image)
     });
 
     await fs.promises.writeFile(this.path + id, data);
+  }
+
+  async createPlaylist(data: Playlist): Promise<Playlist> {
+    let id = data.id || kebabCase(data.playlistTitle);
+
+    const exists = (await fs.promises.readdir(this.path))
+      .filter(it => it.includes(id));
+
+    if (exists.length) {
+      id += `(${exists.length + 1})`;
+    }
+
+    id += PLAYLIST_EXT;
+
+    const playlist = {
+      ...data,
+      id,
+      image: this.prepareImage(data.image)
+    }
+
+    await fs.promises.writeFile(this.path + id, JSON.stringify(playlist));
+
+    return playlist;
   }
 
   async removePlaylist(id: string): Promise<void> {
@@ -48,7 +82,7 @@ export class PlaylistsService {
     return {
       ...item,
       id: path,
-      image: IMAGE_PREFIX + item.image,
+      image: DEFAULT_PREFIX + item.image,
     };
   }
 }
