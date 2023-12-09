@@ -1,10 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { config } from "../../config/config";
-import { map, Observable, of, switchMap } from "rxjs";
+import { delay, map, Observable, of, switchMap } from "rxjs";
 import { DiscSongsPage } from "../interfaces/disc-songs";
 import { TagsService } from "@bsab/shared/maps";
 import { SongMeta } from "../interfaces/song-meta";
+import { environment } from "../../../environments/environment";
+
+// DOCS https://www.discogs.com/developers/#page:database,header:database-search
 
 @Injectable()
 export class SongsMetaApiService {
@@ -18,6 +21,7 @@ export class SongsMetaApiService {
 
   loadSongMeta(title: string, artist?: string): Observable<SongMeta | null> {
     return this.searchSongs(title, artist).pipe(
+      delay(environment.timeout),
       switchMap(({ results }) => {
         if (!results.length) {
           return of(null);
@@ -26,8 +30,8 @@ export class SongsMetaApiService {
         const result = results[0];
 
         return this.tagsService.getOrAddTags([
-          ...result.genre,
-          ...result.style
+          ...result.genre || [],
+          ...result.style || []
         ]).pipe(
           map(tags => ({
             id: result.id,

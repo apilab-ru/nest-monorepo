@@ -6,7 +6,7 @@ import {
   Observable,
   of,
   switchMap,
-  take, tap,
+  take,
 } from "rxjs";
 import { BeatSaverItem } from "../interfaces/beatsaver";
 import { TagsService } from "@bsab/shared/maps/services/tags-service";
@@ -62,7 +62,6 @@ export class ParserBeatSaverService {
         this.updateMaps(updateItems.list, updateItems.founded)
       ])),
       take(1),
-      tap(([newItem, updateItem]) => console.log('xxx result', newItem.length, updateItem.length)),
       map(list => list.flat()),
     )
   }
@@ -99,6 +98,7 @@ export class ParserBeatSaverService {
       entity.originalSoundURL = version.previewURL;
       entity.updatedAt = new Date(source.updatedAt);
       entity.lastPublishedAt = new Date(source.lastPublishedAt);
+      entity.ranked = source.ranked;
 
       entity.stats = source.stats;
 

@@ -1,11 +1,11 @@
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
-import { Controller, Get, Query, Res } from '@nestjs/common';
+import { Controller, Get, Query } from '@nestjs/common';
 import { ParserBeatSaverService } from './services/parser-beat-saver.service';
 import { SettingsService } from "@bsab/shared/settings/services/settings-service";
 import { Cron } from "@nestjs/schedule";
 import { environment } from "../../environments/environment";
 import { SongsService } from "./services/songs-service";
-import { map, tap } from "rxjs";
+import { map } from "rxjs";
 
 @ApiTags('parser')
 @Controller('parser')
@@ -56,32 +56,28 @@ export class ParserController {
       return 'success';
    }
 
-   @Cron('0 */1 * * * *')
+   @Cron('0 */5 * * * *')
    @Get('songs')
    parserSongs() {
       const timeStart = new Date().getTime();
-      console.log('xxx parse songs');
 
       return this.songsService.parseSongsFromMaps().pipe(
          map(() => ({
             durationSeconds: (new Date().getTime() - timeStart) / 1000
          })),
-         tap(({ durationSeconds }) => console.log('xxx parse songs complete: ', durationSeconds)),
       ).toPromise();
    }
 
-  @Cron('0 */30 * * * *')
+  @Cron('30 */5 * * * *')
    @Get('songs/load')
    loadSongs() {
       const timeStart = new Date().getTime();
-      console.log('xxx load songs');
 
       return this.songsService.loadSongs().pipe(
          map(res => ({
             ...res,
             durationSeconds: (new Date().getTime() - timeStart) / 1000
          })),
-         tap(({ durationSeconds }) => console.log('xxx parse songs complete: ', durationSeconds)),
       ).toPromise()
    }
 
