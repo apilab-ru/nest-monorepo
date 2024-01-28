@@ -210,6 +210,7 @@ export class ParserBeatSaverService {
       uploaded: new Date(item.uploaded),
       automapper: item.automapper,
       ranked: item.ranked,
+      blRankedDate: null,
       qualified: item.qualified,
       createdAt: new Date(item.createdAt),
       updatedAt: new Date(item.updatedAt),
