@@ -104,6 +104,12 @@ export class MapEntity {
    ranked: boolean;
 
    @ApiProperty()
+   @Column({
+     type: 'timestamp'
+   })
+   blRankedDate: string | null;
+
+   @ApiProperty()
    @Column()
    qualified: boolean;
 

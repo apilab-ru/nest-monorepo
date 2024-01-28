@@ -10,26 +10,28 @@ import { SettingsService } from "@bsab/shared/settings/services/settings-service
 import { MapsService, TagsService } from "@bsab/shared/maps";
 import { SongsService } from "./services/songs-service";
 import { SongsMetaApiService } from "./services/songs-meta-api.service";
+import { BeatLeaderService } from "./services/beat-leader.service";
 
 @Module({
-   imports: [
-      HttpModule,
-      TypeOrmModule.forFeature([]),
-      ScheduleModule.forRoot(),
-   ],
-   controllers: [
-      ParserController,
-   ],
-   providers: [
-      ParserBeatSaverService,
-      TagsService,
-      AuthorsService,
-      MapsService,
-      SettingsService,
-      ErrorsService,
-      SongsService,
-      SongsMetaApiService,
-   ],
+  imports: [
+    HttpModule,
+    TypeOrmModule.forFeature([]),
+    ScheduleModule.forRoot(),
+  ],
+  controllers: [
+    ParserController,
+  ],
+  providers: [
+    ParserBeatSaverService,
+    TagsService,
+    AuthorsService,
+    MapsService,
+    SettingsService,
+    ErrorsService,
+    SongsService,
+    SongsMetaApiService,
+    BeatLeaderService
+  ],
 })
 export class ParserModule {
 }

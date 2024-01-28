@@ -66,6 +66,7 @@ export class MapsService {
 
   loadListDetails(query: MapsSearch, userId?: number): Promise<PageResponse<MapDetail>> {
     const maxLimit = 100;
+
     return this.loadList(query, maxLimit, userId).then(res => ({
        ...res,
        list: res.list.map(item => this.mapConvert(item))
@@ -217,6 +218,10 @@ export class MapsService {
       queryRunner.andWhere('JSON_EXTRACT(maps.stats, "$.score") >= :score', {
         score: +query.scoreFrom / 100
       })
+    }
+
+    if (query.blRanked) {
+      queryRunner.andWhere('blRankedDate is not NULL')
     }
 
     const orderFiled = OrderField[query.orderField] || OrderField.createdAt;

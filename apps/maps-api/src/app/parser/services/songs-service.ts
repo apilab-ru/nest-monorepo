@@ -1,12 +1,14 @@
 import { Injectable } from "@nestjs/common";
 import { MapsService } from "@bsab/shared/maps";
-import { combineLatest, from, map, Observable, of, switchMap, tap } from "rxjs";
+import { combineLatest, from, map, Observable, switchMap, tap } from "rxjs";
 import { SongsMetaApiService } from "./songs-meta-api.service";
 import { And, Connection, IsNull, LessThan, MoreThan, Not, Repository } from "typeorm";
 import { SongEntity } from "../entites/song.entity";
 import { BandEntity } from "../entites/band.entity";
 import { MapEntity } from "@bsab/shared/maps/entites/mapEntity";
 import { SettingsService } from "@bsab/shared/settings/services/settings-service";
+import { BeatLeaderService } from "./beat-leader.service";
+import { OrderDirection } from "@bsab/api/request/request";
 
 interface SongMinimal extends Omit<SongEntity, 'id' | 'discId'> {
 }
@@ -24,6 +26,7 @@ export class SongsService {
     private mapsService: MapsService,
     private songsApiService: SongsMetaApiService,
     private settingsService: SettingsService,
+    private beatLeaderService: BeatLeaderService,
     connection: Connection,
   ) {
     this.songRepo = connection.getRepository(SongEntity);

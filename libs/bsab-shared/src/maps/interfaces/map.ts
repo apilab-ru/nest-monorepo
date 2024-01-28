@@ -6,6 +6,7 @@ export enum OrderField {
     maxNps = 'maps.maxNps',
     bpm = 'maps.bpm',
     score = 'JSON_EXTRACT(maps.stats, "$.score")',
+    blRankedDate = 'maps.blRankedDate'
 }
 
 export interface DifficultyDetail {

@@ -22,4 +22,5 @@ export interface MapsSearch extends BaseSearch {
    durationFrom?: string;
    durationTo?: string;
    scoreFrom?: string;
+   blRanked?: string;
 }
