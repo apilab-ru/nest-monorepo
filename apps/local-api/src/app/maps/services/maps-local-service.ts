@@ -20,6 +20,18 @@ const CINEMA_FILE = 'cinema-video.json';
 export class MapsLocalService {
    private version = 8;
 
+   async loadMapById(id: string): Promise<LocalMap | null> {
+     const files = await fs.promises.readdir(environment.levelsPath);
+
+     const file = files.find(name => name.indexOf(id + ' ') === 0);
+
+     if (!file) {
+       return null;
+     }
+
+     return this.loadMap(file);
+   }
+
    async loadMaps(offset = 0, limit = 10000): Promise<MapsResponse> {
       const { mtime } = await fs.promises.stat(environment.levelsPath);
 
@@ -75,7 +87,9 @@ export class MapsLocalService {
             .then(async zip => {
                const name = file.replace('.zip', '');
                const dir = environment.levelsPath + '/' + name;
-               await fs.promises.mkdir(dir);
+               await fs.promises.mkdir(dir, {
+                 recursive: true,
+               });
 
                return Promise.all(Object.entries(zip.files).map(([fileName, fileData]) => {
                   // @ts-ignore

@@ -1,6 +1,7 @@
 import { environment } from "../../../environments/environment";
 import { Playlist } from "@bsab/api/local/playlist";
 import { Injectable } from "@nestjs/common";
+import { LocalMap } from "@bsab/api/map/map";
 
 const fs = require('fs');
 
@@ -14,6 +15,25 @@ export class PlaylistsService {
   private lastChange: string;
   private cache: Playlist[];
   private path = environment.playlistsPath;
+
+  async getById(id: string): Promise<Playlist | null> {
+    return this.parserPlaylist(id);
+  }
+
+  async addSongToPlaylist(playlist: Playlist, map: LocalMap): Promise<Playlist> {
+    playlist.songs.push({
+      songName: map.songName,
+      levelAuthorName: map.songAuthorName,
+      hash: map.hash,
+      levelid: `custom_level_${map.hash}`,
+      difficulties: map.difficultMap.flatMap(mode => mode.list.map(it => ({
+        characteristic: mode.mode,
+        name: it.difficulty
+      })))
+    })
+
+    return playlist;
+  }
 
   async getList(): Promise<Playlist[]> {
     const { mtime } = await fs.promises.stat(this.path);
