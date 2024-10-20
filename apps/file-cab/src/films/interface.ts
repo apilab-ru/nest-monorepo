@@ -1,14 +1,14 @@
 import { SearchRequest } from '@filecab/models';
-import { Types } from "@filecab/models/types";
+import { Types } from '@filecab/models/types';
 
 export enum EFilmsSortBy {
   voteAverage = 'vote_average',
-  popularity = 'popularity'
+  popularity = 'popularity',
 }
 
 export enum EOrderType {
   asc = 'asc',
-  desc = 'desc'
+  desc = 'desc',
 }
 
 export interface FilmsChips {

@@ -4,7 +4,6 @@ import { config } from '../../config/config';
 
 @Injectable()
 export class FireBaseService {
-
   private fb = firebase;
   private db: firebase.database.Database;
 
@@ -26,9 +25,10 @@ export class FireBaseService {
 
   async add(name: string, data): Promise<string> {
     let id: string;
-    return this.db.ref(name)
+    return this.db
+      .ref(name)
       .push(data)
-      .then(post => {
+      .then((post) => {
         id = post.key;
         return this.db.ref(name + '/' + id).update({ id });
       })
@@ -40,8 +40,9 @@ export class FireBaseService {
   }
 
   async select<T>(name: string): Promise<T[]> {
-    return this.db.ref(name)
+    return this.db
+      .ref(name)
       .once('value')
-      .then(response => response.toJSON() as T[]);
+      .then((response) => response.toJSON() as T[]);
   }
 }

@@ -9,7 +9,9 @@ import {
   KinopoiskDetailItem,
   KinopoiskSearchItemResponse,
   KinopoiskSearchParams,
-  KinopoiskSearchResponse, KinopoiskSearchShortItemResult, KinopoiskSearchShortResult,
+  KinopoiskSearchResponse,
+  KinopoiskSearchShortItemResult,
+  KinopoiskSearchShortResult,
 } from './interface';
 import { withLatestFrom } from 'rxjs/operators';
 import { LibraryItemEntity } from '../../library/entites/library-item.entity';
@@ -25,14 +27,15 @@ export class KinopoiskService {
     private httpService: HttpService,
     private genreService: GenreService,
     private libraryService: LibraryService,
-  ) {
-  }
+  ) {}
 
   getByFieldId(id: number, field: string): Observable<MediaItem> {
     return this.getByKinopoiskId(id).pipe(
-      switchMap(item => this.libraryService.saveToRepository([item], 'kinopoiskId')
-        .then(list => list[0])
-      )
+      switchMap((item) =>
+        this.libraryService
+          .saveToRepository([item], 'kinopoiskId')
+          .then((list) => list[0]),
+      ),
     );
   }
 
@@ -45,13 +48,17 @@ export class KinopoiskService {
     );
   }
 
-  search(params: FilmSearchParams): Observable<SearchRequestResultV2<MediaItem>> {
+  search(
+    params: FilmSearchParams,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     if (params.kinopoiskId) {
       return this.getByKinopoiskId(params.kinopoiskId).pipe(
-        switchMap(item => this.libraryService.saveToRepository([item], 'kinopoiskId')
-          .then(list => list[0])
+        switchMap((item) =>
+          this.libraryService
+            .saveToRepository([item], 'kinopoiskId')
+            .then((list) => list[0]),
         ),
-        map(item => ({
+        map((item) => ({
           page: 1,
           results: [item],
           hasMore: false,
@@ -65,27 +72,36 @@ export class KinopoiskService {
 
     return this.genreService.list$.pipe(
       take(1),
-      switchMap(genres => {
+      switchMap((genres) => {
         const genreIds = params.genre?.split(',');
         const genreId = genreIds?.length ? +genreIds[0] : null;
-        const kinopoiskGenre = genreId ? genres.find(it => it.id === genreId)?.kinopoiskId : null;
+        const kinopoiskGenre = genreId
+          ? genres.find((it) => it.id === genreId)?.kinopoiskId
+          : null;
 
         return this.requestSearch({
           page: params.page,
           keyword: params.name,
-          ...(params.year ? {
-            yearFrom: +params.year,
-            yearTo: +params.year,
-          } : {}),
-          ...(kinopoiskGenre ? {
-            genres: kinopoiskGenre,
-          } : {}),
+          ...(params.year
+            ? {
+                yearFrom: +params.year,
+                yearTo: +params.year,
+              }
+            : {}),
+          ...(kinopoiskGenre
+            ? {
+                genres: kinopoiskGenre,
+              }
+            : {}),
         });
       }),
     );
   }
 
-  private requestSearchKeyword(keyword: string, page = 1): Observable<SearchRequestResultV2<MediaItem>> {
+  private requestSearchKeyword(
+    keyword: string,
+    page = 1,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     const perPage = 20;
     return this.get<KinopoiskSearchResponse>('v2.1/films/search-by-keyword', {
       keyword,
@@ -93,10 +109,14 @@ export class KinopoiskService {
     }).pipe(
       withLatestFrom(this.genreService.list$),
       switchMap(([data, genres]) => {
-        const list = data.films.map(item => this.mapKeywordSearchResult(item, genres));
+        const list = data.films.map((item) =>
+          this.mapKeywordSearchResult(item, genres),
+        );
 
-        return from(this.libraryService.saveToRepository(list, 'kinopoiskId')).pipe(
-          map(results => ({
+        return from(
+          this.libraryService.saveToRepository(list, 'kinopoiskId'),
+        ).pipe(
+          map((results) => ({
             page,
             hasMore: data.searchFilmsCountResult > page * perPage,
             total: data.searchFilmsCountResult,
@@ -107,7 +127,9 @@ export class KinopoiskService {
     );
   }
 
-  private requestSearch(params: KinopoiskSearchParams): Observable<SearchRequestResultV2<MediaItem>> {
+  private requestSearch(
+    params: KinopoiskSearchParams,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     const perPage = 20;
     return this.get<KinopoiskSearchShortResult>('v2.2/films', {
       order: 'YEAR',
@@ -116,10 +138,14 @@ export class KinopoiskService {
     }).pipe(
       withLatestFrom(this.genreService.list$),
       switchMap(([data, genres]) => {
-        const list = data.items.map(item => this.mapSearchResult(item, genres));
+        const list = data.items.map((item) =>
+          this.mapSearchResult(item, genres),
+        );
 
-        return from(this.libraryService.saveToRepository(list, 'kinopoiskId')).pipe(
-          map(results => ({
+        return from(
+          this.libraryService.saveToRepository(list, 'kinopoiskId'),
+        ).pipe(
+          map((results) => ({
             page: params.page,
             results,
             hasMore: data.total > params.page * perPage,
@@ -129,7 +155,10 @@ export class KinopoiskService {
     );
   }
 
-  private mapSearchResult(detail: KinopoiskSearchShortItemResult, genres: Genre[]): Omit<LibraryItemEntity, 'id'> {
+  private mapSearchResult(
+    detail: KinopoiskSearchShortItemResult,
+    genres: Genre[],
+  ): Omit<LibraryItemEntity, 'id'> {
     return {
       title: detail.nameRu || detail.nameOriginal,
       originalTitle: detail.nameEn || detail.nameOriginal,
@@ -139,7 +168,7 @@ export class KinopoiskService {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
-        detail.genres
+        detail.genres,
       ),
       episodes: null,
       popularity: this.toNumber(detail.ratingKinopoisk),
@@ -151,7 +180,10 @@ export class KinopoiskService {
     };
   }
 
-  private mapKeywordSearchResult(detail: KinopoiskSearchItemResponse, genres: Genre[]): Omit<LibraryItemEntity, 'id'> {
+  private mapKeywordSearchResult(
+    detail: KinopoiskSearchItemResponse,
+    genres: Genre[],
+  ): Omit<LibraryItemEntity, 'id'> {
     return {
       title: detail.nameRu || detail.nameEn || '',
       originalTitle: detail.nameEn,
@@ -161,7 +193,7 @@ export class KinopoiskService {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
-        detail.genres
+        detail.genres,
       ),
       episodes: null,
       popularity: this.toNumber(detail.rating),
@@ -173,7 +205,10 @@ export class KinopoiskService {
     };
   }
 
-  private mapDetails(detail: KinopoiskDetailItem, genres: Genre[]): Omit<LibraryItemEntity, 'id'> {
+  private mapDetails(
+    detail: KinopoiskDetailItem,
+    genres: Genre[],
+  ): Omit<LibraryItemEntity, 'id'> {
     return {
       title: detail.nameRu || detail.nameOriginal || '',
       originalTitle: detail.nameOriginal,
@@ -183,7 +218,7 @@ export class KinopoiskService {
         detail.genres.map(({ genre }) => KINOPOISK_GENRES_MAP[genre], genres),
         genres,
         'kinopoiskId',
-        detail.genres
+        detail.genres,
       ),
       episodes: null,
       popularity: this.toNumber(detail.ratingKinopoisk),
@@ -196,19 +231,23 @@ export class KinopoiskService {
   }
 
   private toNumber(value: string | number): number | null {
-    return (value && value !== 'null') ? +value : null;
+    return value && value !== 'null' ? +value : null;
   }
 
-  private get<T>(api: string, params?: Record<string, string | number>): Observable<T> {
-    return this.httpService.get<T>(this.endpoint + api, {
-      headers: {
-        'x-api-key': config.films.kinopoiskKey,
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
-        'accept': 'application/json',
-      },
-      params,
-    }).pipe(
-      map(res => res.data),
-    );
+  private get<T>(
+    api: string,
+    params?: Record<string, string | number>,
+  ): Observable<T> {
+    return this.httpService
+      .get<T>(this.endpoint + api, {
+        headers: {
+          'x-api-key': config.films.kinopoiskKey,
+          'user-agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+          accept: 'application/json',
+        },
+        params,
+      })
+      .pipe(map((res) => res.data));
   }
 }

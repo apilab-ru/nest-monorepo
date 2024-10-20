@@ -1,18 +1,11 @@
-import { Module } from "@nestjs/common";
-import { HttpModule } from "@nestjs/axios";
-import { ProxyService } from "./services/proxy.service";
-import { ParserController } from "./proxy.controler";
+import { Module } from '@nestjs/common';
+import { HttpModule } from '@nestjs/axios';
+import { ProxyService } from './services/proxy.service';
+import { ParserController } from './proxy.controler';
 
 @Module({
-   imports: [
-      HttpModule,
-   ],
-   controllers: [
-      ParserController
-   ],
-   providers: [
-      ProxyService,
-   ],
+  imports: [HttpModule],
+  controllers: [ParserController],
+  providers: [ProxyService],
 })
-export class ProxyModule {
-}
+export class ProxyModule {}

@@ -1,15 +1,14 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({
-   name: 'songs_bands',
+  name: 'songs_bands',
 })
 export class BandEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-   @PrimaryGeneratedColumn()
-   id: number;
-
-   @ApiProperty()
-   @Column()
-   name: string;
+  @ApiProperty()
+  @Column()
+  name: string;
 }

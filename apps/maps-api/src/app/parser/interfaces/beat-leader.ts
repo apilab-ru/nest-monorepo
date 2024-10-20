@@ -7,11 +7,11 @@ export interface BeatLeaderItem {
 export interface BeatLeaderResponseItem {
   song: {
     id: string;
-  }
+  };
   difficulty: {
     rankedTime: number;
     stars: number;
-  }
+  };
 }
 
 export interface BeatLeaderResponse {
@@ -19,6 +19,6 @@ export interface BeatLeaderResponse {
     itemsPerPage: number;
     page: number;
     total: number;
-  },
+  };
   data: BeatLeaderResponseItem[];
 }

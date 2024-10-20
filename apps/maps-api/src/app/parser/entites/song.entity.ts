@@ -1,36 +1,36 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { ApiProperty } from "@nestjs/swagger";
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({
-   name: 'songs',
+  name: 'songs',
 })
 export class SongEntity {
-   @PrimaryGeneratedColumn()
-   id: number;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-   @ApiProperty()
-   @Column()
-   discId: number | null;
+  @ApiProperty()
+  @Column()
+  discId: number | null;
 
-   @ApiProperty()
-   @Column()
-   name: string;
+  @ApiProperty()
+  @Column()
+  name: string;
 
-   @ApiProperty()
-   @Column()
-   subName: string;
+  @ApiProperty()
+  @Column()
+  subName: string;
 
-   @ApiProperty()
-   @Column()
-   band: string | null;
+  @ApiProperty()
+  @Column()
+  band: string | null;
 
-   @ApiProperty()
-   @Column()
-   duration: number;
+  @ApiProperty()
+  @Column()
+  duration: number;
 
-   @ApiProperty()
-   @Column({
-      type: 'json',
-   })
-   tags: number[];
+  @ApiProperty()
+  @Column({
+    type: 'json',
+  })
+  tags: number[];
 }

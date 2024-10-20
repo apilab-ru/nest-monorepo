@@ -5,7 +5,7 @@ import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { UserEntity } from '../user/entites/user.entity';
 import { UserTokenEntity } from '../user/entites/user-token.entity';
 import { UserLibraryEntity } from '../user-library/entites/user-library';
-import { ErrorEntity } from "@utils/exceptions/entities/error.entity";
+import { ErrorEntity } from '@utils/exceptions/entities/error.entity';
 
 export const DB_CONFIG: ConnectionOptions = {
   type: 'mysql',

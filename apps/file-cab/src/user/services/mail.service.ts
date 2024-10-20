@@ -9,19 +9,17 @@ export class MailService {
   private transport$: Observable<any>;
 
   constructor() {
-    this.transport$ = new Observable<any>(resolve => {
+    this.transport$ = new Observable<any>((resolve) => {
       const transporter = nodemailer.createTransport({
         ...config.email,
       });
 
       resolve.next(transporter);
-    }).pipe(
-      shareReplay(1),
-    );
+    }).pipe(shareReplay(1));
   }
 
   sendEmail(email: string, subject: string, html: string): Promise<void> {
-    return firstValueFrom(this.transport$).then(transport => {
+    return firstValueFrom(this.transport$).then((transport) => {
       const mailOptions = {
         from: config.email.auth.user,
         to: email,
@@ -30,7 +28,7 @@ export class MailService {
       };
 
       return new Promise<void>((resolve, reject) => {
-        transport.sendMail(mailOptions, function(error, info) {
+        transport.sendMail(mailOptions, function (error, info) {
           if (error) {
             reject(error);
             return;

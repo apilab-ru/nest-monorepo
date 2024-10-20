@@ -27,10 +27,7 @@ export class UserDto implements UserResponse {
   email: string;
   token: string;
 
-  constructor(
-    entity: UserEntity,
-    token: string,
-  ) {
+  constructor(entity: UserEntity, token: string) {
     this.id = entity.id;
     this.email = entity.email;
     this.token = token;

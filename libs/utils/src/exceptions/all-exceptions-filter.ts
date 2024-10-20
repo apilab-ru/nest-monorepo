@@ -1,11 +1,19 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { captureException } from '@sentry/node';
-import { AbstractHttpAdapter } from "@nestjs/core/adapters/http-adapter";
+import { AbstractHttpAdapter } from '@nestjs/core/adapters/http-adapter';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapter: AbstractHttpAdapter, private readonly isDev?: boolean) {
-  }
+  constructor(
+    private readonly httpAdapter: AbstractHttpAdapter,
+    private readonly isDev?: boolean,
+  ) {}
 
   catch(exception: Error, host: ArgumentsHost): void {
     const ctx = host.switchToHttp();
@@ -13,9 +21,9 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const httpStatus = this.statusMapper(exception);
 
     if (this.isDev) {
-       console.error(exception);
+      console.error(exception);
     } else {
-       console.error(exception.message);
+      console.error(exception.message);
     }
 
     const responseBody = {
@@ -32,7 +40,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     }
 
     if (exception.message.includes('no such file')) {
-       return HttpStatus.NOT_FOUND;
+      return HttpStatus.NOT_FOUND;
     }
 
     switch (exception.message) {

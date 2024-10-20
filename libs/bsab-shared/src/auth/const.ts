@@ -1,3 +1,5 @@
-import { PassportModule } from "@nestjs/passport";
+import { PassportModule } from '@nestjs/passport';
 
-export const AppPassportModule = PassportModule.register({ defaultStrategy: 'bearer' });
+export const AppPassportModule = PassportModule.register({
+  defaultStrategy: 'bearer',
+});

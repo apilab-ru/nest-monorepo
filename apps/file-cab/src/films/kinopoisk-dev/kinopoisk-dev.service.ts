@@ -1,23 +1,32 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable } from '@nestjs/common';
 import { config } from '../../config/config';
-import { map, Observable, switchMap, take } from "rxjs";
-import { FilmSearchParams, MediaItem, SearchRequestResultV2 } from "@filecab/models";
-import { HttpService } from "@nestjs/axios";
-import { GenreService } from "../../genres/genres.service";
-import { LibraryService } from "../../library/library.service";
-import { KINOPOISK_DEV_FILM_TYPE_MAP, KinopoiskDevFileds, KinopoiskDevTypes } from "./const";
+import { map, Observable, switchMap, take } from 'rxjs';
+import {
+  FilmSearchParams,
+  MediaItem,
+  SearchRequestResultV2,
+} from '@filecab/models';
+import { HttpService } from '@nestjs/axios';
+import { GenreService } from '../../genres/genres.service';
+import { LibraryService } from '../../library/library.service';
+import {
+  KINOPOISK_DEV_FILM_TYPE_MAP,
+  KinopoiskDevFileds,
+  KinopoiskDevTypes,
+} from './const';
 import {
   KinopoiskDevDetails,
   KinopoiskDevPagination,
   KinopoiskDevRequestSearch,
-  KinopoiskDevResponse, KinopoiskDevShortItem
-} from "./interface";
-import { withLatestFrom } from "rxjs/operators";
-import { Genre } from "@filecab/models/genre";
-import { KINOPOISK_GENRES_MAP } from "../kinopoisk/const";
-import { Types } from "@filecab/models/types";
-import { EMPTY_POSTER } from "../../base/const";
-import { ErrorsService } from "@utils/exceptions/errors-service";
+  KinopoiskDevResponse,
+  KinopoiskDevShortItem,
+} from './interface';
+import { withLatestFrom } from 'rxjs/operators';
+import { Genre } from '@filecab/models/genre';
+import { KINOPOISK_GENRES_MAP } from '../kinopoisk/const';
+import { Types } from '@filecab/models/types';
+import { EMPTY_POSTER } from '../../base/const';
+import { ErrorsService } from '@utils/exceptions/errors-service';
 
 @Injectable()
 export class KinopoiskDevService {
@@ -29,55 +38,61 @@ export class KinopoiskDevService {
     private genreService: GenreService,
     private libraryService: LibraryService,
     private errorsService: ErrorsService,
-  ) {
-  }
+  ) {}
 
-  getByFieldId(id: number, field: keyof typeof KinopoiskDevFileds): Observable<MediaItem> {
+  getByFieldId(
+    id: number,
+    field: keyof typeof KinopoiskDevFileds,
+  ): Observable<MediaItem> {
     if (field === 'kinopoiskId') {
       return this.loadById(id);
     }
 
     return this.search({
-      [field]: id
-    } as FilmSearchParams).pipe(
-      map(response => response.results[0]),
-    );
+      [field]: id,
+    } as FilmSearchParams).pipe(map((response) => response.results[0]));
   }
 
   loadById(kinopoiskId: number): Observable<MediaItem> {
     return this.requestSearch<KinopoiskDevDetails>([
       {
         field: KinopoiskDevFileds.kinopoiskId,
-        search: kinopoiskId
-      }
+        search: kinopoiskId,
+      },
     ]).pipe(
       withLatestFrom(this.genreService.list$),
       map(([data, genres]) => this.mapDetail(data, genres)),
-    )
+    );
   }
 
-  search(params: FilmSearchParams, isTv = false): Observable<SearchRequestResultV2<MediaItem>> {
+  search(
+    params: FilmSearchParams,
+    isTv = false,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     const pageParams: Partial<KinopoiskDevPagination> = {
       limit: params?.limit || 100,
       page: params?.page || 1,
-    }
+    };
 
     const fields: KinopoiskDevRequestSearch[] = [];
 
-    Object.entries(params).filter(([key]) => !['limit', 'page'].includes(key)).forEach(([key, search]) => {
-      fields.push({
-        field: KinopoiskDevFileds[key],
-        search
-      })
-    })
+    Object.entries(params)
+      .filter(([key]) => !['limit', 'page'].includes(key))
+      .forEach(([key, search]) => {
+        fields.push({
+          field: KinopoiskDevFileds[key],
+          search,
+        });
+      });
 
-    const type = params.type === Types.films ? KinopoiskDevTypes.movie : undefined;
+    const type =
+      params.type === Types.films ? KinopoiskDevTypes.movie : undefined;
 
     if (type) {
       fields.push({
         field: 'type',
         search: type,
-      })
+      });
     }
 
     const selectFields: string[] = [
@@ -97,23 +112,31 @@ export class KinopoiskDevService {
       // selectFields.push('seasonsInfo')
     }
 
-    return this.requestSearch<KinopoiskDevResponse>(fields, selectFields, pageParams).pipe(
-      switchMap(res => this.mapDevResponse(res)),
-    );
+    return this.requestSearch<KinopoiskDevResponse>(
+      fields,
+      selectFields,
+      pageParams,
+    ).pipe(switchMap((res) => this.mapDevResponse(res)));
   }
 
-  private mapDevResponse(response: KinopoiskDevResponse): Observable<SearchRequestResultV2<MediaItem>> {
+  private mapDevResponse(
+    response: KinopoiskDevResponse,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     return this.genreService.list$.pipe(
       take(1),
-      map(genres => response.docs.map(item => this.mapDetail(item, genres))),
-      switchMap(list => this.libraryService.saveToRepository(list, 'kinopoiskId')),
-      map(list => ({
+      map((genres) =>
+        response.docs.map((item) => this.mapDetail(item, genres)),
+      ),
+      switchMap((list) =>
+        this.libraryService.saveToRepository(list, 'kinopoiskId'),
+      ),
+      map((list) => ({
         results: list,
         total: response.total,
         page: response.page,
         hasMore: response.page < response.pages,
       })),
-    )
+    );
   }
 
   private parseImdb(id: string | null): number | undefined {
@@ -124,12 +147,18 @@ export class KinopoiskDevService {
     return parseInt(id.replace('tt', ''));
   }
 
-  private mapDetail(detail: KinopoiskDevShortItem, genres: Genre[]): Omit<MediaItem, 'id'> {
-    const episodes = detail.seasonsInfo?.reduce((calc, it) => calc + it.episodesCount, 0) || 0;
+  private mapDetail(
+    detail: KinopoiskDevShortItem,
+    genres: Genre[],
+  ): Omit<MediaItem, 'id'> {
+    const episodes =
+      detail.seasonsInfo?.reduce((calc, it) => calc + it.episodesCount, 0) || 0;
 
     const url = detail.externalId?.kpHD
       ? `https://hd.kinopoisk.ru/?rt=` + detail.externalId.kpHD
-      : (detail.externalId?.imdb ? `https://www.imdb.com/title/${detail.externalId.imdb}/` : '');
+      : detail.externalId?.imdb
+      ? `https://www.imdb.com/title/${detail.externalId.imdb}/`
+      : '';
 
     const itemGenres = [];
 
@@ -137,9 +166,12 @@ export class KinopoiskDevService {
       if (KINOPOISK_GENRES_MAP[name]) {
         itemGenres.push(KINOPOISK_GENRES_MAP[name]);
       } else {
-        this.errorsService.addError({
-          error: 'Kinopoisk genre not found'
-        }, { name })
+        this.errorsService.addError(
+          {
+            error: 'Kinopoisk genre not found',
+          },
+          { name },
+        );
       }
     });
 
@@ -157,46 +189,47 @@ export class KinopoiskDevService {
         itemGenres,
         genres,
         'kinopoiskId',
-        detail.genres
+        detail.genres,
       ),
       originalTitle: detail.alternativeName,
       type: KINOPOISK_DEV_FILM_TYPE_MAP[detail.type],
-    }
+    };
   }
 
   private requestSearch<T>(
     fields: KinopoiskDevRequestSearch[],
     selectFields: string[] = [],
-    params: Partial<KinopoiskDevPagination> = {}
+    params: Partial<KinopoiskDevPagination> = {},
   ): Observable<T> {
     const searchParams = new URLSearchParams({
-      ...params as unknown as Record<string, string>
+      ...(params as unknown as Record<string, string>),
     });
 
-    fields.forEach(item => {
+    fields.forEach((item) => {
       searchParams.append(item.field, '' + item.search);
-    })
+    });
 
-    selectFields.forEach(field => {
+    selectFields.forEach((field) => {
       searchParams.append('selectFields', field);
-    })
+    });
 
-    return this.get<T>('movie', searchParams.toString())
+    return this.get<T>('movie', searchParams.toString());
   }
 
   private get<T>(api: string, paramsQuery = ''): Observable<T> {
     const url = this.endpoint + api + '?' + (paramsQuery || '');
 
-    return this.httpService.get<T>(url, {
-      headers: {
-        'x-api-key': this.getToken(),
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
-        'accept': 'application/json',
-        'Accept-Encoding': 'gzip,deflate,compress'
-      },
-    }).pipe(
-      map(res => res.data),
-    );
+    return this.httpService
+      .get<T>(url, {
+        headers: {
+          'x-api-key': this.getToken(),
+          'user-agent':
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+          accept: 'application/json',
+          'Accept-Encoding': 'gzip,deflate,compress',
+        },
+      })
+      .pipe(map((res) => res.data));
   }
 
   private getToken(): string {

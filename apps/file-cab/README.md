@@ -1,17 +1,20 @@
 ## Description
+
 Swagger http://localhost:3000/swagger/
 Debugger chrome://inspect
 
-### FilmsApi 
+### FilmsApi
+
 https://developers.themoviedb.org/3/getting-started/introduction
 
-### AnimeApi 
+### AnimeApi
+
 Последние добавленные переводы:
 http://smotret-anime.ru/api/translations/
- 
+
 Последние переводы онгоингов:
 http://smotret-anime.ru/api/translations/?feed=recent
- 
+
 Список всех переводов (в начале самые старые, удобно для полного сканирования):
 http://smotret-anime.ru/api/translations/?feed=id
 
@@ -23,7 +26,7 @@ http://smotret-anime.ru/api/translations/905760
 
 Список аниме:
 http://smotret-anime.ru/api/series/
- 
+
 Можно выбрать только определенные поля:
 http://smotret-anime.ru/api/series/?fields=id,title,typeTitle,posterUrlSmall
 
@@ -34,18 +37,18 @@ http://smotret-anime.ru/api/series?chips=genre@=8,35;genre_op=and
 
 Можно фильтровать по параметрам, например:
 http://smotret-anime.ru/api/series/?myAnimeListId=24133
- 
+
 Или искать по названию:
 http://smotret-anime.ru/api/series/?query=gate
- 
+
 Есть "читабельный" вид:
 http://smotret-anime.ru/api/series/?pretty=1
- 
+
 Через limit и offset можно регулировать количество элементов "на странице" и смещение от начала:
 http://smotret-anime.ru/api/series/?limit=1&offset=10
- 
+
 Информация о конкретном аниме и список эпизодов:
 http://smotret-anime.ru/api/series/9866
- 
+
 Информация о конкретном эпизоде и список переводов:
 http://smotret-anime.ru/api/episodes/102173

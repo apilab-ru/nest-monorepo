@@ -6,7 +6,6 @@ import { MediaItem, LibraryItemType } from '@filecab/models';
   name: 'library',
 })
 export class LibraryItemEntity implements MediaItem {
-
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -106,13 +105,13 @@ export class MediaItemDTO implements MediaItem {
   kinopoiskId?: number | null;
 
   constructor(entity: LibraryItemEntity) {
-    Object.keys(entity).forEach(key => {
+    Object.keys(entity).forEach((key) => {
       if (key !== 'processed') {
         this[key] = entity[key];
       }
 
       if (key === 'genreIds') {
-        this.genreIds = entity.genreIds.map(it => +it)
+        this.genreIds = entity.genreIds.map((it) => +it);
       }
     });
   }

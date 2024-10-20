@@ -1,4 +1,4 @@
-import { LibraryItemType } from "@filecab/models";
+import { LibraryItemType } from '@filecab/models';
 
 export enum KinopoiskDevFileds {
   kinopoiskId = 'id',
@@ -19,7 +19,10 @@ export enum KinopoiskDevTypes {
   tvShow = 'tv-show',
 }
 
-export const KINOPOISK_DEV_FILM_TYPE_MAP: Record<KinopoiskDevTypes, LibraryItemType> = {
+export const KINOPOISK_DEV_FILM_TYPE_MAP: Record<
+  KinopoiskDevTypes,
+  LibraryItemType
+> = {
   [KinopoiskDevTypes.movie]: LibraryItemType.movie,
   [KinopoiskDevTypes.tv]: LibraryItemType.tv,
   [KinopoiskDevTypes.tvShow]: LibraryItemType.tv,

@@ -1,7 +1,6 @@
-
 export class Commands {
   private commandMap = {
-    refreshRats: false
+    refreshRats: false,
   };
 
   refreshRats() {

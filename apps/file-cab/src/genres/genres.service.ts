@@ -3,9 +3,20 @@ import { Repository, Connection } from 'typeorm';
 import { GenreEntity } from './entites/genre.entity';
 import { GenreBase } from './interface';
 import { Genre, GenreKind } from '@filecab/models/genre';
-import { from, map, Observable, of, shareReplay, startWith, Subject, switchMap, take, tap } from 'rxjs';
+import {
+  from,
+  map,
+  Observable,
+  of,
+  shareReplay,
+  startWith,
+  Subject,
+  switchMap,
+  take,
+  tap,
+} from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
-import { ErrorsService } from "@utils/exceptions/errors-service";
+import { ErrorsService } from '@utils/exceptions/errors-service';
 
 @Injectable()
 export class GenreService {
@@ -32,13 +43,16 @@ export class GenreService {
   }
 
   setList(list: GenreBase[]): Promise<GenreEntity[]> {
-    const listPrepared = list.map(item => ({ ...item, name: this.prepareName(item.name) }));
+    const listPrepared = list.map((item) => ({
+      ...item,
+      name: this.prepareName(item.name),
+    }));
 
     return this.repository
       .find()
-      .then(res => {
-        listPrepared.forEach(item => {
-          const oldEntity = res.find(it => it.name === item.name);
+      .then((res) => {
+        listPrepared.forEach((item) => {
+          const oldEntity = res.find((it) => it.name === item.name);
           if (oldEntity) {
             if (!oldEntity.kind.includes(item.kind)) {
               oldEntity.kind.push(item.kind);
@@ -62,7 +76,8 @@ export class GenreService {
           }
         });
         return this.repository.save(res);
-      }).then(list => {
+      })
+      .then((list) => {
         this.refresh.next(undefined);
         return list;
       });
@@ -73,28 +88,38 @@ export class GenreService {
   }
 
   findGenres(itemList: string[], fullList: Genre[]): number[] {
-    return itemList.map(name => {
-      const item = fullList.find(dbItem => dbItem.name === name);
+    return itemList
+      .map((name) => {
+        const item = fullList.find((dbItem) => dbItem.name === name);
 
-      if (!item) {
-        this.sentryService.captureException({
-          message: 'Anime genre not found',
-          name: name,
-        });
+        if (!item) {
+          this.sentryService.captureException({
+            message: 'Anime genre not found',
+            name: name,
+          });
 
-        this.errorsService.addError({
-          error: 'Anime genre not found',
-        }, { name })
-      }
+          this.errorsService.addError(
+            {
+              error: 'Anime genre not found',
+            },
+            { name },
+          );
+        }
 
-      return item?.id;
-    }).filter(it => !!it);
+        return item?.id;
+      })
+      .filter((it) => !!it);
   }
 
-  prepareGenres(originalList: number[], fullList: Genre[], key: keyof Genre, context: any): number[] {
+  prepareGenres(
+    originalList: number[],
+    fullList: Genre[],
+    key: keyof Genre,
+    context: any,
+  ): number[] {
     const response: number[] = [];
-    originalList.forEach(item => {
-      const id = fullList.find(genre => genre[key] === item)?.id;
+    originalList.forEach((item) => {
+      const id = fullList.find((genre) => genre[key] === item)?.id;
       if (id) {
         response.push(+id);
       } else if (item) {
@@ -102,16 +127,19 @@ export class GenreService {
           message: 'Genre math error',
           key,
           item,
-          context
+          context,
         });
 
-        this.errorsService.addError({
-          error: 'Genre math error',
-        }, {
-          key,
-          item,
-          context
-        })
+        this.errorsService.addError(
+          {
+            error: 'Genre math error',
+          },
+          {
+            key,
+            item,
+            context,
+          },
+        );
       }
     });
 
@@ -121,21 +149,23 @@ export class GenreService {
   findGenresAsync(itemList: string[]): Observable<number[]> {
     return this.list$.pipe(
       take(1),
-      switchMap(fullList => {
+      switchMap((fullList) => {
         const newItems: Omit<GenreEntity, 'id'>[] = [];
-        const genreIds = itemList.map(name => {
-          const item = fullList.find(dbItem => dbItem.name === name);
+        const genreIds = itemList
+          .map((name) => {
+            const item = fullList.find((dbItem) => dbItem.name === name);
 
-          if (!item) {
-            newItems.push({
-              name,
-              kind: [GenreKind.anime],
-              key: '',
-            });
-          }
+            if (!item) {
+              newItems.push({
+                name,
+                kind: [GenreKind.anime],
+                key: '',
+              });
+            }
 
-          return item?.id;
-        }).filter(it => !!it);
+            return item?.id;
+          })
+          .filter((it) => !!it);
 
         if (!newItems.length) {
           return of(genreIds);
@@ -143,8 +173,8 @@ export class GenreService {
 
         return from(this.repository.save(newItems)).pipe(
           tap(() => this.refresh.next()),
-          map(newItems => {
-            return [...genreIds, ...newItems.map(it => it.id)];
+          map((newItems) => {
+            return [...genreIds, ...newItems.map((it) => it.id)];
           }),
         );
       }),

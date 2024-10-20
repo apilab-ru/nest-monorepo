@@ -8,11 +8,7 @@ import { firstValueFrom } from 'rxjs';
 @ApiTags('anime')
 @Controller('anime')
 export class AnimeController {
-
-  constructor(
-    private readonly animeService: AnimeService,
-  ) {
-  }
+  constructor(private readonly animeService: AnimeService) {}
 
   @Get('search')
   @ApiQuery({
@@ -48,7 +44,9 @@ export class AnimeController {
     type: 'number',
     required: false,
   })
-  async findAnime(@Query() query: AnimeSearchQuery): Promise<SearchRequestResult<Anime>> {
+  async findAnime(
+    @Query() query: AnimeSearchQuery,
+  ): Promise<SearchRequestResult<Anime>> {
     return await firstValueFrom(this.animeService.search(query));
   }
 

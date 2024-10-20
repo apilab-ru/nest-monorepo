@@ -1,15 +1,12 @@
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 import { Body, Controller, Post } from '@nestjs/common';
-import { LibraryItemV2, PreparedItem } from "@filecab/models/library";
-import { MigrationService } from "./migration.service";
+import { LibraryItemV2, PreparedItem } from '@filecab/models/library';
+import { MigrationService } from './migration.service';
 
 @ApiTags('library')
 @Controller('library')
 export class LibraryController {
-  constructor(
-    private migrationService: MigrationService,
-  ) {
-  }
+  constructor(private migrationService: MigrationService) {}
 
   @Post('migrate/v3')
   @ApiBody({
@@ -65,4 +62,3 @@ export class LibraryController {
     });
   }*/
 }
-

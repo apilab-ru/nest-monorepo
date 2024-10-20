@@ -2,18 +2,16 @@ const path = require('path');
 const fs = require('fs');
 const nodeModulesPath = '"./../../';
 
-const dir = 'S:\\projects\\nest-monorepo\\dist\\apps\\maps-api'
+const dir = 'S:\\projects\\nest-monorepo\\dist\\apps\\maps-api';
 
 function fromDir(startPath, filter, callback) {
-
   var files = fs.readdirSync(startPath);
   for (var i = 0; i < files.length; i++) {
     var filename = path.join(startPath, files[i]);
     var stat = fs.lstatSync(filename);
-    if (stat.isDirectory()){
+    if (stat.isDirectory()) {
       fromDir(filename, filter, callback); //recurse
-    }
-    else if (filter.test(filename)) callback(filename);
+    } else if (filter.test(filename)) callback(filename);
   }
 }
 
@@ -31,7 +29,7 @@ fromDir(dir, /\.js$/, function (filename) {
 
   const getPatch = (depth) => {
     let path = nodeModulesPath;
-    for (let i=0; i<depth; i++) {
+    for (let i = 0; i < depth; i++) {
       path += '../';
     }
     return path + 'node_modules/';
@@ -42,8 +40,8 @@ fromDir(dir, /\.js$/, function (filename) {
       return console.log(err);
     }
     let result = data;
-    replaceList.forEach(regEx => {
-      result = result.replace(regEx, it => {
+    replaceList.forEach((regEx) => {
+      result = result.replace(regEx, (it) => {
         return getPatch(depth) + it.substr(1);
       });
     });

@@ -1,11 +1,16 @@
-import { ArgumentsHost, Catch, ExceptionFilter, HttpException, HttpStatus } from '@nestjs/common';
+import {
+  ArgumentsHost,
+  Catch,
+  ExceptionFilter,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { captureException } from '@sentry/node';
 import { AbstractHttpAdapter } from '@nestjs/core';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapter: AbstractHttpAdapter) {
-  }
+  constructor(private readonly httpAdapter: AbstractHttpAdapter) {}
 
   catch(exception: Error, host: ArgumentsHost): void {
     console.error('xxx catch', exception);

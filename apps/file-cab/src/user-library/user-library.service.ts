@@ -18,89 +18,87 @@ export class UserLibraryService {
     private genreService: GenreService,
     private fireBaseService: FireBaseService,
   ) {
-    this.userLibraryRepository = this.connection.getRepository(UserLibraryEntity);
+    this.userLibraryRepository =
+      this.connection.getRepository(UserLibraryEntity);
   }
 
   postList(userId: number, library: Library): Promise<void> {
-    return this.userLibraryRepository.findOne({
-      where: {
-        userId,
-      },
-    }).then(res => {
-      const entity = res || new UserLibraryEntity();
-      entity.userId = userId;
-      entity.data = this.flatData(library.data);
-      entity.tags = library.tags;
+    return this.userLibraryRepository
+      .findOne({
+        where: {
+          userId,
+        },
+      })
+      .then((res) => {
+        const entity = res || new UserLibraryEntity();
+        entity.userId = userId;
+        entity.data = this.flatData(library.data);
+        entity.tags = library.tags;
 
-      return this.userLibraryRepository.save(entity);
-    }).then(() => {
-      const animeList = library.data.anime.map(({ item }) => {
-        delete item.id;
-        return {
-          ...item,
-          processed: true,
-        };
-      });
+        return this.userLibraryRepository.save(entity);
+      })
+      .then(() => {
+        const animeList = library.data.anime.map(({ item }) => {
+          delete item.id;
+          return {
+            ...item,
+            processed: true,
+          };
+        });
 
-      const tvList = library.data.tv.map(({ item }) => {
-        delete item.id;
-        return {
-          ...item,
-          processed: true,
-        };
-      });
+        const tvList = library.data.tv.map(({ item }) => {
+          delete item.id;
+          return {
+            ...item,
+            processed: true,
+          };
+        });
 
-      const filmsList = library.data.films.map(({ item }) => {
-        delete item.id;
-        return {
-          ...item,
-          processed: true,
-        };
-      });
+        const filmsList = library.data.films.map(({ item }) => {
+          delete item.id;
+          return {
+            ...item,
+            processed: true,
+          };
+        });
 
-      return Promise.all([
-        this.libraryService.saveToRepository(
-          animeList,
-          'smotretId',
-        ),
-        this.libraryService.saveToRepository(
-          tvList,
-          'imdbId',
-        ),
-        this.libraryService.saveToRepository(
-          filmsList,
-          'imdbId',
-        ),
-      ]);
-    }).then(() => {
-      this.fireBaseService.updateValue(FIREBASE_EVENT_TABLE, {
-        [userId]: new Date().getTime(),
+        return Promise.all([
+          this.libraryService.saveToRepository(animeList, 'smotretId'),
+          this.libraryService.saveToRepository(tvList, 'imdbId'),
+          this.libraryService.saveToRepository(filmsList, 'imdbId'),
+        ]);
+      })
+      .then(() => {
+        this.fireBaseService.updateValue(FIREBASE_EVENT_TABLE, {
+          [userId]: new Date().getTime(),
+        });
       });
-    });
   }
 
   loadList(userId: number): Promise<Library> {
-    return this.userLibraryRepository.findOne({
-      where: {
-        userId,
-      },
-    }).then(res => {
-      if (!res) {
-        return {
-          tags: [],
-          data: {
-            anime: [],
-            films: [],
-            tv: [],
-          },
-        };
-      }
+    return this.userLibraryRepository
+      .findOne({
+        where: {
+          userId,
+        },
+      })
+      .then((res) => {
+        if (!res) {
+          return {
+            tags: [],
+            data: {
+              anime: [],
+              films: [],
+              tv: [],
+            },
+          };
+        }
 
-      return this.loadDataItems(res.data).then(data => ({
-        tags: res.tags,
-        data,
-      }));
-    });
+        return this.loadDataItems(res.data).then((data) => ({
+          tags: res.tags,
+          data,
+        }));
+      });
   }
 
   emitUpdateToAllUsers(): void {
@@ -108,7 +106,7 @@ export class UserLibraryService {
       return;
     }
 
-    this.userLibraryRepository.find().then(list => {
+    this.userLibraryRepository.find().then((list) => {
       const date = new Date().getTime();
       const data = list.reduce((obj, item) => {
         obj[item.userId] = date;
@@ -124,14 +122,19 @@ export class UserLibraryService {
     return result;
   }
 
-  private loadDataItems(data: Record<string, LibraryFlatData[]>): Promise<Record<string, LibraryItem[]>> {
+  private loadDataItems(
+    data: Record<string, LibraryFlatData[]>,
+  ): Promise<Record<string, LibraryItem[]>> {
     return Promise.all([
       this.libraryService.loadByIds(
-        data.anime.map(it => it.item.smotretId),
+        data.anime.map((it) => it.item.smotretId),
         'smotretId',
       ),
       this.libraryService.loadByIds(
-        [...data.tv.map(it => it.item.imdbId), ...data.films.map(it => it.item.imdbId)],
+        [
+          ...data.tv.map((it) => it.item.imdbId),
+          ...data.films.map((it) => it.item.imdbId),
+        ],
         'imdbId',
       ),
     ]).then(([anime, films]) => {
@@ -146,18 +149,32 @@ export class UserLibraryService {
       }, {});
 
       return {
-        anime: data.anime.map(item => ({ ...item, item: animeMap[item.item.smotretId] })).filter(it => it.item),
-        films: data.films.map(item => ({ ...item, item: filmsMap[item.item.imdbId] })).filter(it => it.item),
-        tv: data.tv.map(item => ({ ...item, item: filmsMap[item.item.imdbId] })).filter(it => it.item),
+        anime: data.anime
+          .map((item) => ({ ...item, item: animeMap[item.item.smotretId] }))
+          .filter((it) => it.item),
+        films: data.films
+          .map((item) => ({ ...item, item: filmsMap[item.item.imdbId] }))
+          .filter((it) => it.item),
+        tv: data.tv
+          .map((item) => ({ ...item, item: filmsMap[item.item.imdbId] }))
+          .filter((it) => it.item),
       };
     });
   }
 
-  private flatData(data: Record<string, LibraryItem[]>): Record<string, LibraryFlatData[]> {
+  private flatData(
+    data: Record<string, LibraryItem[]>,
+  ): Record<string, LibraryFlatData[]> {
     return {
-      anime: data.anime.map(it => ({ ...it, item: { smotretId: it.item.smotretId } })),
-      films: data.films.map(it => ({ ...it, item: { imdbId: it.item.imdbId } })),
-      tv: data.tv.map(it => ({ ...it, item: { imdbId: it.item.imdbId } })),
+      anime: data.anime.map((it) => ({
+        ...it,
+        item: { smotretId: it.item.smotretId },
+      })),
+      films: data.films.map((it) => ({
+        ...it,
+        item: { imdbId: it.item.imdbId },
+      })),
+      tv: data.tv.map((it) => ({ ...it, item: { imdbId: it.item.imdbId } })),
     };
   }
 }

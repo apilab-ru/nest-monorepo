@@ -1,12 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
-import { ShikimoriDetailItem, ShikimoriGenre, ShikimoriItem } from './interface';
+import {
+  ShikimoriDetailItem,
+  ShikimoriGenre,
+  ShikimoriItem,
+} from './interface';
 import { catchError, map, switchMap, take, tap, toArray } from 'rxjs/operators';
 import { concat, from, Observable, of } from 'rxjs';
 import { SentryService } from '../sentry/sentry.service';
 import { URLSearchParams } from 'url';
 import { GenreBase } from '../genres/interface';
-import { AnimeSearchV2Query, MediaItem, SearchRequestResultV2 } from '@filecab/models';
+import {
+  AnimeSearchV2Query,
+  MediaItem,
+  SearchRequestResultV2,
+} from '@filecab/models';
 import { Connection, Repository } from 'typeorm';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
 import { GenreService } from '../genres/genres.service';
@@ -34,61 +42,70 @@ export class AnimeShikimoriService {
     this.repository = connection.getRepository(LibraryItemEntity);
   }
 
-  search(query: AnimeSearchV2Query): Observable<SearchRequestResultV2<MediaItem>> {
+  search(
+    query: AnimeSearchV2Query,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     const params = new URLSearchParams();
     if (query.name) {
       params.append('search', query.name);
     }
     params.append('limit', `${query.limit || defaultLimit}`);
 
-    return this.httpService.get<ShikimoriItem[]>(api + 'animes?' + params.toString(), this.config).pipe(
-      switchMap(({ data }) => {
+    return this.httpService
+      .get<ShikimoriItem[]>(api + 'animes?' + params.toString(), this.config)
+      .pipe(
+        switchMap(({ data }) => {
+          return concat(
+            ...data.map((item) => this.getItemDetail(item.id)),
+          ).pipe(toArray());
+        }),
+        catchError((error) => {
+          this.sentryService.captureException(error);
 
-        return concat(...data.map(item => this.getItemDetail(item.id))).pipe(
-          toArray(),
-        );
-      }),
-      catchError(error => {
-        this.sentryService.captureException(error);
-
-        return of([]);
-      }),
-      map(list => ({ results: list, page: query.page || 1 })),
-    );
+          return of([]);
+        }),
+        map((list) => ({ results: list, page: query.page || 1 })),
+      );
   }
 
   loadBaseGenres(): Observable<GenreBase[]> {
-    return this.httpService.get<ShikimoriGenre[]>(api + 'genres', this.config).pipe(
-      map(list => list.data.map(item => ({ name: item.russian, kind: item.kind }))),
-    );
+    return this.httpService
+      .get<ShikimoriGenre[]>(api + 'genres', this.config)
+      .pipe(
+        map((list) =>
+          list.data.map((item) => ({ name: item.russian, kind: item.kind })),
+        ),
+      );
   }
 
   getItemDetail(id: number): Observable<MediaItem> {
     return from(this.repository.findOneBy({ id })).pipe(
-      switchMap(item => item ? of(item) : this.loadDetail(id)),
+      switchMap((item) => (item ? of(item) : this.loadDetail(id))),
     );
   }
 
   private loadDetail(id: number): Observable<MediaItem> {
-    return this.httpService.get<ShikimoriDetailItem>(api + 'animes/' + id, this.config).pipe(
-      switchMap(response => this.convertShikimoriToItem(response.data)),
-      tap(item => {
-        this.repository.insert(item)
-          .catch(err => {
-
+    return this.httpService
+      .get<ShikimoriDetailItem>(api + 'animes/' + id, this.config)
+      .pipe(
+        switchMap((response) => this.convertShikimoriToItem(response.data)),
+        tap((item) => {
+          this.repository.insert(item).catch((err) => {
             this.sentryService.captureException({
               error: err,
               item: item,
             });
           });
-      }),
-    );
+        }),
+      );
   }
 
-  private convertShikimoriToItem(item: ShikimoriDetailItem): Observable<MediaItem> {
+  private convertShikimoriToItem(
+    item: ShikimoriDetailItem,
+  ): Observable<MediaItem> {
     return this.genreService.list$.pipe(
       take(1),
-      map(genres => {
+      map((genres) => {
         return {
           shikimoriId: item.id,
           title: item.russian,
@@ -108,7 +125,7 @@ export class AnimeShikimoriService {
 
   private findGenres(itemList: ShikimoriGenre[], fullList: Genre[]): number[] {
     return this.genreService.findGenres(
-      itemList.map(it => this.genreService.prepareName(it.russian)),
+      itemList.map((it) => this.genreService.prepareName(it.russian)),
       fullList,
     );
   }

@@ -5,7 +5,6 @@ import { ApiProperty } from '@nestjs/swagger';
   name: 'errors',
 })
 export class ErrorEntity {
-
   @PrimaryGeneratedColumn()
   id: number;
 

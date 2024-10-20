@@ -5,26 +5,24 @@ import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class AuthService {
+  constructor(
+    @InjectRepository(UserEntity)
+    private readonly usersRepository: Repository<UserEntity>,
+  ) {}
 
-   constructor(
-      @InjectRepository(UserEntity) private readonly usersRepository: Repository<UserEntity>
-   ) {
-   }
+  validateUser(token: string): Promise<UserEntity> {
+    return this.usersRepository.findOne({
+      where: {
+        token,
+      },
+    });
+  }
 
-   validateUser(token: string): Promise<UserEntity> {
-      return this.usersRepository.findOne({
-         where: {
-            token
-         }
-      });
-   }
-
-   byId(id: number): Promise<UserEntity> {
-      return this.usersRepository.findOne({
-         where: {
-            id
-         }
-      });
-   }
-
+  byId(id: number): Promise<UserEntity> {
+    return this.usersRepository.findOne({
+      where: {
+        id,
+      },
+    });
+  }
 }

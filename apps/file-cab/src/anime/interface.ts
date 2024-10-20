@@ -7,7 +7,7 @@ export enum EAnimeSearchTypes {
   ona = 'ona',
   movie = 'movie',
   special = 'special',
-  music = 'music'
+  music = 'music',
 }
 
 export interface AnimeSearchChips {
@@ -27,18 +27,18 @@ export interface AnimeSearchQuery extends AnimeSearchChips {
 }
 
 export interface ShikimoriItem {
-  id: 693,
-  name: string,
-  russian: string,
+  id: 693;
+  name: string;
+  russian: string;
   image: {
-    original: string,
-    preview: string,//"/system/animes/preview/693.jpg?1634710483",
-    x96: string,
-    x48: string,
-  },
-  url: string, // "/animes/693-burn-up-scramble",
-  kind: string, //"tv",
-  score: string, // "6.19",
+    original: string;
+    preview: string; //"/system/animes/preview/693.jpg?1634710483",
+    x96: string;
+    x48: string;
+  };
+  url: string; // "/animes/693-burn-up-scramble",
+  kind: string; //"tv",
+  score: string; // "6.19",
   status: string; // "released",
   episodes: number;
   episodes_aired: number;
@@ -47,69 +47,68 @@ export interface ShikimoriItem {
 }
 
 export interface ShikimoriDetailItem {
-  id: number,
-  name: string,
-  russian: string,
+  id: number;
+  name: string;
+  russian: string;
   image: {
-    original: string, //225x319
-    preview: string, //160x227
-    x96: string,
-    x48: string
-  },
-  url: string,
-  kind: LibraryItemType,
-  score: string,
-  status: string;//"released",
-  episodes: number,
-  episodes_aired: number,
+    original: string; //225x319
+    preview: string; //160x227
+    x96: string;
+    x48: string;
+  };
+  url: string;
+  kind: LibraryItemType;
+  score: string;
+  status: string; //"released",
+  episodes: number;
+  episodes_aired: number;
   aired_on: string; //"2016-04-09",
   released_on: string;
   rating: string; //"pg_13",
-  english: string[],
-  japanese: string[],
-  synonyms: string[],
-  license_name_ru: string | null,
-  duration: number,
+  english: string[];
+  japanese: string[];
+  synonyms: string[];
+  license_name_ru: string | null;
+  duration: number;
   description: string | null;
-  franchise: string,
-  favoured: boolean,
-  anons: boolean,
-  ongoing: boolean,
-  thread_id: number,
-  topic_id: number,
-  myanimelist_id: number,
+  franchise: string;
+  favoured: boolean;
+  anons: boolean;
+  ongoing: boolean;
+  thread_id: number;
+  topic_id: number;
+  myanimelist_id: number;
   rates_scores_stats: {
-    name: number,
-    value: number
-  }[],
+    name: number;
+    value: number;
+  }[];
   updated_at: string; //"2021-12-10T20:53:50.897+03:00",
-  next_episode_at: string | null,
-  fansubbers: string[],
-  fandubbers: string[],
-  licensors: string[],
-  genres: ShikimoriGenre[],
-  studios:
-    {
-      id: number,
-      name: string,
-      filtered_name: string,
-      real: boolean,
-      image: string
-    }[],
+  next_episode_at: string | null;
+  fansubbers: string[];
+  fandubbers: string[];
+  licensors: string[];
+  genres: ShikimoriGenre[];
+  studios: {
+    id: number;
+    name: string;
+    filtered_name: string;
+    real: boolean;
+    image: string;
+  }[];
   videos: {
-    id: number,
-    url: string,
-    image_url: string,
-    player_url: string,
-    name: string,
-    kind: string,
-    hosting: string
-  }[],
+    id: number;
+    url: string;
+    image_url: string;
+    player_url: string;
+    name: string;
+    kind: string;
+    hosting: string;
+  }[];
   screenshots: {
-    original: string,
-    preview: string
-  }[],
-  user_rate: null
+    original: string;
+    preview: string;
+  }[];
+  user_rate: null;
 }
 
 export interface ShikimoriGenre {

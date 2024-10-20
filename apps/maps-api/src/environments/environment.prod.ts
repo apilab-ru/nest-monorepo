@@ -1,5 +1,5 @@
 export const environment = {
-   production: true,
-   prefix: '/bsab/',
-   timeout: 30,
+  production: true,
+  prefix: '/bsab/',
+  timeout: 30,
 };

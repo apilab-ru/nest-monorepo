@@ -1,8 +1,10 @@
-import { CityRaw, Currency, RawMessage, ResourceRaw, TradeRaw } from "./models";
-import { City, Trade } from "./city.model";
+import { CityRaw, Currency, RawMessage, ResourceRaw, TradeRaw } from './models';
+import { City, Trade } from './city.model';
 
-const file = "S:\\projects\\nest-monorepo\\apps\\ratopia-api\\src\\app\\last-result.json";
-const fileParsed = "S:\\projects\\nest-monorepo\\apps\\ratopia-api\\src\\app\\parsed.json";
+const file =
+  'S:\\projects\\nest-monorepo\\apps\\ratopia-api\\src\\app\\last-result.json';
+const fileParsed =
+  'S:\\projects\\nest-monorepo\\apps\\ratopia-api\\src\\app\\parsed.json';
 
 type WsHandler = (message: string) => void;
 
@@ -10,20 +12,24 @@ export class ProxyData {
   private wsHandler: WsHandler | undefined;
 
   sendData(data: RawMessage): void {
-    if (data.Event === "trades") {
+    if (data.Event === 'trades') {
       const list = this.parserList(data.Payload);
 
-      this.send(JSON.stringify({
-        event: 'trades',
-        payload: list
-      }));
+      this.send(
+        JSON.stringify({
+          event: 'trades',
+          payload: list,
+        }),
+      );
     }
 
-    if (data.Event === "currency") {
-      this.send(JSON.stringify({
-        event: 'currency',
-        payload: data.Payload
-      }));
+    if (data.Event === 'currency') {
+      this.send(
+        JSON.stringify({
+          event: 'currency',
+          payload: data.Payload,
+        }),
+      );
     }
   }
 
@@ -40,7 +46,9 @@ export class ProxyData {
   }
 
   private parserList(list: CityRaw[]): City[] {
-    return list.filter(item => item.Key !== 'Hometown').map(item => this.parserCity(item));
+    return list
+      .filter((item) => item.Key !== 'Hometown')
+      .map((item) => this.parserCity(item));
   }
 
   private parserCity(city: CityRaw): City {
@@ -49,16 +57,20 @@ export class ProxyData {
 
     const resources = JSON.parse(city.Resources) as ResourceRaw[];
     const resourcesMap = new Map(
-      resources.map(item => ([item.Resource, item ]))
-    )
+      resources.map((item) => [item.Resource, item]),
+    );
 
     return {
       key: city.Key,
       relations: city.Relations,
-      import: importRes.map(item => this.convertTrade(resourcesMap.get(item.Value))),
-      export: exportRes.map(item => this.convertTrade(resourcesMap.get(item.Value))),
+      import: importRes.map((item) =>
+        this.convertTrade(resourcesMap.get(item.Value)),
+      ),
+      export: exportRes.map((item) =>
+        this.convertTrade(resourcesMap.get(item.Value)),
+      ),
       currency: city.Currency === '0' ? 'gold' : 'dar',
-    }
+    };
   }
 
   private convertTrade(res?: ResourceRaw): Trade | null {
@@ -69,7 +81,7 @@ export class ProxyData {
     return {
       resource: res.Resource,
       package: res.CountPerPackage,
-      price: res.NowValue
-    }
+      price: res.NowValue,
+    };
   }
 }

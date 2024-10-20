@@ -1,3 +1,1 @@
-export class EnvironmentBase {
-
-}
+export class EnvironmentBase {}

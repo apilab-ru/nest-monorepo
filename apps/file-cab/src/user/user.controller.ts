@@ -19,10 +19,7 @@ import { AuthGuard } from '@nestjs/passport';
 @ApiTags('user')
 @Controller('user')
 export class UserController {
-  constructor(
-    private userService: UserService,
-  ) {
-  }
+  constructor(private userService: UserService) {}
 
   @Post('auth')
   @ApiBody({
@@ -47,7 +44,7 @@ export class UserController {
     },
   })
   async registration(@Body() params: AuthParams): Promise<UserResponse> {
-    return await this.userService.registration(params).catch(error => {
+    return await this.userService.registration(params).catch((error) => {
       if (error.toString().includes('Duplicate')) {
         throw new HttpException('userExisted', HttpStatus.BAD_REQUEST);
       }
@@ -59,18 +56,14 @@ export class UserController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
   @Get('me')
-  async getMe(
-    @Request() req,
-  ): Promise<UserResponse> {
+  async getMe(@Request() req): Promise<UserResponse> {
     return req.user;
   }
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard())
   @Post('logout')
-  async logout(
-    @Request() req,
-  ): Promise<void> {
+  async logout(@Request() req): Promise<void> {
     return this.userService.logout(req.user);
   }
 
@@ -88,8 +81,8 @@ export class UserController {
 
   @Get('reset/:hash')
   reset(@Param('hash') hash: string): Promise<string> {
-    return this.userService.resetPassword(hash).then(
-      () => 'Пароль успешно пересоздан, и отправлен на вашу почту.',
-    );
+    return this.userService
+      .resetPassword(hash)
+      .then(() => 'Пароль успешно пересоздан, и отправлен на вашу почту.');
   }
 }

@@ -2,26 +2,25 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({
-    name: 'authors',
+  name: 'authors',
 })
 export class AuthorEntity {
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @PrimaryGeneratedColumn()
-    id: number;
+  @ApiProperty()
+  @Column()
+  name: string;
 
-    @ApiProperty()
-    @Column()
-    name: string;
+  @ApiProperty()
+  @Column()
+  hash: string;
 
-    @ApiProperty()
-    @Column()
-    hash: string;
+  @ApiProperty()
+  @Column()
+  avatar: string;
 
-    @ApiProperty()
-    @Column()
-    avatar: string;
-
-    @ApiProperty()
-    @Column()
-    curator: boolean;
+  @ApiProperty()
+  @Column()
+  curator: boolean;
 }

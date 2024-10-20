@@ -1,4 +1,4 @@
-import { MediaItem } from "@filecab/models";
+import { MediaItem } from '@filecab/models';
 
 export const CHIPS = {
   year: 'yearseason',
@@ -25,4 +25,4 @@ export const GENRES_CONVERT = {
   74: 30, // Романтический подтекст,
   77: 30, // Командный спорт
   79: 11, // Игры
-}
+};

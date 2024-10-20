@@ -1,21 +1,24 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { FilmsService } from './films.service';
-import { FilmSearchParams, MediaItem, SearchRequestResult, SearchRequestResultV2 } from '@filecab/models';
+import {
+  FilmSearchParams,
+  MediaItem,
+  SearchRequestResult,
+  SearchRequestResultV2,
+} from '@filecab/models';
 import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { EFilmsSortBy, EOrderType } from './interface';
 import { firstValueFrom } from 'rxjs';
-import { KinopoiskDevService } from "./kinopoisk-dev/kinopoisk-dev.service";
-import { Types } from "@filecab/models/types";
+import { KinopoiskDevService } from './kinopoisk-dev/kinopoisk-dev.service';
+import { Types } from '@filecab/models/types';
 
 @ApiTags('films/v2')
 @Controller('films/v2')
 export class FilmsV2Controller {
-
   constructor(
     private filmsService: FilmsService,
     private kinopoiskService: KinopoiskDevService,
-  ) {
-  }
+  ) {}
 
   @Get('movie')
   @ApiQuery({
@@ -70,10 +73,12 @@ export class FilmsV2Controller {
   async findFilm(
     @Query() query: FilmSearchParams,
   ): Promise<SearchRequestResult<MediaItem>> {
-    return await firstValueFrom(this.kinopoiskService.search({
-      ...query,
-      type: Types.films,
-    }));
+    return await firstValueFrom(
+      this.kinopoiskService.search({
+        ...query,
+        type: Types.films,
+      }),
+    );
   }
 
   @Get('tv')
@@ -109,12 +114,14 @@ export class FilmsV2Controller {
     type: 'string',
     required: false,
   })
-  async findTv(
-    @Query() query,
-  ): Promise<SearchRequestResultV2<MediaItem>> {
-    return await firstValueFrom(this.kinopoiskService.search({
-      ...query,
-    }, true));
+  async findTv(@Query() query): Promise<SearchRequestResultV2<MediaItem>> {
+    return await firstValueFrom(
+      this.kinopoiskService.search(
+        {
+          ...query,
+        },
+        true,
+      ),
+    );
   }
-
 }

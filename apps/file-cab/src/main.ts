@@ -4,7 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AllExceptionsFilter } from './sentry/all-exceptions-filter';
 import { urlencoded, json } from 'express';
 import { Logger } from '@nestjs/common';
-import { environment } from "./environments/environment";
+import { environment } from './environments/environment';
 
 declare global {
   namespace NodeJS {
@@ -30,7 +30,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config, {
-    ignoreGlobalPrefix: false
+    ignoreGlobalPrefix: false,
   });
 
   app.use(json({ limit: '50mb' }));
@@ -45,12 +45,19 @@ async function bootstrap() {
 
   const port = environment.port;
 
-  SwaggerModule.setup(environment.prefix + SWAGGER_PUBLIC_PATH, app, document, {});
+  SwaggerModule.setup(
+    environment.prefix + SWAGGER_PUBLIC_PATH,
+    app,
+    document,
+    {},
+  );
 
   await app.listen(port);
 
   Logger.log(
-    `Application is running on: http://localhost:${port + environment.prefix}/swagger`,
+    `Application is running on: http://localhost:${
+      port + environment.prefix
+    }/swagger`,
   );
 }
 

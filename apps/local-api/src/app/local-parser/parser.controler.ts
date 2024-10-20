@@ -5,21 +5,18 @@ import { ParserLocalService } from './services/parser-local.service';
 @ApiTags('parser')
 @Controller('parser')
 export class ParserController {
-   private syncProcess = {};
+  private syncProcess = {};
 
-   constructor(
-      private parserService: ParserLocalService,
-   ) {
-   }
+  constructor(private parserService: ParserLocalService) {}
 
-   @Get('sync')
-   parserBeat(): any {
-      return this.parserService.loadMaps().toPromise();
+  @Get('sync')
+  parserBeat(): any {
+    return this.parserService.loadMaps().toPromise();
 
-      //return 'success';
-   }
+    //return 'success';
+  }
 
-   /*private parserPage(page: number, reload: boolean) {
+  /*private parserPage(page: number, reload: boolean) {
       const start = new Date().getTime();
       console.log('xxx start', page, new Date().toTimeString());
 
@@ -40,5 +37,4 @@ export class ParserController {
          }
       });
    }*/
-
 }

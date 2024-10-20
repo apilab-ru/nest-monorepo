@@ -1,14 +1,14 @@
-import { environment } from "../../../environments/environment";
-import { Playlist } from "@bsab/api/local/playlist";
-import { Injectable } from "@nestjs/common";
-import { LocalMap } from "@bsab/api/map/map";
+import { environment } from '../../../environments/environment';
+import { Playlist } from '@bsab/api/local/playlist';
+import { Injectable } from '@nestjs/common';
+import { LocalMap } from '@bsab/api/map/map';
 
 const fs = require('fs');
 
 const PLAYLIST_EXT = '.bplist';
 const IMAGE_PREFIX_LIST = ['data:image/png;', 'data:image/avif;'];
-const DEFAULT_PREFIX = 'data:image/png;'
-const kebabCase =  require("lodash/kebabCase");
+const DEFAULT_PREFIX = 'data:image/png;';
+const kebabCase = require('lodash/kebabCase');
 
 @Injectable()
 export class PlaylistsService {
@@ -20,17 +20,22 @@ export class PlaylistsService {
     return this.parserPlaylist(id);
   }
 
-  async addSongToPlaylist(playlist: Playlist, map: LocalMap): Promise<Playlist> {
+  async addSongToPlaylist(
+    playlist: Playlist,
+    map: LocalMap,
+  ): Promise<Playlist> {
     playlist.songs.push({
       songName: map.songName,
       levelAuthorName: map.songAuthorName,
       hash: map.hash,
       levelid: `custom_level_${map.hash}`,
-      difficulties: map.difficultMap.flatMap(mode => mode.list.map(it => ({
-        characteristic: mode.mode,
-        name: it.difficulty
-      })))
-    })
+      difficulties: map.difficultMap.flatMap((mode) =>
+        mode.list.map((it) => ({
+          characteristic: mode.mode,
+          name: it.difficulty,
+        })),
+      ),
+    });
 
     return playlist;
   }
@@ -42,27 +47,29 @@ export class PlaylistsService {
       return this.cache;
     }
 
-    const files = (await fs.promises.readdir(this.path))
-      .filter(it => it.includes(PLAYLIST_EXT));
+    const files = (await fs.promises.readdir(this.path)).filter((it) =>
+      it.includes(PLAYLIST_EXT),
+    );
 
-    this.cache = await Promise.all(files.map(file => this.parserPlaylist(file)));
+    this.cache = await Promise.all(
+      files.map((file) => this.parserPlaylist(file)),
+    );
 
     return this.cache;
   }
 
   private prepareImage(image: string): string {
-    IMAGE_PREFIX_LIST.forEach(prefix => {
-      image = image.replace(prefix, '')
+    IMAGE_PREFIX_LIST.forEach((prefix) => {
+      image = image.replace(prefix, '');
     });
 
     return image;
   }
 
   async updatePlaylist(id: string, playlist: Playlist): Promise<void> {
-
     const data = JSON.stringify({
       ...playlist,
-      image: this.prepareImage(playlist.image)
+      image: this.prepareImage(playlist.image),
     });
 
     await fs.promises.writeFile(this.path + id, data);
@@ -71,8 +78,9 @@ export class PlaylistsService {
   async createPlaylist(data: Playlist): Promise<Playlist> {
     let id = data.id || kebabCase(data.playlistTitle);
 
-    const exists = (await fs.promises.readdir(this.path))
-      .filter(it => it.includes(id));
+    const exists = (await fs.promises.readdir(this.path)).filter((it) =>
+      it.includes(id),
+    );
 
     if (exists.length) {
       id += `(${exists.length + 1})`;
@@ -83,8 +91,8 @@ export class PlaylistsService {
     const playlist = {
       ...data,
       id,
-      image: this.prepareImage(data.image)
-    }
+      image: this.prepareImage(data.image),
+    };
 
     await fs.promises.writeFile(this.path + id, JSON.stringify(playlist));
 
@@ -92,7 +100,7 @@ export class PlaylistsService {
   }
 
   async removePlaylist(id: string): Promise<void> {
-     await fs.promises.unlink(this.path + id);
+    await fs.promises.unlink(this.path + id);
   }
 
   private async parserPlaylist(path: string): Promise<Playlist> {

@@ -6,17 +6,15 @@ import { UserEntity } from '../entities/user.entity';
 
 @Injectable()
 export class HttpStrategy extends PassportStrategy(Strategy) {
-   constructor(
-      private authService: AuthService,
-   ) {
-      super();
-   }
+  constructor(private authService: AuthService) {
+    super();
+  }
 
-   async validate(token: string, ...params): Promise<UserEntity> {
-      /*if (environment.autoAuthUser) {
+  async validate(token: string, ...params): Promise<UserEntity> {
+    /*if (environment.autoAuthUser) {
          return this.authService.byId(environment.autoAuthUser);
       }*/
 
-      return this.authService.validateUser(token);
-   }
+    return this.authService.validateUser(token);
+  }
 }

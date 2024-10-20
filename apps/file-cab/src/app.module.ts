@@ -26,11 +26,11 @@ import { ClassTransformInterceptor } from './sentry/class-transform.interceptor'
 import { LibraryController } from './library/library-controller';
 import { HttpModule } from '@nestjs/axios';
 import { KinopoiskService } from './films/kinopoisk/kinopoisk.service';
-import { MigrationService } from "./library/migration.service";
-import { KinopoiskDevService } from "./films/kinopoisk-dev/kinopoisk-dev.service";
-import { ErrorsService } from "@utils/exceptions/errors-service";
-import { UtilsController } from "./utils/utils.controller";
-import { UtilsService } from "./utils/utils.service";
+import { MigrationService } from './library/migration.service';
+import { KinopoiskDevService } from './films/kinopoisk-dev/kinopoisk-dev.service';
+import { ErrorsService } from '@utils/exceptions/errors-service';
+import { UtilsController } from './utils/utils.controller';
+import { UtilsService } from './utils/utils.service';
 
 @Module({
   imports: [
@@ -74,9 +74,7 @@ import { UtilsService } from "./utils/utils.service";
   ],
 })
 export class AppModule {
-  constructor(
-    sentryService: SentryService,
-  ) {
+  constructor(sentryService: SentryService) {
     sentryService.init();
   }
 }

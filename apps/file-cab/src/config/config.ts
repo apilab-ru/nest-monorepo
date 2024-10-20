@@ -42,7 +42,4 @@ const baseConfig = {
   },
 };
 
-export const config = merge(
-  baseConfig,
-  configCustom,
-);
+export const config = merge(baseConfig, configCustom);

@@ -15,8 +15,7 @@ export class GenresController {
     private animeService: AnimeService,
     private animeV2Service: AnimeShikimoriService,
     private genreService: GenreService,
-  ) {
-  }
+  ) {}
 
   @Get('refresh')
   refresh(): Promise<string> {
@@ -24,11 +23,12 @@ export class GenresController {
       this.filmService.loadBaseGenres(),
       this.animeService.loadBaseGenres(),
       this.animeV2Service.loadBaseGenres(),
-    ]).toPromise()
-      .then(([filmsList, animeList]) => this.genreService.setList([
-        ...filmsList,
-        ...animeList,
-      ])).then((list) => {
+    ])
+      .toPromise()
+      .then(([filmsList, animeList]) =>
+        this.genreService.setList([...filmsList, ...animeList]),
+      )
+      .then((list) => {
         return 'success total: ' + list.length;
       });
   }

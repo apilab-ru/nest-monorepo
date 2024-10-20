@@ -23,13 +23,18 @@ import { GenreEntity } from '../genres/entites/genre.entity';
 import { MediaItem } from '@filecab/models';
 import { LibraryService } from '../library/library.service';
 import { LibraryItemEntity } from '../library/entites/library-item.entity';
-import { CHIPS, CUSTOM_FIELDS, FILTER_GENRES, GENRES_CONVERT, SAVE_FIELDS } from "./const";
+import {
+  CHIPS,
+  CUSTOM_FIELDS,
+  FILTER_GENRES,
+  GENRES_CONVERT,
+  SAVE_FIELDS,
+} from './const';
 
 const fs = require('fs');
-const uniq = require("lodash/uniq");
+const uniq = require('lodash/uniq');
 
 const DEFAULT_LIMIT = 50;
-
 
 @Injectable()
 export class AnimeService {
@@ -40,23 +45,25 @@ export class AnimeService {
     private genreService: GenreService,
     private sentryService: SentryService,
     private libraryService: LibraryService,
-  ) {
-  }
+  ) {}
 
-  searchV2(query: AnimeSearchV2Query): Observable<SearchRequestResultV2<MediaItem>> {
+  searchV2(
+    query: AnimeSearchV2Query,
+  ): Observable<SearchRequestResultV2<MediaItem>> {
     return this.genreService.list$.pipe(
       take(1),
-      switchMap(genres => this.requestSearch(query, genres)),
+      switchMap((genres) => this.requestSearch(query, genres)),
       switchMap((list) => {
-        return !list.length ? of([]) : combineLatest(list.map(item => this.convertToLibraryItem(item)));
+        return !list.length
+          ? of([])
+          : combineLatest(list.map((item) => this.convertToLibraryItem(item)));
       }),
-      switchMap(list => {
+      switchMap((list) => {
         const byFields: Partial<Record<keyof MediaItem, MediaItem[]>> = {};
 
-        list.forEach(item => {
-          for(const key of SAVE_FIELDS) {
+        list.forEach((item) => {
+          for (const key of SAVE_FIELDS) {
             if (item[key]) {
-
               if (!byFields[key]) {
                 byFields[key] = [];
               }
@@ -65,15 +72,21 @@ export class AnimeService {
               break;
             }
           }
-        })
+        });
 
         return combineLatest(
-          ...Object.entries(byFields).map(([field, list]) => from(
-            this.libraryService.saveToRepository(list, field as keyof MediaItem))
-        ))
+          ...Object.entries(byFields).map(([field, list]) =>
+            from(
+              this.libraryService.saveToRepository(
+                list,
+                field as keyof MediaItem,
+              ),
+            ),
+          ),
+        );
       }),
       toArray(),
-      map(results => ({
+      map((results) => ({
         results: results.flat(2),
         page: query.page,
         hasMore: query.limit === results.length,
@@ -82,16 +95,17 @@ export class AnimeService {
   }
 
   search(query: AnimeSearchQuery): Observable<SearchRequestResult<Anime>> {
-    return this.requestSearch(query)
-      .pipe(
-        map(list => list ? list.map(this.convertFromAnimeItem.bind(this)) : []),
-        map(list => ({
-          results: list as Anime[],
-          page: 1,
-          total_results: list.length,
-          total_pages: 1,
-        })),
-      );
+    return this.requestSearch(query).pipe(
+      map((list) =>
+        list ? list.map(this.convertFromAnimeItem.bind(this)) : [],
+      ),
+      map((list) => ({
+        results: list as Anime[],
+        page: 1,
+        total_results: list.length,
+        total_pages: 1,
+      })),
+    );
   }
 
   byId(id: number): Observable<Anime> {
@@ -99,18 +113,19 @@ export class AnimeService {
     params.append('id', `${id}`);
     const url = this.endpoint + '?' + params.toString();
 
-    return this.httpService.get<{ data: SmotretAnimeResponseItem }>(url)
-      .pipe(
-        map(response => response.data.data),
-        map(item => this.convertFromAnimeItem(item)),
-      );
+    return this.httpService.get<{ data: SmotretAnimeResponseItem }>(url).pipe(
+      map((response) => response.data.data),
+      map((item) => this.convertFromAnimeItem(item)),
+    );
   }
 
   foundItem(entity: LibraryItemEntity): Observable<MediaItem | null> {
     return this.byIdV2(entity.smotretId).pipe(
-      catchError(() => this.searchV2({ name: entity.title }).pipe(
-        map(result => result.results.length ? result.results[0] : null),
-      )),
+      catchError(() =>
+        this.searchV2({ name: entity.title }).pipe(
+          map((result) => (result.results.length ? result.results[0] : null)),
+        ),
+      ),
     );
   }
 
@@ -119,48 +134,52 @@ export class AnimeService {
     params.append('id', `${id}`);
     const url = this.endpoint + '?' + params.toString();
 
-    return this.httpService.get<{ data: SmotretAnimeResponseItem }>(url)
-      .pipe(
-        map(response => response.data.data),
-        switchMap(item => this.convertToLibraryItem(item)),
-        tap(item => {
-          this.libraryService.saveToRepository([item], 'smotretId');
-        }),
-      );
+    return this.httpService.get<{ data: SmotretAnimeResponseItem }>(url).pipe(
+      map((response) => response.data.data),
+      switchMap((item) => this.convertToLibraryItem(item)),
+      tap((item) => {
+        this.libraryService.saveToRepository([item], 'smotretId');
+      }),
+    );
   }
 
-  getByFieldId(id: number, field: 'aniDbId' | 'smotretId' | 'shikimoriId'): Observable<MediaItem[]> {
+  getByFieldId(
+    id: number,
+    field: 'aniDbId' | 'smotretId' | 'shikimoriId',
+  ): Observable<MediaItem[]> {
     return from(this.libraryService.loadByIds([id], field)).pipe(
-      switchMap(list => {
+      switchMap((list) => {
         if (list.length) {
-          return of(list)
+          return of(list);
         }
 
-        return this.searchV2({ [field]: id }).pipe(
-          map(list => list.results)
-        );
-      })
+        return this.searchV2({ [field]: id }).pipe(map((list) => list.results));
+      }),
     );
   }
 
   getGenres(): Observable<GenreOld[]> {
     const list$ = new Subject<GenreOld[]>();
     this.getGenresFromCache()
-      .then(list => list$.next(list))
-      .catch(() => this.loadGenres().subscribe(list => {
-        list$.next(list);
-        this.saveGenres(list);
-      }));
+      .then((list) => list$.next(list))
+      .catch(() =>
+        this.loadGenres().subscribe((list) => {
+          list$.next(list);
+          this.saveGenres(list);
+        }),
+      );
     return list$.asObservable().pipe(take(1));
   }
 
   loadBaseGenres(): Observable<GenreBase[]> {
     return this.loadGenres().pipe(
-      map(list => list.map(it => ({
-        name: it.name,
-        kind: GenreKind.anime,
-        smotretId: it.id,
-      }))),
+      map((list) =>
+        list.map((it) => ({
+          name: it.name,
+          kind: GenreKind.anime,
+          smotretId: it.id,
+        })),
+      ),
     );
   }
 
@@ -168,10 +187,15 @@ export class AnimeService {
     if (!list) {
       return [];
     }
-    return [list.slice(0, length)].concat(this.chunk(list.slice(length), length));
+    return [list.slice(0, length)].concat(
+      this.chunk(list.slice(length), length),
+    );
   }
 
-  private requestSearch(query: AnimeSearchV2Query, dbGenres?: GenreEntity[]): Observable<SmotretAnimeResponseItem[]> {
+  private requestSearch(
+    query: AnimeSearchV2Query,
+    dbGenres?: GenreEntity[],
+  ): Observable<SmotretAnimeResponseItem[]> {
     query.limit = Math.min(query.limit || DEFAULT_LIMIT, DEFAULT_LIMIT);
     query.page = query.page || 1;
     const { name, limit, page, shikimoriId, smotretId, ...chips } = query;
@@ -201,10 +225,10 @@ export class AnimeService {
       stChips = 'chips=';
 
       if (chips.genre && dbGenres) {
-        const genres = chips.genre.split(',').map(it => +it);
-        const apiGenres = genres.map(it => dbGenres
-          .find(dbIt => dbIt.id === it)?.smotretId,
-        ).filter(it => !!it);
+        const genres = chips.genre.split(',').map((it) => +it);
+        const apiGenres = genres
+          .map((it) => dbGenres.find((dbIt) => dbIt.id === it)?.smotretId)
+          .filter((it) => !!it);
         chips.genre = apiGenres.join(',');
       }
 
@@ -214,9 +238,9 @@ export class AnimeService {
     }
     const url = this.endpoint + '?' + params.toString() + '&' + stChips;
 
-    return this.httpService.get<AnimeRequestResponse>(url).pipe(
-      map(res => res.data.data),
-    );
+    return this.httpService
+      .get<AnimeRequestResponse>(url)
+      .pipe(map((res) => res.data.data));
   }
 
   private loadGenres(): Observable<GenreOld[]> {
@@ -224,33 +248,32 @@ export class AnimeService {
     params.append('fields', 'genres,titles,id');
     params.append('limit', '2000');
     const url = this.endpoint + '?' + params.toString();
-    return this.httpService.get<AnimeRequestResponse>(url)
-      .pipe(
-        map(response => response.data),
-        map(data => {
-          const genres = {};
-          data.data.forEach(item => {
-            if (item.genres) {
-              item.genres.forEach(it => {
-                genres[it.id] = {
-                  id: it.id,
-                  name: it.title,
-                };
-              });
-            }
-          });
-          const list = [];
-          for (const i in genres) {
-            list.push(genres[i]);
+    return this.httpService.get<AnimeRequestResponse>(url).pipe(
+      map((response) => response.data),
+      map((data) => {
+        const genres = {};
+        data.data.forEach((item) => {
+          if (item.genres) {
+            item.genres.forEach((it) => {
+              genres[it.id] = {
+                id: it.id,
+                name: it.title,
+              };
+            });
           }
-          return list;
-        }),
-      );
+        });
+        const list = [];
+        for (const i in genres) {
+          list.push(genres[i]);
+        }
+        return list;
+      }),
+    );
   }
 
   private saveGenres(list: GenreOld[]): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      fs.writeFile('cache/genres-anime.json', JSON.stringify(list), err => {
+      fs.writeFile('cache/genres-anime.json', JSON.stringify(list), (err) => {
         if (err) {
           reject(err);
         } else {
@@ -272,24 +295,26 @@ export class AnimeService {
     });
   }
 
-  private convertToLibraryItem(item: SmotretAnimeResponseItem): Observable<MediaItem> {
+  private convertToLibraryItem(
+    item: SmotretAnimeResponseItem,
+  ): Observable<MediaItem> {
     return this.findGenres(item.genres).pipe(
-      map(genreIds => ({
-          title: item.titles.ru,
-          image: item.posterUrl,
-          url: item.url,
-          description: this.getDescription(item),
-          genreIds,
-          originalTitle: item.titles.en,
-          year: item.year,
-          type: item.type,
-          popularity: +(item.myAnimeListScore || item.worldArtScore || 0),
-          episodes: item.episodes && item.episodes.length,
-          shikimoriId: item.myAnimeListId,
-          aniDbId: item.aniDbId,
-          smotretId: item.id,
-        }),
-      ));
+      map((genreIds) => ({
+        title: item.titles.ru,
+        image: item.posterUrl,
+        url: item.url,
+        description: this.getDescription(item),
+        genreIds,
+        originalTitle: item.titles.en,
+        year: item.year,
+        type: item.type,
+        popularity: +(item.myAnimeListScore || item.worldArtScore || 0),
+        episodes: item.episodes && item.episodes.length,
+        shikimoriId: item.myAnimeListId,
+        aniDbId: item.aniDbId,
+        smotretId: item.id,
+      })),
+    );
   }
 
   private findGenres(list: AnimeGenre[]): Observable<number[]> {
@@ -297,25 +322,26 @@ export class AnimeService {
       return of([]);
     }
 
-    const ids = list.map(it => it.id)
-      .filter(id => !FILTER_GENRES.includes(id))
-      .map(id => {
+    const ids = list
+      .map((it) => it.id)
+      .filter((id) => !FILTER_GENRES.includes(id))
+      .map((id) => {
         if (GENRES_CONVERT[id]) {
-          return GENRES_CONVERT[id]
+          return GENRES_CONVERT[id];
         }
 
         return id;
-      })
+      });
 
     return this.genreService.list$.pipe(
       take(1),
-      map(genres => {
+      map((genres) => {
         return this.genreService.prepareGenres(
           uniq(ids),
           genres,
           'smotretId',
-          list
-        )
+          list,
+        );
       }),
     );
   }
@@ -332,7 +358,7 @@ export class AnimeService {
       title: item.titles.ru,
       image: item.posterUrl,
       description: this.getDescription(item),
-      genre_ids: item.genres ? item.genres.map(genre => genre.id) : [],
+      genre_ids: item.genres ? item.genres.map((genre) => genre.id) : [],
       original_title: item.titles.en,
       year: item.year,
       type: item.type,
@@ -346,11 +372,12 @@ export class AnimeService {
     if (!item.descriptions) {
       return null;
     }
-    const base = item.descriptions.find(it => it.source === AnimeDescriptionSource.word_art);
+    const base = item.descriptions.find(
+      (it) => it.source === AnimeDescriptionSource.word_art,
+    );
     if (base) {
       return base.value;
     }
     return item.descriptions[0].value;
   }
-
 }

@@ -7,11 +7,7 @@ import { EFilmsSortBy, EOrderType } from './interface';
 @ApiTags('films')
 @Controller('films')
 export class FilmsController {
-
-  constructor(
-    private filmsService: FilmsService,
-  ) {
-  }
+  constructor(private filmsService: FilmsService) {}
 
   @Get('movie')
   @ApiQuery({
@@ -46,18 +42,16 @@ export class FilmsController {
     type: 'string',
     required: false,
   })
-  async findFilm(
-    @Query() query,
-  ): Promise<SearchRequestResult<Film>> {
+  async findFilm(@Query() query): Promise<SearchRequestResult<Film>> {
     const chips = { ...query };
     const orderField = chips.orderField;
     const orderType = chips.orderType;
     delete chips.name;
     delete chips.orderField;
     delete chips.orderType;
-    return await this.filmsService.searchMovie(
-      query.name, chips, orderField, orderType,
-    ).toPromise();
+    return await this.filmsService
+      .searchMovie(query.name, chips, orderField, orderType)
+      .toPromise();
   }
 
   @Get('tv')
@@ -93,23 +87,20 @@ export class FilmsController {
     type: 'string',
     required: false,
   })
-  async findTv(
-    @Query() query,
-  ): Promise<SearchRequestResult<Film>> {
+  async findTv(@Query() query): Promise<SearchRequestResult<Film>> {
     const chips = { ...query };
     const orderField = chips.orderField;
     const orderType = chips.orderType;
     delete chips.name;
     delete chips.orderField;
     delete chips.orderType;
-    return await this.filmsService.searchTv(
-      query.name, chips, orderField, orderType,
-    ).toPromise();
+    return await this.filmsService
+      .searchTv(query.name, chips, orderField, orderType)
+      .toPromise();
   }
 
   @Get('genres')
   async loadGenres(): Promise<GenreOld[]> {
     return await this.filmsService.getGenres().toPromise();
   }
-
 }

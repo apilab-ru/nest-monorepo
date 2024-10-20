@@ -29,36 +29,44 @@ export class UserService {
       throw new Error('notFillData');
     }
 
-    return this.userRepository.findOneBy({
-      email,
-      password: this.passwordHash(password),
-    }).then(user => {
-      if (!user) {
-        throw new Error('notFound');
-      }
+    return this.userRepository
+      .findOneBy({
+        email,
+        password: this.passwordHash(password),
+      })
+      .then((user) => {
+        if (!user) {
+          throw new Error('notFound');
+        }
 
-      const token = this.generateToken();
+        const token = this.generateToken();
 
-      return this.tokenRepository.insert({
-        userId: user.id,
-        token,
-      }).then(() => new UserDto(user, token));
-    });
+        return this.tokenRepository
+          .insert({
+            userId: user.id,
+            token,
+          })
+          .then(() => new UserDto(user, token));
+      });
   }
 
   registration({ email, password }: AuthParams): Promise<UserResponse | null> {
-    return this.userRepository.insert({
-      email,
-      password: this.passwordHash(password),
-    }).then(({ identifiers }) => {
-      const userId = +identifiers[0].id;
-      const token = this.generateToken();
+    return this.userRepository
+      .insert({
+        email,
+        password: this.passwordHash(password),
+      })
+      .then(({ identifiers }) => {
+        const userId = +identifiers[0].id;
+        const token = this.generateToken();
 
-      return this.tokenRepository.insert({
-        userId,
-        token,
-      }).then(() => ({ id: userId, email, token }));
-    });
+        return this.tokenRepository
+          .insert({
+            userId,
+            token,
+          })
+          .then(() => ({ id: userId, email, token }));
+      });
   }
 
   logout(user: UserResponse): Promise<void> {
@@ -73,84 +81,95 @@ export class UserService {
       .where('ut.token=:token', { token })
       .printSql()
       .getRawOne<UserEntity>()
-      .then(res => {
-
+      .then((res) => {
         if (!res) {
           throw new Error('notFoundUser');
         }
 
-        this.tokenRepository.update({
-          token,
-        }, {
-          date: format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
-        });
+        this.tokenRepository.update(
+          {
+            token,
+          },
+          {
+            date: format(new Date(), 'yyyy-MM-dd hh:mm:ss'),
+          },
+        );
 
         return new UserDto(res, token);
       });
   }
 
   resetPassword(resetHash: string): Promise<void> {
-    return this.userRepository.findOne({
-      where: {
-        resetHash,
-      },
-    }).then(user => {
-      if (!user) {
-        throw new Error('notFound');
-      }
+    return this.userRepository
+      .findOne({
+        where: {
+          resetHash,
+        },
+      })
+      .then((user) => {
+        if (!user) {
+          throw new Error('notFound');
+        }
 
-      const password = this.makeRandomString(8);
-      user.password = this.passwordHash(password);
-      user.resetHash = null;
+        const password = this.makeRandomString(8);
+        user.password = this.passwordHash(password);
+        user.resetHash = null;
 
-      return Promise.all([
-        this.renderTemplate('new-password', {
-          year: new Date().getFullYear(),
-          password,
-        }),
-        this.userRepository.save(user),
-        this.tokenRepository.delete({
-          userId: user.id,
-        }),
-      ]).then(([html]) => this.mailService.sendEmail(
-        user.email,
-        `Новый пароль для сервиса WatchList`,
-        html,
-      ));
-    });
+        return Promise.all([
+          this.renderTemplate('new-password', {
+            year: new Date().getFullYear(),
+            password,
+          }),
+          this.userRepository.save(user),
+          this.tokenRepository.delete({
+            userId: user.id,
+          }),
+        ]).then(([html]) =>
+          this.mailService.sendEmail(
+            user.email,
+            `Новый пароль для сервиса WatchList`,
+            html,
+          ),
+        );
+      });
   }
 
   sendResetPassword(email: string): Promise<void> {
-    return this.userRepository.findOne({
-      where: {
-        email,
-      },
-    }).then((user) => {
-      if (!user) {
-        throw new Error('notFound');
-      }
-
-      const hash = this.makeRandomString(10);
-
-      user.resetHash = hash;
-      this.userRepository.save(user);
-
-      return this.renderTemplate('password-reset', {
-        year: new Date().getFullYear(),
-        link: config.domain + '/user/reset/' + hash,
-      }).then(html => {
-        return this.mailService.sendEmail(
+    return this.userRepository
+      .findOne({
+        where: {
           email,
-          'Сброс пароля для приложения WatchList',
-          html,
-        );
+        },
+      })
+      .then((user) => {
+        if (!user) {
+          throw new Error('notFound');
+        }
+
+        const hash = this.makeRandomString(10);
+
+        user.resetHash = hash;
+        this.userRepository.save(user);
+
+        return this.renderTemplate('password-reset', {
+          year: new Date().getFullYear(),
+          link: config.domain + '/user/reset/' + hash,
+        }).then((html) => {
+          return this.mailService.sendEmail(
+            email,
+            'Сброс пароля для приложения WatchList',
+            html,
+          );
+        });
       });
-    });
   }
 
   private renderTemplate(template: string, param: Object): Promise<string> {
     return new Promise((resolve, reject) => {
-      const pathLink = path.resolve(__dirname, '../templates/' + template + '.html');
+      const pathLink = path.resolve(
+        __dirname,
+        '../templates/' + template + '.html',
+      );
       fs.readFile(pathLink, null, (err, data) => {
         if (err) {
           reject(err);
@@ -177,7 +196,8 @@ export class UserService {
 
   private makeRandomString(length): string {
     let result = '';
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));

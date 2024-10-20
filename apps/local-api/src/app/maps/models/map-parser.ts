@@ -1,4 +1,9 @@
-import { MapDifficultDetail, RavMapDifficultDetail, RavMapDifficultDetailV2, RavMapDifficultDetailV3 } from './map';
+import {
+  MapDifficultDetail,
+  RavMapDifficultDetail,
+  RavMapDifficultDetailV2,
+  RavMapDifficultDetailV3,
+} from './map';
 
 function mapParser(inline: string): RavMapDifficultDetail {
   return JSON.parse(inline) as RavMapDifficultDetail;
@@ -13,7 +18,7 @@ export function readMapDifficultDetail(inline: string): MapDifficultDetail {
 
     return {
       notesTotal: notes.length,
-      times
+      times,
     };
   }
 
@@ -23,19 +28,26 @@ export function readMapDifficultDetail(inline: string): MapDifficultDetail {
 
     return {
       notesTotal: notes.length,
-      times
+      times,
     };
   }
 
   throw new Error('not found type');
 }
 
-function isV2(detail: RavMapDifficultDetail): detail is RavMapDifficultDetailV2 {
+function isV2(
+  detail: RavMapDifficultDetail,
+): detail is RavMapDifficultDetailV2 {
   const version = (detail as RavMapDifficultDetailV2)._version;
-  return version && version[0] === '2' || !!(detail as RavMapDifficultDetailV2)._notes;
+  return (
+    (version && version[0] === '2') ||
+    !!(detail as RavMapDifficultDetailV2)._notes
+  );
 }
 
-function isV3(detail: RavMapDifficultDetail): detail is RavMapDifficultDetailV3 {
+function isV3(
+  detail: RavMapDifficultDetail,
+): detail is RavMapDifficultDetailV3 {
   const version = (detail as RavMapDifficultDetailV3).version;
   return version && version[0] === '3';
 }
