@@ -1,0 +1,4608 @@
+[
+  {
+    "Key": "Hometown",
+    "Export": [],
+    "Import": [],
+    "Resources": [],
+    "Relations": 0,
+    "Currency": "0"
+  },
+  {
+    "Key": "Ellamali",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 3014
+      },
+      {
+        "Key": 2,
+        "Value": 1114
+      },
+      {
+        "Key": 4,
+        "Value": 3006
+      },
+      {
+        "Key": 5,
+        "Value": 1117
+      },
+      {
+        "Key": 6,
+        "Value": 1107
+      },
+      {
+        "Key": 6,
+        "Value": 1151
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 1128
+      },
+      {
+        "Key": 1,
+        "Value": 1144
+      },
+      {
+        "Key": 1,
+        "Value": 1133
+      },
+      {
+        "Key": 4,
+        "Value": 3011
+      },
+      {
+        "Key": 4,
+        "Value": 1123
+      },
+      {
+        "Key": 4,
+        "Value": 1110
+      },
+      {
+        "Key": 7,
+        "Value": 3009
+      },
+      {
+        "Key": 7,
+        "Value": 1119
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 116,
+        "OriginValue": 24,
+        "NowValue": 17.2799854,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3014,
+        "OriginValue": 40,
+        "NowValue": 29.1999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1140,
+        "OriginValue": 15,
+        "NowValue": 27.8999958,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 17.0000057,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 14.4200039,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 30,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3006,
+        "OriginValue": 20,
+        "NowValue": 17.3999977,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1126,
+        "OriginValue": 25,
+        "NowValue": 24,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 16.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2012,
+        "OriginValue": 70,
+        "NowValue": 85.39997,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1117,
+        "OriginValue": 60,
+        "NowValue": 61.2000046,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1151,
+        "OriginValue": 110,
+        "NowValue": 114.399994,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 38.5,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1137,
+        "OriginValue": 100,
+        "NowValue": 115,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1018,
+        "OriginValue": 6,
+        "NowValue": 12,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1144,
+        "OriginValue": 15,
+        "NowValue": 14.1000032,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 110,
+        "OriginValue": 8,
+        "NowValue": 7.03999758,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1128,
+        "OriginValue": 25,
+        "NowValue": 22.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 108,
+        "OriginValue": 6,
+        "NowValue": 4.14,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 17.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 39.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 26.8000011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 64.00001,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1110,
+        "OriginValue": 30,
+        "NowValue": 57.0000076,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 35.55,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3009,
+        "OriginValue": 60,
+        "NowValue": 40.8000031,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 120,
+        "OriginValue": 70,
+        "NowValue": 60.2000046,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1119,
+        "OriginValue": 135,
+        "NowValue": 118.800011,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      }
+    ],
+    "Relations": 51,
+    "Currency": "0"
+  },
+  {
+    "Key": "Farsight",
+    "Export": [
+      {
+        "Key": 3,
+        "Value": 1120
+      },
+      {
+        "Key": 3,
+        "Value": 3004
+      },
+      {
+        "Key": 4,
+        "Value": 2009
+      },
+      {
+        "Key": 5,
+        "Value": 1107
+      },
+      {
+        "Key": 6,
+        "Value": 1152
+      },
+      {
+        "Key": 6,
+        "Value": 1149
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 3005
+      },
+      {
+        "Key": 1,
+        "Value": 101
+      },
+      {
+        "Key": 1,
+        "Value": 102
+      },
+      {
+        "Key": 4,
+        "Value": 117
+      },
+      {
+        "Key": 4,
+        "Value": 1003
+      },
+      {
+        "Key": 4,
+        "Value": 103
+      },
+      {
+        "Key": 7,
+        "Value": 122
+      },
+      {
+        "Key": 7,
+        "Value": 128
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 30.800024,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 109,
+        "OriginValue": 25,
+        "NowValue": 27.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 15.9999895,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1142,
+        "OriginValue": 15,
+        "NowValue": 9.000001,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2006,
+        "OriginValue": 75,
+        "NowValue": 120.75,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2011,
+        "OriginValue": 50,
+        "NowValue": 25,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2009,
+        "OriginValue": 75,
+        "NowValue": 143.25,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2012,
+        "OriginValue": 70,
+        "NowValue": 44.79999,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 26,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1118,
+        "OriginValue": 15,
+        "NowValue": 14.4,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1105,
+        "OriginValue": 20,
+        "NowValue": 27.9999943,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1152,
+        "OriginValue": 66,
+        "NowValue": 48.8399963,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1145,
+        "OriginValue": 60,
+        "NowValue": 58.80003,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 183.35,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 14.7,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 41.65001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 13.2000017,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1127,
+        "OriginValue": 30,
+        "NowValue": 16.2,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 103,
+        "OriginValue": 25,
+        "NowValue": 46.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 23,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 117,
+        "OriginValue": 10,
+        "NowValue": 7.00000048,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 31.9500084,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 45.1999969,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 122,
+        "OriginValue": 40,
+        "NowValue": 22.8000011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 113,
+        "OriginValue": 15,
+        "NowValue": 13.4999952,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 40.59999,
+        "CountPerPackage": 5,
+        "NeedProsperity": 3
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 4.43999863,
+        "CountPerPackage": 30,
+        "NeedProsperity": 4
+      }
+    ],
+    "Relations": 53,
+    "Currency": "0"
+  },
+  {
+    "Key": "Baschichium",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1143
+      },
+      {
+        "Key": 2,
+        "Value": 115
+      },
+      {
+        "Key": 4,
+        "Value": 1013
+      },
+      {
+        "Key": 5,
+        "Value": 1132
+      },
+      {
+        "Key": 6,
+        "Value": 1139
+      },
+      {
+        "Key": 6,
+        "Value": 1154
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 1010
+      },
+      {
+        "Key": 1,
+        "Value": 102
+      },
+      {
+        "Key": 1,
+        "Value": 1006
+      },
+      {
+        "Key": 3,
+        "Value": 1142
+      },
+      {
+        "Key": 3,
+        "Value": 3004
+      },
+      {
+        "Key": 3,
+        "Value": 1120
+      },
+      {
+        "Key": 5,
+        "Value": 1114
+      },
+      {
+        "Key": 7,
+        "Value": 2000
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 115,
+        "OriginValue": 5,
+        "NowValue": 5.89999771,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3010,
+        "OriginValue": 35,
+        "NowValue": 17.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1143,
+        "OriginValue": 15,
+        "NowValue": 24.4500027,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 15.8400059,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 22.1999989,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 35.64,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3015,
+        "OriginValue": 40,
+        "NowValue": 53.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1124,
+        "OriginValue": 55,
+        "NowValue": 87.45,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1117,
+        "OriginValue": 60,
+        "NowValue": 62.4,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 35,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2006,
+        "OriginValue": 75,
+        "NowValue": 37.5,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1132,
+        "OriginValue": 38,
+        "NowValue": 32.29999,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1154,
+        "OriginValue": 130,
+        "NowValue": 237.899979,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 28,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 5.8,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1010,
+        "OriginValue": 7,
+        "NowValue": 9.519996,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 2.07,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 6.599999,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 6.799999,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 100,
+        "OriginValue": 2,
+        "NowValue": 1.88000047,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 4.79999971,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 52.50001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 109,
+        "OriginValue": 25,
+        "NowValue": 31.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 11.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1142,
+        "OriginValue": 15,
+        "NowValue": 19.3500023,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1112,
+        "OriginValue": 20,
+        "NowValue": 10,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3006,
+        "OriginValue": 20,
+        "NowValue": 39,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 23.239994,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 93.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1126,
+        "OriginValue": 25,
+        "NowValue": 17,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 30.8000011,
+        "CountPerPackage": 5,
+        "NeedProsperity": 3
+      }
+    ],
+    "Relations": 52,
+    "Currency": "0"
+  },
+  {
+    "Key": "Kantenlant",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1006
+      },
+      {
+        "Key": 2,
+        "Value": 1109
+      },
+      {
+        "Key": 2,
+        "Value": 2004
+      },
+      {
+        "Key": 2,
+        "Value": 2005
+      },
+      {
+        "Key": 5,
+        "Value": 1100
+      },
+      {
+        "Key": 6,
+        "Value": 1145
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 111
+      },
+      {
+        "Key": 3,
+        "Value": 124
+      },
+      {
+        "Key": 3,
+        "Value": 102
+      },
+      {
+        "Key": 5,
+        "Value": 101
+      },
+      {
+        "Key": 5,
+        "Value": 107
+      },
+      {
+        "Key": 7,
+        "Value": 1027
+      },
+      {
+        "Key": 7,
+        "Value": 2000
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 11.88,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 7.68,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1007,
+        "OriginValue": 6,
+        "NowValue": 5.039997,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1153,
+        "OriginValue": 125,
+        "NowValue": 145,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 86.7999954,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1102,
+        "OriginValue": 20,
+        "NowValue": 20.1999969,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 11.9000006,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 31.1399879,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3016,
+        "OriginValue": 30,
+        "NowValue": 28.2000046,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 18,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2010,
+        "OriginValue": 25,
+        "NowValue": 14.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1111,
+        "OriginValue": 35,
+        "NowValue": 18.1999989,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1152,
+        "OriginValue": 66,
+        "NowValue": 36.3,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1145,
+        "OriginValue": 60,
+        "NowValue": 84.5999756,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 163.4,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 124,
+        "OriginValue": 15,
+        "NowValue": 23.40001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 10.4799967,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 111,
+        "OriginValue": 30,
+        "NowValue": 15.3,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 43.6500053,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 126,
+        "OriginValue": 60,
+        "NowValue": 80.99998,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 69.99999,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 7.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1027,
+        "OriginValue": 40,
+        "NowValue": 74.80001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 125,
+        "OriginValue": 50,
+        "NowValue": 37.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      }
+    ],
+    "Relations": 52,
+    "Currency": "1"
+  },
+  {
+    "Key": "Soldem",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1136
+      },
+      {
+        "Key": 2,
+        "Value": 1109
+      },
+      {
+        "Key": 4,
+        "Value": 111
+      },
+      {
+        "Key": 5,
+        "Value": 1013
+      },
+      {
+        "Key": 6,
+        "Value": 1149
+      },
+      {
+        "Key": 6,
+        "Value": 1145
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 108
+      },
+      {
+        "Key": 1,
+        "Value": 1133
+      },
+      {
+        "Key": 1,
+        "Value": 1018
+      },
+      {
+        "Key": 4,
+        "Value": 3011
+      },
+      {
+        "Key": 4,
+        "Value": 110
+      },
+      {
+        "Key": 4,
+        "Value": 1107
+      },
+      {
+        "Key": 7,
+        "Value": 1138
+      },
+      {
+        "Key": 7,
+        "Value": 3009
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 103,
+        "OriginValue": 25,
+        "NowValue": 17.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 16.2000046,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 119.000031,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1603,
+        "OriginValue": 48,
+        "NowValue": 71.04001,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1136,
+        "OriginValue": 65,
+        "NowValue": 125.449989,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 124,
+        "OriginValue": 15,
+        "NowValue": 13.35,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 13.28,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 111,
+        "OriginValue": 30,
+        "NowValue": 31.2,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 33,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 20.9999962,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1134,
+        "OriginValue": 32,
+        "NowValue": 34.88001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1152,
+        "OriginValue": 66,
+        "NowValue": 33,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1145,
+        "OriginValue": 60,
+        "NowValue": 120,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 110.20002,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1018,
+        "OriginValue": 6,
+        "NowValue": 4.31999969,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1144,
+        "OriginValue": 15,
+        "NowValue": 25.9500046,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 108,
+        "OriginValue": 6,
+        "NowValue": 7.97999954,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1103,
+        "OriginValue": 20,
+        "NowValue": 34.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 121,
+        "OriginValue": 20,
+        "NowValue": 35,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 19.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 18.800005,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 22.8000011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1124,
+        "OriginValue": 55,
+        "NowValue": 77.54997,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 110,
+        "OriginValue": 8,
+        "NowValue": 15.920001,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 74,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3009,
+        "OriginValue": 60,
+        "NowValue": 111.000023,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 84.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1138,
+        "OriginValue": 120,
+        "NowValue": 123.59993,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      }
+    ],
+    "Relations": 55,
+    "Currency": "1"
+  },
+  {
+    "Key": "Underforge",
+    "Export": [
+      {
+        "Key": 3,
+        "Value": 1016
+      },
+      {
+        "Key": 3,
+        "Value": 1003
+      },
+      {
+        "Key": 3,
+        "Value": 1106
+      },
+      {
+        "Key": 5,
+        "Value": 1008
+      },
+      {
+        "Key": 6,
+        "Value": 1102
+      },
+      {
+        "Key": 6,
+        "Value": 1153
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 3005
+      },
+      {
+        "Key": 1,
+        "Value": 1100
+      },
+      {
+        "Key": 1,
+        "Value": 102
+      },
+      {
+        "Key": 4,
+        "Value": 1109
+      },
+      {
+        "Key": 4,
+        "Value": 1603
+      },
+      {
+        "Key": 4,
+        "Value": 1148
+      },
+      {
+        "Key": 7,
+        "Value": 107
+      },
+      {
+        "Key": 7,
+        "Value": 1123
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 118,
+        "OriginValue": 15,
+        "NowValue": 17.4,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 7.619997,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 114,
+        "OriginValue": 10,
+        "NowValue": 14.1000013,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 6.400001,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 6.95999956,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1106,
+        "OriginValue": 15,
+        "NowValue": 19.8000011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 57.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 28,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 33.4800072,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1153,
+        "OriginValue": 125,
+        "NowValue": 83.75,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 53.1999931,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1102,
+        "OriginValue": 20,
+        "NowValue": 30.5999985,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 21.9000053,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 19.25,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 14.6400013,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2010,
+        "OriginValue": 25,
+        "NowValue": 24.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 27.8399925,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 103,
+        "OriginValue": 25,
+        "NowValue": 46.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 25.5999928,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1603,
+        "OriginValue": 48,
+        "NowValue": 60.96,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1136,
+        "OriginValue": 65,
+        "NowValue": 96.20002,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 70.39999,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 122,
+        "OriginValue": 40,
+        "NowValue": 41.9999962,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 48.79999,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1119,
+        "OriginValue": 135,
+        "NowValue": 256.499939,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 3.2099998,
+        "CountPerPackage": 30,
+        "NeedProsperity": 3
+      }
+    ],
+    "Relations": 51,
+    "Currency": "1"
+  },
+  {
+    "Key": "Stoucket",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1103
+      },
+      {
+        "Key": 2,
+        "Value": 1118
+      },
+      {
+        "Key": 4,
+        "Value": 3009
+      },
+      {
+        "Key": 5,
+        "Value": 1008
+      },
+      {
+        "Key": 6,
+        "Value": 1109
+      },
+      {
+        "Key": 6,
+        "Value": 1102
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 102
+      },
+      {
+        "Key": 1,
+        "Value": 104
+      },
+      {
+        "Key": 1,
+        "Value": 3016
+      },
+      {
+        "Key": 4,
+        "Value": 1140
+      },
+      {
+        "Key": 4,
+        "Value": 3014
+      },
+      {
+        "Key": 4,
+        "Value": 1114
+      },
+      {
+        "Key": 7,
+        "Value": 1011
+      },
+      {
+        "Key": 7,
+        "Value": 113
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 34.6499977,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1103,
+        "OriginValue": 20,
+        "NowValue": 17,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1118,
+        "OriginValue": 15,
+        "NowValue": 13.0499992,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3009,
+        "OriginValue": 60,
+        "NowValue": 37.8,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 60.6000023,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1138,
+        "OriginValue": 120,
+        "NowValue": 70.7999954,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 22.1999989,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2001,
+        "OriginValue": 22,
+        "NowValue": 11,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1135,
+        "OriginValue": 42,
+        "NowValue": 36.9599953,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1153,
+        "OriginValue": 125,
+        "NowValue": 171.25,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 69.3,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1102,
+        "OriginValue": 20,
+        "NowValue": 12.2000008,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3016,
+        "OriginValue": 30,
+        "NowValue": 35.40001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1012,
+        "OriginValue": 20,
+        "NowValue": 40,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 2.64,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 10.08,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 108,
+        "OriginValue": 6,
+        "NowValue": 6,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 2.31,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 116,
+        "OriginValue": 24,
+        "NowValue": 28.3200016,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3014,
+        "OriginValue": 40,
+        "NowValue": 55.2,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1140,
+        "OriginValue": 15,
+        "NowValue": 25.0500011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 18.2000065,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1011,
+        "OriginValue": 38,
+        "NowValue": 27.7399979,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 113,
+        "OriginValue": 15,
+        "NowValue": 10.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 15,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1010,
+        "OriginValue": 7,
+        "NowValue": 10.4299994,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 26.2500019,
+        "CountPerPackage": 5,
+        "NeedProsperity": 2
+      }
+    ],
+    "Relations": 55,
+    "Currency": "1"
+  },
+  {
+    "Key": "Ashenmoor",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1006
+      },
+      {
+        "Key": 2,
+        "Value": 1018
+      },
+      {
+        "Key": 3,
+        "Value": 1115
+      },
+      {
+        "Key": 5,
+        "Value": 1137
+      },
+      {
+        "Key": 6,
+        "Value": 1151
+      },
+      {
+        "Key": 6,
+        "Value": 1107
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 107
+      },
+      {
+        "Key": 3,
+        "Value": 128
+      },
+      {
+        "Key": 3,
+        "Value": 101
+      },
+      {
+        "Key": 5,
+        "Value": 124
+      },
+      {
+        "Key": 5,
+        "Value": 125
+      },
+      {
+        "Key": 7,
+        "Value": 111
+      },
+      {
+        "Key": 7,
+        "Value": 102
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 5.2799983,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 6.05999851,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1018,
+        "OriginValue": 6,
+        "NowValue": 6.239999,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2007,
+        "OriginValue": 40,
+        "NowValue": 40.8,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1115,
+        "OriginValue": 40,
+        "NowValue": 20,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1132,
+        "OriginValue": 38,
+        "NowValue": 41.420002,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1603,
+        "OriginValue": 48,
+        "NowValue": 41.76,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2001,
+        "OriginValue": 22,
+        "NowValue": 43.78,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1137,
+        "OriginValue": 100,
+        "NowValue": 111,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1151,
+        "OriginValue": 110,
+        "NowValue": 103.4,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 100,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 58.5000038,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 126,
+        "OriginValue": 60,
+        "NowValue": 69.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 29.1999931,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 13.0500011,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 23.6600037,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 124,
+        "OriginValue": 15,
+        "NowValue": 10.95,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1027,
+        "OriginValue": 40,
+        "NowValue": 78,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 125,
+        "OriginValue": 50,
+        "NowValue": 31.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 9.999998,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 111,
+        "OriginValue": 30,
+        "NowValue": 47.6999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      }
+    ],
+    "Relations": 55,
+    "Currency": "1"
+  },
+  {
+    "Key": "Untermarkt",
+    "Export": [
+      {
+        "Key": 3,
+        "Value": 2006
+      },
+      {
+        "Key": 3,
+        "Value": 1104
+      },
+      {
+        "Key": 3,
+        "Value": 120
+      },
+      {
+        "Key": 3,
+        "Value": 1141
+      },
+      {
+        "Key": 8,
+        "Value": 2003
+      },
+      {
+        "Key": 8,
+        "Value": 2011
+      },
+      {
+        "Key": 8,
+        "Value": 2007
+      },
+      {
+        "Key": 8,
+        "Value": 3007
+      }
+    ],
+    "Import": [
+      {
+        "Key": 4,
+        "Value": 121
+      },
+      {
+        "Key": 4,
+        "Value": 3000
+      },
+      {
+        "Key": 4,
+        "Value": 126
+      },
+      {
+        "Key": 4,
+        "Value": 2002
+      },
+      {
+        "Key": 4,
+        "Value": 2012
+      },
+      {
+        "Key": 8,
+        "Value": 109
+      },
+      {
+        "Key": 8,
+        "Value": 2001
+      },
+      {
+        "Key": 8,
+        "Value": 116
+      },
+      {
+        "Key": 8,
+        "Value": 1122
+      },
+      {
+        "Key": 8,
+        "Value": 1116
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 46.2000046,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3009,
+        "OriginValue": 60,
+        "NowValue": 66,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 124,
+        "OriginValue": 15,
+        "NowValue": 29.850008,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 112,
+        "OriginValue": 20,
+        "NowValue": 22.8000069,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 62.65,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1127,
+        "OriginValue": 30,
+        "NowValue": 35.4,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1132,
+        "OriginValue": 38,
+        "NowValue": 63.0799866,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 52.85001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1115,
+        "OriginValue": 40,
+        "NowValue": 36.799984,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 109,
+        "OriginValue": 25,
+        "NowValue": 32,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 34.56,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 121,
+        "OriginValue": 20,
+        "NowValue": 21.1999912,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1128,
+        "OriginValue": 25,
+        "NowValue": 18.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1117,
+        "OriginValue": 60,
+        "NowValue": 88.80001,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1007,
+        "OriginValue": 6,
+        "NowValue": 10.0799932,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2002,
+        "OriginValue": 40,
+        "NowValue": 76.7999954,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 13.8000031,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2006,
+        "OriginValue": 75,
+        "NowValue": 90.75,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1104,
+        "OriginValue": 35,
+        "NowValue": 68.25,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2003,
+        "OriginValue": 35,
+        "NowValue": 42.3500175,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1135,
+        "OriginValue": 42,
+        "NowValue": 60.8999863,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 103,
+        "OriginValue": 25,
+        "NowValue": 12.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1121,
+        "OriginValue": 60,
+        "NowValue": 69.60001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1602,
+        "OriginValue": 24,
+        "NowValue": 43.2,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1011,
+        "OriginValue": 38,
+        "NowValue": 54.72002,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 92.14996,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 122,
+        "OriginValue": 40,
+        "NowValue": 25.9999981,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 100,
+        "OriginValue": 2,
+        "NowValue": 1.13999987,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1108,
+        "OriginValue": 50,
+        "NowValue": 31.5,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1136,
+        "OriginValue": 65,
+        "NowValue": 43.5500069,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1113,
+        "OriginValue": 30,
+        "NowValue": 59.7,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1112,
+        "OriginValue": 20,
+        "NowValue": 19.800005,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3016,
+        "OriginValue": 30,
+        "NowValue": 32.6999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3017,
+        "OriginValue": 60,
+        "NowValue": 40.7999954,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1010,
+        "OriginValue": 7,
+        "NowValue": 3.71000218,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3010,
+        "OriginValue": 35,
+        "NowValue": 35.0000038,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 55.4399948,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 98.69998,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1124,
+        "OriginValue": 55,
+        "NowValue": 105.050011,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 72.45,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 26.79998,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1119,
+        "OriginValue": 135,
+        "NowValue": 75.6,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 111.199989,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 9.100004,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1116,
+        "OriginValue": 16,
+        "NowValue": 21.44,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 3.57000065,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2008,
+        "OriginValue": 35,
+        "NowValue": 26.949995,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2007,
+        "OriginValue": 40,
+        "NowValue": 57.60001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2010,
+        "OriginValue": 25,
+        "NowValue": 12.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1145,
+        "OriginValue": 60,
+        "NowValue": 120,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 116,
+        "OriginValue": 24,
+        "NowValue": 12,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3014,
+        "OriginValue": 40,
+        "NowValue": 80,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 11.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2011,
+        "OriginValue": 50,
+        "NowValue": 50.5,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 7.80000257,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1122,
+        "OriginValue": 75,
+        "NowValue": 150,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1603,
+        "OriginValue": 48,
+        "NowValue": 34.5599976,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 120,
+        "OriginValue": 70,
+        "NowValue": 68.6000061,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3013,
+        "OriginValue": 40,
+        "NowValue": 49.5999947,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 3,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1103,
+        "OriginValue": 20,
+        "NowValue": 19.4,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1140,
+        "OriginValue": 15,
+        "NowValue": 13.05,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 113,
+        "OriginValue": 15,
+        "NowValue": 11.5499973,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 3.48,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 16.32,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1012,
+        "OriginValue": 20,
+        "NowValue": 33.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 100,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1118,
+        "OriginValue": 15,
+        "NowValue": 7.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3007,
+        "OriginValue": 30,
+        "NowValue": 16.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 115,
+        "OriginValue": 5,
+        "NowValue": 10,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 6.72,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1144,
+        "OriginValue": 15,
+        "NowValue": 9.15,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 126,
+        "OriginValue": 60,
+        "NowValue": 30,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1027,
+        "OriginValue": 40,
+        "NowValue": 58.40002,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1017,
+        "OriginValue": 20,
+        "NowValue": 38.2000046,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 111,
+        "OriginValue": 30,
+        "NowValue": 27.2999954,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 44.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1015,
+        "OriginValue": 20,
+        "NowValue": 18.1999989,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1110,
+        "OriginValue": 30,
+        "NowValue": 55.20001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2012,
+        "OriginValue": 70,
+        "NowValue": 93.8,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1137,
+        "OriginValue": 100,
+        "NowValue": 130,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1105,
+        "OriginValue": 20,
+        "NowValue": 15.8000021,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2001,
+        "OriginValue": 22,
+        "NowValue": 12.9800014,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1147,
+        "OriginValue": 35,
+        "NowValue": 24.4999981,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 4.800001,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 11.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1143,
+        "OriginValue": 15,
+        "NowValue": 17.2500019,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1131,
+        "OriginValue": 30,
+        "NowValue": 38.6999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 18.9,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 108,
+        "OriginValue": 6,
+        "NowValue": 3.36,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 110,
+        "OriginValue": 8,
+        "NowValue": 14.3199968,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 21.1999989,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1111,
+        "OriginValue": 35,
+        "NowValue": 46.8999748,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 116.400024,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1138,
+        "OriginValue": 120,
+        "NowValue": 98.4,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3006,
+        "OriginValue": 20,
+        "NowValue": 20.199995,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1126,
+        "OriginValue": 25,
+        "NowValue": 29,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 114,
+        "OriginValue": 10,
+        "NowValue": 9.099997,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 118,
+        "OriginValue": 15,
+        "NowValue": 10.0499973,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3015,
+        "OriginValue": 40,
+        "NowValue": 49.599987,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 117,
+        "OriginValue": 10,
+        "NowValue": 6.79999971,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1134,
+        "OriginValue": 32,
+        "NowValue": 22.0800018,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 21.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2009,
+        "OriginValue": 75,
+        "NowValue": 124.5,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 13.92,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 125,
+        "OriginValue": 50,
+        "NowValue": 49.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1142,
+        "OriginValue": 15,
+        "NowValue": 22.5000019,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1018,
+        "OriginValue": 6,
+        "NowValue": 3.84,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 63.0000076,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1102,
+        "OriginValue": 20,
+        "NowValue": 12.4,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1141,
+        "OriginValue": 100,
+        "NowValue": 175,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1106,
+        "OriginValue": 15,
+        "NowValue": 29.1000042,
+        "CountPerPackage": 10,
+        "NeedProsperity": 3
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 1.61999941,
+        "CountPerPackage": 30,
+        "NeedProsperity": 3
+      }
+    ],
+    "Relations": 52,
+    "Currency": "1"
+  },
+  {
+    "Key": "Granbazaar",
+    "Export": [
+      {
+        "Key": 3,
+        "Value": 1105
+      },
+      {
+        "Key": 3,
+        "Value": 1012
+      },
+      {
+        "Key": 5,
+        "Value": 1135
+      },
+      {
+        "Key": 5,
+        "Value": 1134
+      },
+      {
+        "Key": 7,
+        "Value": 1017
+      },
+      {
+        "Key": 7,
+        "Value": 1147
+      },
+      {
+        "Key": 8,
+        "Value": 1127
+      },
+      {
+        "Key": 8,
+        "Value": 1131
+      }
+    ],
+    "Import": [
+      {
+        "Key": 3,
+        "Value": 1112
+      },
+      {
+        "Key": 3,
+        "Value": 114
+      },
+      {
+        "Key": 5,
+        "Value": 1111
+      },
+      {
+        "Key": 5,
+        "Value": 1121
+      },
+      {
+        "Key": 5,
+        "Value": 1602
+      },
+      {
+        "Key": 7,
+        "Value": 1113
+      },
+      {
+        "Key": 7,
+        "Value": 1015
+      },
+      {
+        "Key": 8,
+        "Value": 3017
+      },
+      {
+        "Key": 8,
+        "Value": 1129
+      },
+      {
+        "Key": 8,
+        "Value": 1126
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 38.4999924,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3009,
+        "OriginValue": 60,
+        "NowValue": 34.80001,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 124,
+        "OriginValue": 15,
+        "NowValue": 14.8499994,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 112,
+        "OriginValue": 20,
+        "NowValue": 39.7999954,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 30.1,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1127,
+        "OriginValue": 30,
+        "NowValue": 18.5999985,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1132,
+        "OriginValue": 38,
+        "NowValue": 26.6,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 32.55,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1115,
+        "OriginValue": 40,
+        "NowValue": 77.2000046,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 109,
+        "OriginValue": 25,
+        "NowValue": 18,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 17.460001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 121,
+        "OriginValue": 20,
+        "NowValue": 14.7999992,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1128,
+        "OriginValue": 25,
+        "NowValue": 13,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1117,
+        "OriginValue": 60,
+        "NowValue": 57,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1007,
+        "OriginValue": 6,
+        "NowValue": 12,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2002,
+        "OriginValue": 40,
+        "NowValue": 64.39998,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 17.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2006,
+        "OriginValue": 75,
+        "NowValue": 54,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1104,
+        "OriginValue": 35,
+        "NowValue": 67.2,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2003,
+        "OriginValue": 35,
+        "NowValue": 33.6000023,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1135,
+        "OriginValue": 42,
+        "NowValue": 33.18,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 103,
+        "OriginValue": 25,
+        "NowValue": 27,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1121,
+        "OriginValue": 60,
+        "NowValue": 114.600006,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1602,
+        "OriginValue": 24,
+        "NowValue": 13.1999989,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1011,
+        "OriginValue": 38,
+        "NowValue": 67.64,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 48.45,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 122,
+        "OriginValue": 40,
+        "NowValue": 56.3999939,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 100,
+        "OriginValue": 2,
+        "NowValue": 1.24,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1108,
+        "OriginValue": 50,
+        "NowValue": 42,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1136,
+        "OriginValue": 65,
+        "NowValue": 83.8500061,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1113,
+        "OriginValue": 30,
+        "NowValue": 43.1999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1112,
+        "OriginValue": 20,
+        "NowValue": 11.9999981,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3016,
+        "OriginValue": 30,
+        "NowValue": 19.5000038,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3017,
+        "OriginValue": 60,
+        "NowValue": 34.8000031,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1010,
+        "OriginValue": 7,
+        "NowValue": 13.65,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3010,
+        "OriginValue": 35,
+        "NowValue": 66.49999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 125.399986,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1109,
+        "OriginValue": 70,
+        "NowValue": 57.3999977,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1124,
+        "OriginValue": 55,
+        "NowValue": 32.4500351,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 22.5,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 107,
+        "OriginValue": 40,
+        "NowValue": 29.2,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1119,
+        "OriginValue": 135,
+        "NowValue": 76.95,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 53.6000023,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 12.460001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1116,
+        "OriginValue": 16,
+        "NowValue": 25.7599964,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 2.04,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2008,
+        "OriginValue": 35,
+        "NowValue": 61.2499962,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2007,
+        "OriginValue": 40,
+        "NowValue": 32.4000053,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2010,
+        "OriginValue": 25,
+        "NowValue": 14,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1145,
+        "OriginValue": 60,
+        "NowValue": 46.8000031,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 116,
+        "OriginValue": 24,
+        "NowValue": 18,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3014,
+        "OriginValue": 40,
+        "NowValue": 49.20002,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 15.3999977,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2011,
+        "OriginValue": 50,
+        "NowValue": 25,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 21.7500038,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1122,
+        "OriginValue": 75,
+        "NowValue": 111.75,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1603,
+        "OriginValue": 48,
+        "NowValue": 83.51998,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 120,
+        "OriginValue": 70,
+        "NowValue": 40.6000023,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3013,
+        "OriginValue": 40,
+        "NowValue": 30.8000031,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 4.920002,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1103,
+        "OriginValue": 20,
+        "NowValue": 22.9999962,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1140,
+        "OriginValue": 15,
+        "NowValue": 12.149992,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 113,
+        "OriginValue": 15,
+        "NowValue": 10.9500008,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 9.419998,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 24,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1012,
+        "OriginValue": 20,
+        "NowValue": 13.2000008,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1107,
+        "OriginValue": 50,
+        "NowValue": 25,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1118,
+        "OriginValue": 15,
+        "NowValue": 14.9999981,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3007,
+        "OriginValue": 30,
+        "NowValue": 50.0999947,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 115,
+        "OriginValue": 5,
+        "NowValue": 4.249998,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 18.0000019,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1144,
+        "OriginValue": 15,
+        "NowValue": 16.05,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 126,
+        "OriginValue": 60,
+        "NowValue": 112.199989,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1027,
+        "OriginValue": 40,
+        "NowValue": 49.9999924,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1017,
+        "OriginValue": 20,
+        "NowValue": 32.3999977,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 111,
+        "OriginValue": 30,
+        "NowValue": 15.6,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 16.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1015,
+        "OriginValue": 20,
+        "NowValue": 10.1999931,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1110,
+        "OriginValue": 30,
+        "NowValue": 46.2000046,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2012,
+        "OriginValue": 70,
+        "NowValue": 63.0000076,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1137,
+        "OriginValue": 100,
+        "NowValue": 94,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1105,
+        "OriginValue": 20,
+        "NowValue": 22.4000015,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2001,
+        "OriginValue": 22,
+        "NowValue": 40.9199867,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1147,
+        "OriginValue": 35,
+        "NowValue": 44.799984,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 4.4,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 10,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1143,
+        "OriginValue": 15,
+        "NowValue": 8.399999,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1131,
+        "OriginValue": 30,
+        "NowValue": 19.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 10.3000011,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 108,
+        "OriginValue": 6,
+        "NowValue": 3.36,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 110,
+        "OriginValue": 8,
+        "NowValue": 15.04,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 20,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1111,
+        "OriginValue": 35,
+        "NowValue": 65.4500046,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1129,
+        "OriginValue": 60,
+        "NowValue": 63.5999947,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1138,
+        "OriginValue": 120,
+        "NowValue": 93.60005,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3006,
+        "OriginValue": 20,
+        "NowValue": 21.600008,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1126,
+        "OriginValue": 25,
+        "NowValue": 40.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 114,
+        "OriginValue": 10,
+        "NowValue": 9.09999752,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 118,
+        "OriginValue": 15,
+        "NowValue": 19.4999962,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3015,
+        "OriginValue": 40,
+        "NowValue": 39.6000252,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 117,
+        "OriginValue": 10,
+        "NowValue": 5.6,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1134,
+        "OriginValue": 32,
+        "NowValue": 25.5999966,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 36.3999977,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2009,
+        "OriginValue": 75,
+        "NowValue": 42.75,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 42.9599953,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 125,
+        "OriginValue": 50,
+        "NowValue": 91.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1142,
+        "OriginValue": 15,
+        "NowValue": 28.2000027,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1018,
+        "OriginValue": 6,
+        "NowValue": 8.160001,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 128,
+        "OriginValue": 45,
+        "NowValue": 44.9999733,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1102,
+        "OriginValue": 20,
+        "NowValue": 31.399992,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1141,
+        "OriginValue": 100,
+        "NowValue": 62,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1106,
+        "OriginValue": 15,
+        "NowValue": 23.1,
+        "CountPerPackage": 10,
+        "NeedProsperity": 3
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 1.86,
+        "CountPerPackage": 30,
+        "NeedProsperity": 3
+      }
+    ],
+    "Relations": 53,
+    "Currency": "1"
+  },
+  {
+    "Key": "Woodweb",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 102
+      },
+      {
+        "Key": 2,
+        "Value": 2010
+      },
+      {
+        "Key": 4,
+        "Value": 1137
+      },
+      {
+        "Key": 5,
+        "Value": 2008
+      },
+      {
+        "Key": 6,
+        "Value": 1133
+      },
+      {
+        "Key": 6,
+        "Value": 1139
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 118
+      },
+      {
+        "Key": 1,
+        "Value": 1007
+      },
+      {
+        "Key": 1,
+        "Value": 104
+      },
+      {
+        "Key": 4,
+        "Value": 1143
+      },
+      {
+        "Key": 4,
+        "Value": 1148
+      },
+      {
+        "Key": 4,
+        "Value": 3010
+      },
+      {
+        "Key": 7,
+        "Value": 1013
+      },
+      {
+        "Key": 7,
+        "Value": 1006
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 10.2,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 32.2,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 5.92,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 23.64,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2010,
+        "OriginValue": 25,
+        "NowValue": 22.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 16.8,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1149,
+        "OriginValue": 95,
+        "NowValue": 62.7000046,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1119,
+        "OriginValue": 135,
+        "NowValue": 112.050041,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1138,
+        "OriginValue": 120,
+        "NowValue": 139.200027,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1137,
+        "OriginValue": 100,
+        "NowValue": 50,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 60.7500076,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2008,
+        "OriginValue": 35,
+        "NowValue": 19.95,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1112,
+        "OriginValue": 20,
+        "NowValue": 19.1999969,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1154,
+        "OriginValue": 130,
+        "NowValue": 178.099945,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 15.25,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 7.6,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 118,
+        "OriginValue": 15,
+        "NowValue": 8.25001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 5.1,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 114,
+        "OriginValue": 10,
+        "NowValue": 11.3000011,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 2.24999952,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1007,
+        "OriginValue": 6,
+        "NowValue": 4.02,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 100,
+        "OriginValue": 2,
+        "NowValue": 1.27999961,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 115,
+        "OriginValue": 5,
+        "NowValue": 3.499999,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3010,
+        "OriginValue": 35,
+        "NowValue": 64.0499954,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1143,
+        "OriginValue": 15,
+        "NowValue": 7.65,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 30.4199944,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1148,
+        "OriginValue": 20,
+        "NowValue": 26.2000065,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 33,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3015,
+        "OriginValue": 40,
+        "NowValue": 78.3999939,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1141,
+        "OriginValue": 100,
+        "NowValue": 95,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 11.2199955,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      }
+    ],
+    "Relations": 53,
+    "Currency": "1"
+  },
+  {
+    "Key": "Foratstar",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 1014
+      },
+      {
+        "Key": 2,
+        "Value": 1125
+      },
+      {
+        "Key": 4,
+        "Value": 1110
+      },
+      {
+        "Key": 5,
+        "Value": 1139
+      },
+      {
+        "Key": 5,
+        "Value": 1133
+      },
+      {
+        "Key": 7,
+        "Value": 1601
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 1008
+      },
+      {
+        "Key": 1,
+        "Value": 102
+      },
+      {
+        "Key": 1,
+        "Value": 1016
+      },
+      {
+        "Key": 4,
+        "Value": 1143
+      },
+      {
+        "Key": 4,
+        "Value": 115
+      },
+      {
+        "Key": 4,
+        "Value": 3010
+      },
+      {
+        "Key": 7,
+        "Value": 3015
+      },
+      {
+        "Key": 7,
+        "Value": 1124
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 11.2,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 28,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 88.00003,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1110,
+        "OriginValue": 30,
+        "NowValue": 18,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 49.0500145,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 21.9999981,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1104,
+        "OriginValue": 35,
+        "NowValue": 17.5,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1154,
+        "OriginValue": 130,
+        "NowValue": 178.1,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 12.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 7.5,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1601,
+        "OriginValue": 170,
+        "NowValue": 171.699982,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1600,
+        "OriginValue": 240,
+        "NowValue": 460.800018,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1602,
+        "OriginValue": 24,
+        "NowValue": 26.1600037,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 118,
+        "OriginValue": 15,
+        "NowValue": 7.5,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1016,
+        "OriginValue": 6,
+        "NowValue": 6.60000134,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 114,
+        "OriginValue": 10,
+        "NowValue": 9.000003,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 8.160001,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1008,
+        "OriginValue": 12,
+        "NowValue": 20.3999958,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 115,
+        "OriginValue": 5,
+        "NowValue": 5.100001,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3010,
+        "OriginValue": 35,
+        "NowValue": 18.9000015,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1143,
+        "OriginValue": 15,
+        "NowValue": 12.3000031,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2004,
+        "OriginValue": 18,
+        "NowValue": 21.6000061,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 15.6000023,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1013,
+        "OriginValue": 66,
+        "NowValue": 38.94,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3015,
+        "OriginValue": 40,
+        "NowValue": 55.19999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1124,
+        "OriginValue": 55,
+        "NowValue": 31.9000034,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1117,
+        "OriginValue": 60,
+        "NowValue": 53.3999977,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 3.51,
+        "CountPerPackage": 30,
+        "NeedProsperity": 1
+      }
+    ],
+    "Relations": 53,
+    "Currency": "1"
+  },
+  {
+    "Key": "Ratterra",
+    "Export": [
+      {
+        "Key": 2,
+        "Value": 101
+      },
+      {
+        "Key": 2,
+        "Value": 2005
+      },
+      {
+        "Key": 4,
+        "Value": 1110
+      },
+      {
+        "Key": 5,
+        "Value": 1100
+      },
+      {
+        "Key": 6,
+        "Value": 1133
+      },
+      {
+        "Key": 6,
+        "Value": 1154
+      }
+    ],
+    "Import": [
+      {
+        "Key": 1,
+        "Value": 1003
+      },
+      {
+        "Key": 1,
+        "Value": 1006
+      },
+      {
+        "Key": 3,
+        "Value": 2000
+      },
+      {
+        "Key": 5,
+        "Value": 3004
+      },
+      {
+        "Key": 5,
+        "Value": 1142
+      },
+      {
+        "Key": 5,
+        "Value": 1120
+      },
+      {
+        "Key": 7,
+        "Value": 100
+      },
+      {
+        "Key": 7,
+        "Value": 1114
+      }
+    ],
+    "Resources": [
+      {
+        "Resource": 101,
+        "OriginValue": 15,
+        "NowValue": 19.6499977,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3005,
+        "OriginValue": 35,
+        "NowValue": 26.2500019,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 102,
+        "OriginValue": 8,
+        "NowValue": 4.40000057,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2005,
+        "OriginValue": 12,
+        "NowValue": 12.4799976,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1127,
+        "OriginValue": 30,
+        "NowValue": 28.50001,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1014,
+        "OriginValue": 20,
+        "NowValue": 13.6000051,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3011,
+        "OriginValue": 40,
+        "NowValue": 75.99999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1123,
+        "OriginValue": 80,
+        "NowValue": 121.599983,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1110,
+        "OriginValue": 30,
+        "NowValue": 18.8999939,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1125,
+        "OriginValue": 45,
+        "NowValue": 22.5,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1100,
+        "OriginValue": 24,
+        "NowValue": 25.6799984,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2007,
+        "OriginValue": 40,
+        "NowValue": 21.2,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1111,
+        "OriginValue": 35,
+        "NowValue": 20.3,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1154,
+        "OriginValue": 130,
+        "NowValue": 67.6000061,
+        "CountPerPackage": 3,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1133,
+        "OriginValue": 25,
+        "NowValue": 36.75,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1139,
+        "OriginValue": 10,
+        "NowValue": 6.60000038,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1010,
+        "OriginValue": 7,
+        "NowValue": 4.76000071,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 104,
+        "OriginValue": 3,
+        "NowValue": 2.25,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1006,
+        "OriginValue": 6,
+        "NowValue": 6.95999956,
+        "CountPerPackage": 20,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 2000,
+        "OriginValue": 14,
+        "NowValue": 15.260005,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1003,
+        "OriginValue": 3,
+        "NowValue": 2.22,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3004,
+        "OriginValue": 35,
+        "NowValue": 68.6000061,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 109,
+        "OriginValue": 25,
+        "NowValue": 20,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1120,
+        "OriginValue": 20,
+        "NowValue": 16.3999958,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1142,
+        "OriginValue": 15,
+        "NowValue": 7.5,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 100,
+        "OriginValue": 2,
+        "NowValue": 4,
+        "CountPerPackage": 30,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1112,
+        "OriginValue": 20,
+        "NowValue": 35.59999,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 1114,
+        "OriginValue": 20,
+        "NowValue": 14.0000019,
+        "CountPerPackage": 10,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3006,
+        "OriginValue": 20,
+        "NowValue": 15.8000011,
+        "CountPerPackage": 5,
+        "NeedProsperity": 0
+      },
+      {
+        "Resource": 3000,
+        "OriginValue": 35,
+        "NowValue": 33.2499962,
+        "CountPerPackage": 5,
+        "NeedProsperity": 5
+      }
+    ],
+    "Relations": 55,
+    "Currency": "1"
+  }
+]
